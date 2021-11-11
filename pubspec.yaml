@@ -8,12 +8,16 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  build_runner: ^2.1.5
   flutter:
     sdk: flutter
+  json_annotation: ^4.3.0
+  json_serializable: ^6.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  source_gen: ^1.1.0
 
 flutter:
