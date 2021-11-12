@@ -124,7 +124,7 @@ class MovieShowAlias {
 
   MovieShowAlias(this.title, this.country);
 
-  factory MovieShowAlias.fromJson(Map<String, dynamic> json) => _$MovieAliasFromJson(json);
+  factory MovieShowAlias.fromJson(Map<String, dynamic> json) => _$MovieShowAliasFromJson(json);
 
   static MovieShowAlias fromJsonModel(Map<String, dynamic> json) => MovieShowAlias.fromJson(json);
 }

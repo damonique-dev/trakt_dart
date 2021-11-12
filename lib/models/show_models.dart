@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:trakt_dart/models/common_models.dart';
 import 'package:trakt_dart/models/people_models.dart';
 
-part 'user_models.g.dart';
+part 'show_models.g.dart';
 
 @JsonSerializable(createToJson: false)
 class Show {

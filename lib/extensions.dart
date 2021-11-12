@@ -11,7 +11,7 @@ extension TraktModel on Type {
     Comment: Comment.fromJsonModel,
     TraktList: TraktList.fromJsonModel,
     Rating: Rating.fromJsonModel,
-    Stats: Stats.fromJsonModel,
+    MovieStats: MovieStats.fromJsonModel,
     
     // Movie Models
     Movie: Movie.fromJsonModel,
@@ -21,7 +21,7 @@ extension TraktModel on Type {
     AnticipatedMovie: AnticipatedMovie.fromJsonModel,
     BoxOfficeMovie: BoxOfficeMovie.fromJsonModel,
     UpdatedMovie: UpdatedMovie.fromJsonModel,
-    MovieAlias: MovieAlias.fromJsonModel,
+    MovieShowAlias: MovieShowAlias.fromJsonModel,
     MovieRelease: MovieRelease.fromJsonModel,
     MovieTranslation: MovieTranslation.fromJsonModel,
     MoviePeople: MoviePeople.fromJsonModel,
@@ -35,8 +35,8 @@ extension TraktModel on Type {
     // People Models
     Person: Person.fromJsonModel,
     SocialIds: SocialIds.fromJsonModel,
-    Character: Character.fromJsonModel,
-    Crew: Crew.fromJsonModel,
+    MovieCharacter: MovieCharacter.fromJsonModel,
+    MovieCrew: MovieCrew.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

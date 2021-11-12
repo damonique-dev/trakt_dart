@@ -45,8 +45,8 @@ extension MovieRequests on TraktManager {
     return await _get<Movie>("movies/$id", extendedFull: extendedFull);
   }
 
-  Future<List<MovieAlias>> getMovieAliases(String id) async {
-    return await _getList<MovieAlias>("movies/$id/aliases");
+  Future<List<MovieShowAlias>> getMovieAliases(String id) async {
+    return await _getList<MovieShowAlias>("movies/$id/aliases");
   }
 
   Future<List<MovieRelease>> getMovieReleases(String id, String country) async {
@@ -77,8 +77,8 @@ extension MovieRequests on TraktManager {
     return await _getList<Movie>("movies/$id/related", extendedFull: extendedFull, pagination: pagination);
   }
 
-  Future<Stats> getMovieStats(String id) async {
-    return await _get<Stats>("movies/$id/stats");
+  Future<MovieStats> getMovieStats(String id) async {
+    return await _get<MovieStats>("movies/$id/stats");
   }
 
   Future<List<User>> getMovieWatchers(String id, {bool extendedFull = false}) async {
