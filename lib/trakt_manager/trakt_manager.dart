@@ -5,10 +5,12 @@ import 'package:http/http.dart' as http;
 import 'package:trakt_dart/extensions.dart';
 import 'package:trakt_dart/models/common_models.dart';
 import 'package:trakt_dart/models/movie_models.dart';
+import 'package:trakt_dart/models/show_models.dart';
 import 'package:trakt_dart/models/users_models.dart';
 import 'package:trakt_dart/trakt_manager/request_models.dart';
 
 part 'movie_requests.dart';
+part 'show_requests.dart';
 
 class TraktManager {
   String? _clientId;

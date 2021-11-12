@@ -12,8 +12,23 @@ class Episode {
   final Ids ids;
 
   // Extended: full
+  final String? overview;
+  final double? rating;
+  final int? votes, runtime;
 
-  Episode(this.season, this.number, this.title, this.ids);
+  @JsonKey(name: 'comment_count')
+  final int? commentCount;
+
+  @JsonKey(name: 'first_aired')
+  final String? firstAired;
+
+  @JsonKey(name: 'updated_at')
+  final String? updatedAt;
+
+  @JsonKey(name: 'available_translations')
+  final List<String>? availableTranslations;
+
+  Episode(this.season, this.number, this.title, this.ids, this.overview, this.rating, this.votes, this.runtime, this.commentCount, this.firstAired, this.updatedAt, this.availableTranslations);
 
   factory Episode.fromJson(Map<String, dynamic> json) => _$EpisodeFromJson(json);
 
