@@ -59,12 +59,8 @@ Rating _$RatingFromJson(Map<String, dynamic> json) => Rating(
       Map<String, int>.from(json['distribution'] as Map),
     );
 
-Stats _$StatsFromJson(Map<String, dynamic> json) => Stats(
-      json['watchers'] as int,
-      json['plays'] as int,
-      json['collectors'] as int,
-      json['comments'] as int,
-      json['lists'] as int,
-      json['votes'] as int,
-      json['recommended'] as int,
+MovieShowAlias _$MovieShowAliasFromJson(Map<String, dynamic> json) =>
+    MovieShowAlias(
+      json['title'] as String,
+      json['country'] as String,
     );

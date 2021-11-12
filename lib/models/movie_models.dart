@@ -109,17 +109,6 @@ class UpdatedMovie {
 }
 
 @JsonSerializable(createToJson: false)
-class MovieAlias {
-  final String title, country;
-
-  MovieAlias(this.title, this.country);
-
-  factory MovieAlias.fromJson(Map<String, dynamic> json) => _$MovieAliasFromJson(json);
-
-  static MovieAlias fromJsonModel(Map<String, dynamic> json) => MovieAlias.fromJson(json);
-}
-
-@JsonSerializable(createToJson: false)
 class MovieRelease {
   final String country, certification, note;
   @JsonKey(name: 'release_date')
@@ -146,22 +135,33 @@ class MovieTranslation {
 }
 
 @JsonSerializable(createToJson: false)
+class MovieStats {
+  final int watchers, plays, collectors, comments, lists, votes, recommended;
+
+  MovieStats(this.watchers, this.plays, this.collectors, this.comments, this.lists, this.votes, this.recommended);
+
+  factory MovieStats.fromJson(Map<String, dynamic> json) => _$MovieStatsFromJson(json);
+
+  static MovieStats fromJsonModel(Map<String, dynamic> json) => MovieStats.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
 class MoviePeople {
-  final List<Character> cast;
-  final List<Crew> production;
-  final List<Crew> art;
-  final List<Crew> sound;
-  final List<Crew> writing;
-  final List<Crew> camera;
-  final List<Crew> directing;
-  final List<Crew> lighting;
-  final List<Crew> crew;
+  final List<MovieCharacter> cast;
+  final List<MovieCrew> production;
+  final List<MovieCrew> art;
+  final List<MovieCrew> sound;
+  final List<MovieCrew> writing;
+  final List<MovieCrew> camera;
+  final List<MovieCrew> directing;
+  final List<MovieCrew> lighting;
+  final List<MovieCrew> crew;
 
   @JsonKey(name: 'costume & make-up')
-  final List<Crew> costumeAndMakeUp;
+  final List<MovieCrew> costumeAndMakeUp;
 
   @JsonKey(name: 'visual effects')
-  final List<Crew> visualEffects;
+  final List<MovieCrew> visualEffects;
 
   MoviePeople(this.cast, this.production, this.art, this.sound, this.writing, this.camera, this.directing, this.lighting, this.crew, this.costumeAndMakeUp, this.visualEffects);
 

@@ -26,14 +26,30 @@ SocialIds _$SocialIdsFromJson(Map<String, dynamic> json) => SocialIds(
       json['wikipedia'] as String?,
     );
 
-Character _$CharacterFromJson(Map<String, dynamic> json) => Character(
+MovieCharacter _$MovieCharacterFromJson(Map<String, dynamic> json) =>
+    MovieCharacter(
       json['character'] as String,
       (json['characters'] as List<dynamic>).map((e) => e as String).toList(),
       Person.fromJson(json['person'] as Map<String, dynamic>),
     );
 
-Crew _$CrewFromJson(Map<String, dynamic> json) => Crew(
+MovieCrew _$MovieCrewFromJson(Map<String, dynamic> json) => MovieCrew(
       json['job'] as String,
       (json['jobs'] as List<dynamic>).map((e) => e as String).toList(),
       Person.fromJson(json['person'] as Map<String, dynamic>),
+    );
+
+ShowCharacter _$ShowCharacterFromJson(Map<String, dynamic> json) =>
+    ShowCharacter(
+      json['character'] as String,
+      (json['characters'] as List<dynamic>).map((e) => e as String).toList(),
+      Person.fromJson(json['person'] as Map<String, dynamic>),
+      json['episode_count'] as int,
+    );
+
+ShowCrew _$ShowCrewFromJson(Map<String, dynamic> json) => ShowCrew(
+      json['job'] as String,
+      (json['jobs'] as List<dynamic>).map((e) => e as String).toList(),
+      Person.fromJson(json['person'] as Map<String, dynamic>),
+      json['episode_count'] as int,
     );

@@ -33,27 +33,57 @@ class SocialIds {
 }
 
 @JsonSerializable(createToJson: false)
-class Character {
+class MovieCharacter {
   final String character;
   final List<String> characters;
   final Person person;
 
-  Character(this.character, this.characters, this.person);
+  MovieCharacter(this.character, this.characters, this.person);
 
-  factory Character.fromJson(Map<String, dynamic> json) => _$CharacterFromJson(json);
+  factory MovieCharacter.fromJson(Map<String, dynamic> json) => _$MovieCharacterFromJson(json);
 
-  static Character fromJsonModel(Map<String, dynamic> json) => Character.fromJson(json);
+  static MovieCharacter fromJsonModel(Map<String, dynamic> json) => MovieCharacter.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
-class Crew {
+class MovieCrew {
   final String job;
   final List<String> jobs;
   final Person person;
 
-  Crew(this.job, this.jobs, this.person);
+  MovieCrew(this.job, this.jobs, this.person);
 
-  factory Crew.fromJson(Map<String, dynamic> json) => _$CrewFromJson(json);
+  factory MovieCrew.fromJson(Map<String, dynamic> json) => _$MovieCrewFromJson(json);
 
-  static Crew fromJsonModel(Map<String, dynamic> json) => Crew.fromJson(json);
+  static MovieCrew fromJsonModel(Map<String, dynamic> json) => MovieCrew.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class ShowCharacter {
+  final String character;
+  final List<String> characters;
+  final Person person;
+  @JsonKey(name: 'episode_count')
+  final int episodeCount;
+
+  ShowCharacter(this.character, this.characters, this.person, this.episodeCount);
+
+  factory ShowCharacter.fromJson(Map<String, dynamic> json) => _$ShowCharacterFromJson(json);
+
+  static ShowCharacter fromJsonModel(Map<String, dynamic> json) => ShowCharacter.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class ShowCrew {
+  final String job;
+  final List<String> jobs;
+  final Person person;
+  @JsonKey(name: 'episode_count')
+  final int episodeCount;
+
+  ShowCrew(this.job, this.jobs, this.person, this.episodeCount);
+
+  factory ShowCrew.fromJson(Map<String, dynamic> json) => _$ShowCrewFromJson(json);
+
+  static ShowCrew fromJsonModel(Map<String, dynamic> json) => ShowCrew.fromJson(json);
 }

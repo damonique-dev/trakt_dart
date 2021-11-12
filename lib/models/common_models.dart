@@ -119,12 +119,12 @@ class Rating {
 }
 
 @JsonSerializable(createToJson: false)
-class Stats {
-  final int watchers, plays, collectors, comments, lists, votes, recommended;
+class MovieShowAlias {
+  final String title, country;
 
-  Stats(this.watchers, this.plays, this.collectors, this.comments, this.lists, this.votes, this.recommended);
+  MovieShowAlias(this.title, this.country);
 
-  factory Stats.fromJson(Map<String, dynamic> json) => _$StatsFromJson(json);
+  factory MovieShowAlias.fromJson(Map<String, dynamic> json) => _$MovieAliasFromJson(json);
 
-  static Stats fromJsonModel(Map<String, dynamic> json) => Stats.fromJson(json);
+  static MovieShowAlias fromJsonModel(Map<String, dynamic> json) => MovieShowAlias.fromJson(json);
 }
