@@ -15,7 +15,7 @@ MovieShowMetadata _$MovieShowMetadataFromJson(Map<String, dynamic> json) =>
 
 Ids _$IdsFromJson(Map<String, dynamic> json) => Ids(
       json['trakt'] as int?,
-      json['slug'] as String,
+      json['slug'] as String?,
       json['tvdb'] as int?,
       json['imdb'] as String?,
       json['tmdb'] as int?,

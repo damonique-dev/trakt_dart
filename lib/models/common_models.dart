@@ -26,7 +26,7 @@ class MovieShowMetadata {
 
 @JsonSerializable(createToJson: false)
 class Ids {
-  final String slug;
+  final String? slug;
   final int? trakt, tmdb, tvdb;
   final String? imdb;
 
