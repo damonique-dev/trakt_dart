@@ -49,15 +49,15 @@ extension ShowRequests on TraktManager {
     return await _getList<ShowCertification>("shows/$id/certification");
   }
 
-  Future<List<ShowTranslation>> getShowTranslations(String id, String language) async {
+  Future<List<ShowTranslation>> getShowTranslations(String id, {String language = ""}) async {
     return await _getList<ShowTranslation>("shows/$id/translations/$language");
   }
 
-  Future<List<Comment>> getShowComments(String id, CommentsSortBy sortBy, {RequestPagination? pagination}) async {
+  Future<List<Comment>> getShowComments(String id, {CommentsSortBy sortBy = CommentsSortBy.newest,RequestPagination? pagination}) async {
     return await _getList<Comment>("shows/$id/comments/${sortBy.toString()}", pagination: pagination);
   }
 
-  Future<List<TraktList>> getShowLists(String id, ListType type, ListSort sortBy, {RequestPagination? pagination}) async {
+  Future<List<TraktList>> getShowLists(String id, {ListType type = ListType.personal, ListSort sortBy = ListSort.popular, RequestPagination? pagination}) async {
     return await _getList<TraktList>("shows/$id/lists/${type.toString()}/${sortBy.toString()}", pagination: pagination);
   }
 

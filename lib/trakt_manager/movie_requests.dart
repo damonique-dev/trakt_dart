@@ -53,15 +53,15 @@ extension MovieRequests on TraktManager {
     return await _getList<MovieRelease>("movies/$id/releases/$country");
   }
 
-  Future<List<MovieTranslation>> getMovieTranslations(String id, String language) async {
+  Future<List<MovieTranslation>> getMovieTranslations(String id, {String language = ""}) async {
     return await _getList<MovieTranslation>("movies/$id/translations/$language");
   }
 
-  Future<List<Comment>> getMovieComments(String id, CommentsSortBy sortBy, {RequestPagination? pagination}) async {
+  Future<List<Comment>> getMovieComments(String id, {CommentsSortBy sortBy = CommentsSortBy.newest, RequestPagination? pagination}) async {
     return await _getList<Comment>("movies/$id/comments/${sortBy.toString()}", pagination: pagination);
   }
 
-  Future<List<TraktList>> getMovieLists(String id, ListType type, ListSort sortBy, {RequestPagination? pagination}) async {
+  Future<List<TraktList>> getMovieLists(String id, {ListType type = ListType.personal, ListSort sortBy = ListSort.popular, RequestPagination? pagination}) async {
     return await _getList<TraktList>("movies/$id/lists/${type.toString()}/${sortBy.toString()}", pagination: pagination);
   }
 
