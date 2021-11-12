@@ -14,6 +14,7 @@ import 'package:trakt_dart/trakt_manager/request_models.dart';
 
 part 'episode_requests.dart';
 part 'movie_requests.dart';
+part 'people_requests.dart';
 part 'season_requests.dart';
 part 'show_requests.dart';
 
