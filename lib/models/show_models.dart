@@ -139,18 +139,6 @@ class ShowTranslation {
 }
 
 @JsonSerializable(createToJson: false)
-class ShowPeople {
-  final List<ShowCharacter> cast;
-  final List<ShowCrew> crew;
-
-  ShowPeople(this.cast, this.crew);
-
-  factory ShowPeople.fromJson(Map<String, dynamic> json) => _$ShowPeopleFromJson(json);
-
-  static ShowPeople fromJsonModel(Map<String, dynamic> json) => ShowPeople.fromJson(json);
-}
-
-@JsonSerializable(createToJson: false)
 class ShowStats {
   final int watchers, plays, collectors, comments, lists, votes, recommended;
   @JsonKey(name: 'collected_episodes')

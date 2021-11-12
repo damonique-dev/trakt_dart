@@ -144,28 +144,3 @@ class MovieStats {
 
   static MovieStats fromJsonModel(Map<String, dynamic> json) => MovieStats.fromJson(json);
 }
-
-@JsonSerializable(createToJson: false)
-class MoviePeople {
-  final List<MovieCharacter> cast;
-  final List<MovieCrew> production;
-  final List<MovieCrew> art;
-  final List<MovieCrew> sound;
-  final List<MovieCrew> writing;
-  final List<MovieCrew> camera;
-  final List<MovieCrew> directing;
-  final List<MovieCrew> lighting;
-  final List<MovieCrew> crew;
-
-  @JsonKey(name: 'costume & make-up')
-  final List<MovieCrew> costumeAndMakeUp;
-
-  @JsonKey(name: 'visual effects')
-  final List<MovieCrew> visualEffects;
-
-  MoviePeople(this.cast, this.production, this.art, this.sound, this.writing, this.camera, this.directing, this.lighting, this.crew, this.costumeAndMakeUp, this.visualEffects);
-
-  factory MoviePeople.fromJson(Map<String, dynamic> json) => _$MoviePeopleFromJson(json);
-
-  static MoviePeople fromJsonModel(Map<String, dynamic> json) => MoviePeople.fromJson(json);
-}

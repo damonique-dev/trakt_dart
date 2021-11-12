@@ -84,15 +84,6 @@ ShowTranslation _$ShowTranslationFromJson(Map<String, dynamic> json) =>
       json['language'] as String,
     );
 
-ShowPeople _$ShowPeopleFromJson(Map<String, dynamic> json) => ShowPeople(
-      (json['cast'] as List<dynamic>)
-          .map((e) => ShowCharacter.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['crew'] as List<dynamic>)
-          .map((e) => ShowCrew.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
 ShowStats _$ShowStatsFromJson(Map<String, dynamic> json) => ShowStats(
       json['watchers'] as int,
       json['plays'] as int,
