@@ -24,6 +24,8 @@ class User {
   User(this.username, this.name, this.private, this.vip, this.vipEp, this.ids, this.location, this.about, this.gender, this.age, this.images, this.joinedAt);
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  static User fromJsonModel(Map<String, dynamic> json) => User.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -39,6 +41,8 @@ class UserStats {
   UserStats(this.rating, this.playCount, this.completedCount);
 
   factory UserStats.fromJson(Map<String, dynamic> json) => _$UserStatsFromJson(json);
+
+  static UserStats fromJsonModel(Map<String, dynamic> json) => UserStats.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -48,6 +52,8 @@ class Images {
   Images(this.avatar);
 
   factory Images.fromJson(Map<String, dynamic> json) => _$ImagesFromJson(json);
+
+  static Images fromJsonModel(Map<String, dynamic> json) => Images.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -57,4 +63,6 @@ class Avatar {
   Avatar(this.full);
 
   factory Avatar.fromJson(Map<String, dynamic> json) => _$AvatarFromJson(json);
+
+  static Avatar fromJsonModel(Map<String, dynamic> json) => Avatar.fromJson(json);
 }

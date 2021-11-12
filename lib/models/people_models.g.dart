@@ -25,3 +25,15 @@ SocialIds _$SocialIdsFromJson(Map<String, dynamic> json) => SocialIds(
       json['instagram'] as String?,
       json['wikipedia'] as String?,
     );
+
+Character _$CharacterFromJson(Map<String, dynamic> json) => Character(
+      json['character'] as String,
+      (json['characters'] as List<dynamic>).map((e) => e as String).toList(),
+      Person.fromJson(json['person'] as Map<String, dynamic>),
+    );
+
+Crew _$CrewFromJson(Map<String, dynamic> json) => Crew(
+      json['job'] as String,
+      (json['jobs'] as List<dynamic>).map((e) => e as String).toList(),
+      Person.fromJson(json['person'] as Map<String, dynamic>),
+    );

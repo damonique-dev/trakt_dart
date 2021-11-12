@@ -3,6 +3,14 @@ import 'package:trakt_dart/models/users_models.dart';
 
 part 'common_models.g.dart';
 
+enum TimePeriod { daily , weekly , monthly , yearly , all }
+
+enum CommentsSortBy {newest , oldest , likes , replies , highest , lowest , plays}
+
+enum ListType {all , personal , official , watchlists , recommendations}
+
+enum ListSort {popular , likes , comments , items , added , updated}
+
 @JsonSerializable(createToJson: false)
 class MovieShowMetadata {
   final String title;
@@ -12,6 +20,8 @@ class MovieShowMetadata {
   MovieShowMetadata(this.title, this.year, this.ids);
 
   factory MovieShowMetadata.fromJson(Map<String, dynamic> json) => _$MovieShowMetadataFromJson(json);
+
+  static MovieShowMetadata fromJsonModel(Map<String, dynamic> json) => MovieShowMetadata.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -23,6 +33,8 @@ class Ids {
   Ids(this.trakt, this.slug, this.tvdb, this.imdb, this.tmdb);
 
   factory Ids.fromJson(Map<String, dynamic> json) => _$IdsFromJson(json);
+
+  static Ids fromJsonModel(Map<String, dynamic> json) => Ids.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -50,6 +62,8 @@ class Comment {
   Comment(this.id, this.replies, this.likes, this.comment, this.spoiler, this.review, this.parentId, this.createdAt, this.updatedAt, this.userRating, this.userStats, this.user);
 
   factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
+
+  static Comment fromJsonModel(Map<String, dynamic> json) => Comment.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -86,6 +100,8 @@ class TraktList {
   TraktList(this.name, this.description, this.privacy, this.likes, this.user, this.ids, this.displayNumbers, this.allowComments, this.sortBy, this.sortHow, this.createdAt, this.updatedAt, this.itemCount, this.commentCount);
 
   factory TraktList.fromJson(Map<String, dynamic> json) => _$TraktListFromJson(json);
+
+  static TraktList fromJsonModel(Map<String, dynamic> json) => TraktList.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -98,6 +114,8 @@ class Rating {
   Rating(this.rating, this.votes, this.distribution);
 
   factory Rating.fromJson(Map<String, dynamic> json) => _$RatingFromJson(json);
+
+  static Rating fromJsonModel(Map<String, dynamic> json) => Rating.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -107,4 +125,6 @@ class Stats {
   Stats(this.watchers, this.plays, this.collectors, this.comments, this.lists, this.votes, this.recommended);
 
   factory Stats.fromJson(Map<String, dynamic> json) => _$StatsFromJson(json);
+
+  static Stats fromJsonModel(Map<String, dynamic> json) => Stats.fromJson(json);
 }

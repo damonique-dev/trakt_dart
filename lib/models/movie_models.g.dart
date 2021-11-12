@@ -12,7 +12,7 @@ Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(
       json['country'] as String?,
       json['language'] as String?,
       json['certification'] as String?,
-      json['year'] as int,
+      json['year'] as int?,
       json['runtime'] as int?,
       json['votes'] as int?,
       json['comment_count'] as int?,
@@ -38,7 +38,7 @@ TrendingMovie _$TrendingMovieFromJson(Map<String, dynamic> json) =>
 
 RecommendedMovie _$RecommendedMovieFromJson(Map<String, dynamic> json) =>
     RecommendedMovie(
-      json['userCount'] as int,
+      json['user_count'] as int,
       Movie.fromJson(json['movie'] as Map<String, dynamic>),
     );
 
@@ -123,16 +123,4 @@ MoviePeople _$MoviePeopleFromJson(Map<String, dynamic> json) => MoviePeople(
       (json['visual effects'] as List<dynamic>)
           .map((e) => Crew.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
-
-Character _$CharacterFromJson(Map<String, dynamic> json) => Character(
-      json['character'] as String,
-      (json['characters'] as List<dynamic>).map((e) => e as String).toList(),
-      Person.fromJson(json['person'] as Map<String, dynamic>),
-    );
-
-Crew _$CrewFromJson(Map<String, dynamic> json) => Crew(
-      json['job'] as String,
-      (json['jobs'] as List<dynamic>).map((e) => e as String).toList(),
-      Person.fromJson(json['person'] as Map<String, dynamic>),
     );
