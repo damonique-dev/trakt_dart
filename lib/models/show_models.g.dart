@@ -27,7 +27,7 @@ Show _$ShowFromJson(Map<String, dynamic> json) => Show(
       (json['rating'] as num?)?.toDouble(),
       (json['genres'] as List<dynamic>).map((e) => e as String).toList(),
       json['first_aired'] as String?,
-      json['comment_count'] as String?,
+      json['comment_count'] as int?,
       (json['available_translations'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -35,9 +35,9 @@ Show _$ShowFromJson(Map<String, dynamic> json) => Show(
     );
 
 AirTime _$AirTimeFromJson(Map<String, dynamic> json) => AirTime(
-      json['day'] as String,
-      json['time'] as String,
-      json['timezone'] as String,
+      json['day'] as String?,
+      json['time'] as String?,
+      json['timezone'] as String?,
     );
 
 TrendingShow _$TrendingShowFromJson(Map<String, dynamic> json) => TrendingShow(

@@ -12,7 +12,16 @@ class Movie {
   final Ids ids;
 
   // Extended: full
-  final String? overview, country, language, certification, tagline, trailer, homepage, status, released, updatedAt;
+  final String? overview,
+      country,
+      language,
+      certification,
+      tagline,
+      trailer,
+      homepage,
+      status,
+      released,
+      updatedAt;
   final int? runtime, votes;
   final double? rating;
   @JsonKey(name: 'available_translations')
@@ -21,7 +30,26 @@ class Movie {
   @JsonKey(name: 'comment_count')
   final int? commentCount;
 
-  Movie(this.title, this.overview, this.country, this.language, this.certification, this.year, this.runtime, this.votes, this.commentCount, this.ids, this.tagline, this.trailer, this.homepage, this.status, this.rating, this.availableTranslations, this.genres, this.released, this.updatedAt);
+  Movie(
+      this.title,
+      this.overview,
+      this.country,
+      this.language,
+      this.certification,
+      this.year,
+      this.runtime,
+      this.votes,
+      this.commentCount,
+      this.ids,
+      this.tagline,
+      this.trailer,
+      this.homepage,
+      this.status,
+      this.rating,
+      this.availableTranslations,
+      this.genres,
+      this.released,
+      this.updatedAt);
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 
@@ -35,9 +63,11 @@ class TrendingMovie {
 
   TrendingMovie(this.watchers, this.movie);
 
-  factory TrendingMovie.fromJson(Map<String, dynamic> json) => _$TrendingMovieFromJson(json);
+  factory TrendingMovie.fromJson(Map<String, dynamic> json) =>
+      _$TrendingMovieFromJson(json);
 
-  static TrendingMovie fromJsonModel(Map<String, dynamic> json) => TrendingMovie.fromJson(json);
+  static TrendingMovie fromJsonModel(Map<String, dynamic> json) =>
+      TrendingMovie.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -48,9 +78,11 @@ class RecommendedMovie {
 
   RecommendedMovie(this.userCount, this.movie);
 
-  factory RecommendedMovie.fromJson(Map<String, dynamic> json) => _$RecommendedMovieFromJson(json);
+  factory RecommendedMovie.fromJson(Map<String, dynamic> json) =>
+      _$RecommendedMovieFromJson(json);
 
-  static RecommendedMovie fromJsonModel(Map<String, dynamic> json) => RecommendedMovie.fromJson(json);
+  static RecommendedMovie fromJsonModel(Map<String, dynamic> json) =>
+      RecommendedMovie.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -63,11 +95,14 @@ class PlayedWatchedCollectedMovie {
   final int collectedCount;
   final Movie movie;
 
-  PlayedWatchedCollectedMovie(this.watcherCount, this.playCount, this.collectedCount, this.movie);
+  PlayedWatchedCollectedMovie(
+      this.watcherCount, this.playCount, this.collectedCount, this.movie);
 
-  factory PlayedWatchedCollectedMovie.fromJson(Map<String, dynamic> json) => _$PlayedWatchedCollectedMovieFromJson(json);
+  factory PlayedWatchedCollectedMovie.fromJson(Map<String, dynamic> json) =>
+      _$PlayedWatchedCollectedMovieFromJson(json);
 
-  static PlayedWatchedCollectedMovie fromJsonModel(Map<String, dynamic> json) => PlayedWatchedCollectedMovie.fromJson(json);
+  static PlayedWatchedCollectedMovie fromJsonModel(Map<String, dynamic> json) =>
+      PlayedWatchedCollectedMovie.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -78,9 +113,11 @@ class AnticipatedMovie {
 
   AnticipatedMovie(this.listCount, this.movie);
 
-  factory AnticipatedMovie.fromJson(Map<String, dynamic> json) => _$AnticipatedMovieFromJson(json);
+  factory AnticipatedMovie.fromJson(Map<String, dynamic> json) =>
+      _$AnticipatedMovieFromJson(json);
 
-  static AnticipatedMovie fromJsonModel(Map<String, dynamic> json) => AnticipatedMovie.fromJson(json);
+  static AnticipatedMovie fromJsonModel(Map<String, dynamic> json) =>
+      AnticipatedMovie.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -90,9 +127,11 @@ class BoxOfficeMovie {
 
   BoxOfficeMovie(this.revenue, this.movie);
 
-  factory BoxOfficeMovie.fromJson(Map<String, dynamic> json) => _$BoxOfficeMovieFromJson(json);
+  factory BoxOfficeMovie.fromJson(Map<String, dynamic> json) =>
+      _$BoxOfficeMovieFromJson(json);
 
-  static BoxOfficeMovie fromJsonModel(Map<String, dynamic> json) => BoxOfficeMovie.fromJson(json);
+  static BoxOfficeMovie fromJsonModel(Map<String, dynamic> json) =>
+      BoxOfficeMovie.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -103,9 +142,11 @@ class UpdatedMovie {
 
   UpdatedMovie(this.updatedAt, this.movie);
 
-  factory UpdatedMovie.fromJson(Map<String, dynamic> json) => _$UpdatedMovieFromJson(json);
+  factory UpdatedMovie.fromJson(Map<String, dynamic> json) =>
+      _$UpdatedMovieFromJson(json);
 
-  static UpdatedMovie fromJsonModel(Map<String, dynamic> json) => UpdatedMovie.fromJson(json);
+  static UpdatedMovie fromJsonModel(Map<String, dynamic> json) =>
+      UpdatedMovie.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -116,11 +157,14 @@ class MovieRelease {
   @JsonKey(name: 'release_type')
   final String releaseType;
 
-  MovieRelease(this.country, this.certification, this.releaseDate, this.releaseType, this.note);
+  MovieRelease(this.country, this.certification, this.releaseDate,
+      this.releaseType, this.note);
 
-  factory MovieRelease.fromJson(Map<String, dynamic> json) => _$MovieReleaseFromJson(json);
+  factory MovieRelease.fromJson(Map<String, dynamic> json) =>
+      _$MovieReleaseFromJson(json);
 
-  static MovieRelease fromJsonModel(Map<String, dynamic> json) => MovieRelease.fromJson(json);
+  static MovieRelease fromJsonModel(Map<String, dynamic> json) =>
+      MovieRelease.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -129,18 +173,23 @@ class MovieTranslation {
 
   MovieTranslation(this.title, this.overview, this.tagline, this.language);
 
-  factory MovieTranslation.fromJson(Map<String, dynamic> json) => _$MovieTranslationFromJson(json);
+  factory MovieTranslation.fromJson(Map<String, dynamic> json) =>
+      _$MovieTranslationFromJson(json);
 
-  static MovieTranslation fromJsonModel(Map<String, dynamic> json) => MovieTranslation.fromJson(json);
+  static MovieTranslation fromJsonModel(Map<String, dynamic> json) =>
+      MovieTranslation.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
 class MovieStats {
   final int watchers, plays, collectors, comments, lists, votes, recommended;
 
-  MovieStats(this.watchers, this.plays, this.collectors, this.comments, this.lists, this.votes, this.recommended);
+  MovieStats(this.watchers, this.plays, this.collectors, this.comments,
+      this.lists, this.votes, this.recommended);
 
-  factory MovieStats.fromJson(Map<String, dynamic> json) => _$MovieStatsFromJson(json);
+  factory MovieStats.fromJson(Map<String, dynamic> json) =>
+      _$MovieStatsFromJson(json);
 
-  static MovieStats fromJsonModel(Map<String, dynamic> json) => MovieStats.fromJson(json);
+  static MovieStats fromJsonModel(Map<String, dynamic> json) =>
+      MovieStats.fromJson(json);
 }

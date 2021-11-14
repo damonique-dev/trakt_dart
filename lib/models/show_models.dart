@@ -12,7 +12,15 @@ class Show {
   final Ids ids;
 
   // Extended: full
-  final String? overview, certification, network, country, trailer, homepage, status, updated_at, language;
+  final String? overview,
+      certification,
+      network,
+      country,
+      trailer,
+      homepage,
+      status,
+      updated_at,
+      language;
   final int? runtime, votes;
   final AirTime? airs;
   final double? rating;
@@ -22,7 +30,7 @@ class Show {
   final String? firstAired;
 
   @JsonKey(name: 'comment_count')
-  final String? commentCount;
+  final int? commentCount;
 
   @JsonKey(name: 'available_translations')
   final List<String>? availableTranslations;
@@ -30,7 +38,28 @@ class Show {
   @JsonKey(name: 'aired_episodes')
   final int? airedEpisodes;
 
-  Show(this.title, this.year, this.ids, this.overview, this.certification, this.network, this.country, this.trailer, this.homepage, this.status, this.updated_at, this.language, this.runtime, this.votes, this.airs, this.rating, this.genres, this.firstAired, this.commentCount, this.availableTranslations, this.airedEpisodes);
+  Show(
+      this.title,
+      this.year,
+      this.ids,
+      this.overview,
+      this.certification,
+      this.network,
+      this.country,
+      this.trailer,
+      this.homepage,
+      this.status,
+      this.updated_at,
+      this.language,
+      this.runtime,
+      this.votes,
+      this.airs,
+      this.rating,
+      this.genres,
+      this.firstAired,
+      this.commentCount,
+      this.availableTranslations,
+      this.airedEpisodes);
 
   factory Show.fromJson(Map<String, dynamic> json) => _$ShowFromJson(json);
 
@@ -39,13 +68,15 @@ class Show {
 
 @JsonSerializable(createToJson: false)
 class AirTime {
-  final String day, time, timezone;
+  final String? day, time, timezone;
 
   AirTime(this.day, this.time, this.timezone);
 
-  factory AirTime.fromJson(Map<String, dynamic> json) => _$AirTimeFromJson(json);
+  factory AirTime.fromJson(Map<String, dynamic> json) =>
+      _$AirTimeFromJson(json);
 
-  static AirTime fromJsonModel(Map<String, dynamic> json) => AirTime.fromJson(json);
+  static AirTime fromJsonModel(Map<String, dynamic> json) =>
+      AirTime.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -55,9 +86,11 @@ class TrendingShow {
 
   TrendingShow(this.watchers, this.show);
 
-  factory TrendingShow.fromJson(Map<String, dynamic> json) => _$TrendingShowFromJson(json);
+  factory TrendingShow.fromJson(Map<String, dynamic> json) =>
+      _$TrendingShowFromJson(json);
 
-  static TrendingShow fromJsonModel(Map<String, dynamic> json) => TrendingShow.fromJson(json);
+  static TrendingShow fromJsonModel(Map<String, dynamic> json) =>
+      TrendingShow.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -68,9 +101,11 @@ class RecommendedShow {
 
   RecommendedShow(this.userCount, this.show);
 
-  factory RecommendedShow.fromJson(Map<String, dynamic> json) => _$RecommendedShowFromJson(json);
+  factory RecommendedShow.fromJson(Map<String, dynamic> json) =>
+      _$RecommendedShowFromJson(json);
 
-  static RecommendedShow fromJsonModel(Map<String, dynamic> json) => RecommendedShow.fromJson(json);
+  static RecommendedShow fromJsonModel(Map<String, dynamic> json) =>
+      RecommendedShow.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -83,11 +118,14 @@ class PlayedWatchedCollectedShow {
   final int collectedCount;
   final Show show;
 
-  PlayedWatchedCollectedShow(this.watcherCount, this.playCount, this.collectedCount, this.show);
+  PlayedWatchedCollectedShow(
+      this.watcherCount, this.playCount, this.collectedCount, this.show);
 
-  factory PlayedWatchedCollectedShow.fromJson(Map<String, dynamic> json) => _$PlayedWatchedCollectedShowFromJson(json);
+  factory PlayedWatchedCollectedShow.fromJson(Map<String, dynamic> json) =>
+      _$PlayedWatchedCollectedShowFromJson(json);
 
-  static PlayedWatchedCollectedShow fromJsonModel(Map<String, dynamic> json) => PlayedWatchedCollectedShow.fromJson(json);
+  static PlayedWatchedCollectedShow fromJsonModel(Map<String, dynamic> json) =>
+      PlayedWatchedCollectedShow.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -98,9 +136,11 @@ class AnticipatedShow {
 
   AnticipatedShow(this.listCount, this.show);
 
-  factory AnticipatedShow.fromJson(Map<String, dynamic> json) => _$AnticipatedShowFromJson(json);
+  factory AnticipatedShow.fromJson(Map<String, dynamic> json) =>
+      _$AnticipatedShowFromJson(json);
 
-  static AnticipatedShow fromJsonModel(Map<String, dynamic> json) => AnticipatedShow.fromJson(json);
+  static AnticipatedShow fromJsonModel(Map<String, dynamic> json) =>
+      AnticipatedShow.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -111,9 +151,11 @@ class UpdatedShow {
 
   UpdatedShow(this.updatedAt, this.show);
 
-  factory UpdatedShow.fromJson(Map<String, dynamic> json) => _$UpdatedShowFromJson(json);
+  factory UpdatedShow.fromJson(Map<String, dynamic> json) =>
+      _$UpdatedShowFromJson(json);
 
-  static UpdatedShow fromJsonModel(Map<String, dynamic> json) => UpdatedShow.fromJson(json);
+  static UpdatedShow fromJsonModel(Map<String, dynamic> json) =>
+      UpdatedShow.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -122,9 +164,11 @@ class ShowCertification {
 
   ShowCertification(this.certification, this.country);
 
-  factory ShowCertification.fromJson(Map<String, dynamic> json) => _$ShowCertificationFromJson(json);
+  factory ShowCertification.fromJson(Map<String, dynamic> json) =>
+      _$ShowCertificationFromJson(json);
 
-  static ShowCertification fromJsonModel(Map<String, dynamic> json) => ShowCertification.fromJson(json);
+  static ShowCertification fromJsonModel(Map<String, dynamic> json) =>
+      ShowCertification.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -133,9 +177,11 @@ class ShowTranslation {
 
   ShowTranslation(this.title, this.overview, this.language);
 
-  factory ShowTranslation.fromJson(Map<String, dynamic> json) => _$ShowTranslationFromJson(json);
+  factory ShowTranslation.fromJson(Map<String, dynamic> json) =>
+      _$ShowTranslationFromJson(json);
 
-  static ShowTranslation fromJsonModel(Map<String, dynamic> json) => ShowTranslation.fromJson(json);
+  static ShowTranslation fromJsonModel(Map<String, dynamic> json) =>
+      ShowTranslation.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -144,9 +190,12 @@ class ShowStats {
   @JsonKey(name: 'collected_episodes')
   final int collectedEpisodes;
 
-  ShowStats(this.watchers, this.plays, this.collectors, this.comments, this.lists, this.votes, this.recommended, this.collectedEpisodes);
+  ShowStats(this.watchers, this.plays, this.collectors, this.comments,
+      this.lists, this.votes, this.recommended, this.collectedEpisodes);
 
-  factory ShowStats.fromJson(Map<String, dynamic> json) => _$ShowStatsFromJson(json);
+  factory ShowStats.fromJson(Map<String, dynamic> json) =>
+      _$ShowStatsFromJson(json);
 
-  static ShowStats fromJsonModel(Map<String, dynamic> json) => ShowStats.fromJson(json);
+  static ShowStats fromJsonModel(Map<String, dynamic> json) =>
+      ShowStats.fromJson(json);
 }
