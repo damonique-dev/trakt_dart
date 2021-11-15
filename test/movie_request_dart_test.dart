@@ -59,13 +59,13 @@ void main() {
   test('Get Updated Movies', () async {
     final movies = await TraktManager.instance
         .getUpdatedMovies(DateTime.now().toIso8601String());
-    expect(movies.length, equals(10));
+    expect(movies.length, lessThanOrEqualTo(10));
   });
 
   test('Get Updated Movie Ids', () async {
     final moviesIds = await TraktManager.instance
         .getUpdatedMovieIds(DateTime.now().toIso8601String());
-    expect(moviesIds.length, equals(10));
+    expect(moviesIds.length, lessThanOrEqualTo(10));
   });
 
   test('Get Single Movie', () async {

@@ -60,13 +60,13 @@ void main() {
   test('Get Updated shows', () async {
     final shows = await TraktManager.instance
         .getUpdatedShows(DateTime.now().toIso8601String());
-    expect(shows.length, equals(10));
+    expect(shows.length, lessThanOrEqualTo(10));
   });
 
   test('Get Updated show ids', () async {
     final ids = await TraktManager.instance
         .getUpdatedShowIds(DateTime.now().toIso8601String());
-    expect(ids.length, equals(10));
+    expect(ids.length, lessThanOrEqualTo(10));
   });
 
   test('Get Show Summary', () async {
