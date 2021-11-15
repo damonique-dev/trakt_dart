@@ -25,7 +25,7 @@ Show _$ShowFromJson(Map<String, dynamic> json) => Show(
           ? null
           : AirTime.fromJson(json['airs'] as Map<String, dynamic>),
       (json['rating'] as num?)?.toDouble(),
-      (json['genres'] as List<dynamic>).map((e) => e as String).toList(),
+      (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList(),
       json['first_aired'] as String?,
       json['comment_count'] as int?,
       (json['available_translations'] as List<dynamic>?)
@@ -67,7 +67,7 @@ AnticipatedShow _$AnticipatedShowFromJson(Map<String, dynamic> json) =>
     );
 
 UpdatedShow _$UpdatedShowFromJson(Map<String, dynamic> json) => UpdatedShow(
-      json['updated_at'] as int,
+      json['updated_at'] as String,
       Show.fromJson(json['show'] as Map<String, dynamic>),
     );
 
@@ -79,7 +79,7 @@ ShowCertification _$ShowCertificationFromJson(Map<String, dynamic> json) =>
 
 ShowTranslation _$ShowTranslationFromJson(Map<String, dynamic> json) =>
     ShowTranslation(
-      json['title'] as String,
+      json['title'] as String?,
       json['overview'] as String,
       json['language'] as String,
     );

@@ -141,10 +141,4 @@ void main() {
     expect(stats.comments, isNonZero);
     expect(stats.collectors, isNonZero);
   });
-
-  test('Get Watchers', () async {
-    final movies =
-        await TraktManager.instance.getMovieWatchers("deadpool-2016");
-    expect(movies.length, isNonZero);
-  });
 }

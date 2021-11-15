@@ -21,7 +21,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/recommended/${period.toString()}",
+    return await _getList("shows/recommended/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -29,7 +29,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/played/${period.toString()}",
+    return await _getList("shows/played/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -38,7 +38,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/watched/${period.toString()}",
+    return await _getList("shows/watched/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -47,7 +47,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/collected/${period.toString()}",
+    return await _getList("shows/collected/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -65,9 +65,9 @@ extension ShowRequests on TraktManager {
         extendedFull: extendedFull, pagination: pagination);
   }
 
-  Future<List<int>> getUpdatedShowIds(
-      String startDate, RequestPagination? pagination) async {
-    return await _getList("shows/updates/id/startDate", pagination: pagination);
+  Future<List<int>> getUpdatedShowIds(String startDate,
+      {RequestPagination? pagination}) async {
+    return await _getIds("shows/updates/id/startDate", pagination: pagination);
   }
 
   Future<Show> getShowSummary(String id, {bool extendedFull = false}) async {
@@ -78,9 +78,10 @@ extension ShowRequests on TraktManager {
     return await _getList<MovieShowAlias>("shows/$id/aliases");
   }
 
-  Future<List<ShowCertification>> getShowCertifications(String id) async {
-    return await _getList<ShowCertification>("shows/$id/certification");
-  }
+  // TODO: returning 500 no matter the show id...?
+  // Future<List<ShowCertification>> getShowCertifications(String id) async {
+  //   return await _getList<ShowCertification>("shows/$id/certification");
+  // }
 
   Future<List<ShowTranslation>> getShowTranslations(String id,
       {String language = ""}) async {
@@ -90,7 +91,7 @@ extension ShowRequests on TraktManager {
   Future<List<Comment>> getShowComments(String id,
       {CommentsSortBy sortBy = CommentsSortBy.newest,
       RequestPagination? pagination}) async {
-    return await _getList<Comment>("shows/$id/comments/${sortBy.toString()}",
+    return await _getList<Comment>("shows/$id/comments/${sortBy.value}",
         pagination: pagination);
   }
 
@@ -99,7 +100,7 @@ extension ShowRequests on TraktManager {
       ListSort sortBy = ListSort.popular,
       RequestPagination? pagination}) async {
     return await _getList<TraktList>(
-        "shows/$id/lists/${type.toString()}/${sortBy.toString()}",
+        "shows/$id/lists/${type.value}/${sortBy.value}",
         pagination: pagination);
   }
 

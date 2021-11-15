@@ -31,7 +31,7 @@ Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
       json['parent_id'] as int,
       json['created_at'] as String,
       json['updated_at'] as String,
-      json['user_rating'] as int,
+      json['user_rating'] as int?,
       UserStats.fromJson(json['user_stats'] as Map<String, dynamic>),
       User.fromJson(json['user'] as Map<String, dynamic>),
     );

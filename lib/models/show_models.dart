@@ -24,7 +24,7 @@ class Show {
   final int? runtime, votes;
   final AirTime? airs;
   final double? rating;
-  final List<String> genres;
+  final List<String>? genres;
 
   @JsonKey(name: 'first_aired')
   final String? firstAired;
@@ -146,7 +146,7 @@ class AnticipatedShow {
 @JsonSerializable(createToJson: false)
 class UpdatedShow {
   @JsonKey(name: 'updated_at')
-  final int updatedAt;
+  final String updatedAt;
   final Show show;
 
   UpdatedShow(this.updatedAt, this.show);
@@ -173,7 +173,8 @@ class ShowCertification {
 
 @JsonSerializable(createToJson: false)
 class ShowTranslation {
-  final String title, overview, language;
+  final String? title;
+  final String overview, language;
 
   ShowTranslation(this.title, this.overview, this.language);
 

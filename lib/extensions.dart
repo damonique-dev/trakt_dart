@@ -1,4 +1,5 @@
 import 'package:trakt_dart/models/common_models.dart';
+import 'package:trakt_dart/models/episode_models.dart';
 import 'package:trakt_dart/models/movie_models.dart';
 import 'package:trakt_dart/models/people_models.dart';
 import 'package:trakt_dart/models/season_models.dart';
@@ -53,9 +54,13 @@ extension TraktModel on Type {
     MovieCrew: MovieCrew.fromJsonModel,
     MoviePeople: MoviePeople.fromJsonModel,
     MovieCrewList: MovieCrewList.fromJsonModel,
+    ShowCrewList: ShowCrewList.fromJsonModel,
 
     // Season Models
     Season: Season.fromJsonModel,
+
+    // Episode Models
+    Episode: Episode.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

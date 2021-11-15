@@ -130,7 +130,7 @@ class Comment {
   final String updatedAt;
 
   @JsonKey(name: 'user_rating')
-  final int userRating;
+  final int? userRating;
 
   @JsonKey(name: 'user_stats')
   final UserStats userStats;

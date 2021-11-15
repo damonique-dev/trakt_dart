@@ -89,9 +89,15 @@ class MovieCrewList {
 }
 
 @JsonSerializable(createToJson: false)
-class ShowPeople {
-  final List<ShowCharacter>? cast;
-  final List<ShowCrew>? crew, writing, directing, sound, production;
+class ShowCrewList {
+  final List<MovieCrew>? production,
+      art,
+      sound,
+      writing,
+      camera,
+      directing,
+      lighting,
+      crew;
 
   @JsonKey(name: 'costume & make-up')
   final List<ShowCrew>? costumeAndMakeUp;
@@ -99,8 +105,31 @@ class ShowPeople {
   @JsonKey(name: 'visual effects')
   final List<ShowCrew>? visualEffects;
 
-  ShowPeople(this.cast, this.crew, this.writing, this.directing, this.sound,
-      this.production, this.costumeAndMakeUp, this.visualEffects);
+  ShowCrewList(
+      this.production,
+      this.art,
+      this.sound,
+      this.writing,
+      this.camera,
+      this.directing,
+      this.lighting,
+      this.crew,
+      this.costumeAndMakeUp,
+      this.visualEffects);
+
+  factory ShowCrewList.fromJson(Map<String, dynamic> json) =>
+      _$ShowCrewListFromJson(json);
+
+  static ShowCrewList fromJsonModel(Map<String, dynamic> json) =>
+      ShowCrewList.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class ShowPeople {
+  final List<ShowCharacter>? cast;
+  final ShowCrewList? crew;
+
+  ShowPeople(this.cast, this.crew);
 
   factory ShowPeople.fromJson(Map<String, dynamic> json) =>
       _$ShowPeopleFromJson(json);

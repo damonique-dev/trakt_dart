@@ -8,10 +8,10 @@ part of 'users_models.dart';
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
       json['username'] as String,
-      json['name'] as String,
+      json['name'] as String?,
       json['private'] as bool,
-      json['vip'] as bool,
-      json['vip_ep'] as bool,
+      json['vip'] as bool? ?? false,
+      json['vip_ep'] as bool? ?? false,
       Ids.fromJson(json['ids'] as Map<String, dynamic>),
       json['location'] as String?,
       json['about'] as String?,
@@ -24,7 +24,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
     );
 
 UserStats _$UserStatsFromJson(Map<String, dynamic> json) => UserStats(
-      json['rating'] as int,
+      json['rating'] as int?,
       json['play_count'] as int,
       json['completed_count'] as int,
     );
