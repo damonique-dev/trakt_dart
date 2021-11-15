@@ -58,6 +58,7 @@ extension TraktModel on Type {
 
     // Season Models
     Season: Season.fromJsonModel,
+    SeasonStats: SeasonStats.fromJsonModel,
 
     // Episode Models
     Episode: Episode.fromJsonModel,

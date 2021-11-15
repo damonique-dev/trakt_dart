@@ -26,9 +26,37 @@ class Season {
   @JsonKey(name: 'updated_at')
   final String? updatedAt;
 
-  Season(this.number, this.ids, this.title, this.overview, this.network, this.rating, this.votes, this.episodeCount, this.airedEpisodes, this.firstAired, this.updatedAt);
+  Season(
+      this.number,
+      this.ids,
+      this.title,
+      this.overview,
+      this.network,
+      this.rating,
+      this.votes,
+      this.episodeCount,
+      this.airedEpisodes,
+      this.firstAired,
+      this.updatedAt);
 
   factory Season.fromJson(Map<String, dynamic> json) => _$SeasonFromJson(json);
 
-  static Season fromJsonModel(Map<String, dynamic> json) => Season.fromJson(json);
+  static Season fromJsonModel(Map<String, dynamic> json) =>
+      Season.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class SeasonStats {
+  final int watchers, plays, collectors, comments, lists, votes;
+  @JsonKey(name: 'collected_episodes')
+  final int collectedEpisodes;
+
+  SeasonStats(this.watchers, this.plays, this.collectors, this.comments,
+      this.lists, this.votes, this.collectedEpisodes);
+
+  factory SeasonStats.fromJson(Map<String, dynamic> json) =>
+      _$SeasonStatsFromJson(json);
+
+  static SeasonStats fromJsonModel(Map<String, dynamic> json) =>
+      SeasonStats.fromJson(json);
 }

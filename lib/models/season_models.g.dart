@@ -19,3 +19,13 @@ Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
       json['first_aired'] as String?,
       json['updated_at'] as String?,
     );
+
+SeasonStats _$SeasonStatsFromJson(Map<String, dynamic> json) => SeasonStats(
+      json['watchers'] as int,
+      json['plays'] as int,
+      json['collectors'] as int,
+      json['comments'] as int,
+      json['lists'] as int,
+      json['votes'] as int,
+      json['collected_episodes'] as int,
+    );
