@@ -19,7 +19,6 @@ class Show {
       trailer,
       homepage,
       status,
-      updated_at,
       language;
   final int? runtime, votes;
   final AirTime? airs;
@@ -28,6 +27,9 @@ class Show {
 
   @JsonKey(name: 'first_aired')
   final String? firstAired;
+
+  @JsonKey(name: 'updated_at')
+  final String? updatedAt;
 
   @JsonKey(name: 'comment_count')
   final int? commentCount;
@@ -49,7 +51,7 @@ class Show {
       this.trailer,
       this.homepage,
       this.status,
-      this.updated_at,
+      this.updatedAt,
       this.language,
       this.runtime,
       this.votes,

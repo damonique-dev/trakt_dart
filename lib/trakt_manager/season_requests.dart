@@ -30,9 +30,9 @@ extension SeasonRequests on TraktManager {
   }
 
   Future<ShowPeople> getShowSeasonPeople(String id, int seasonNumber,
-      {bool extendedFull = false}) async {
+      {bool extendedFull = false, bool includeGuestStars = false}) async {
     return await _get("shows/$id/seasons/$seasonNumber/people",
-        extendedFull: extendedFull);
+        extendedFull: extendedFull, includeGuestStars: includeGuestStars);
   }
 
   Future<Rating> getShowSeasonRatings(String id, int seasonNumber) async {

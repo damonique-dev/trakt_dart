@@ -164,8 +164,10 @@ class EpisodeCrewList {
 class ShowPeople {
   final List<ShowCharacter>? cast;
   final ShowCrewList? crew;
+  @JsonKey(name: 'guest_stars')
+  final List<ShowCharacter>? guestStars;
 
-  ShowPeople(this.cast, this.crew);
+  ShowPeople(this.cast, this.crew, this.guestStars);
 
   factory ShowPeople.fromJson(Map<String, dynamic> json) =>
       _$ShowPeopleFromJson(json);
@@ -178,8 +180,10 @@ class ShowPeople {
 class EpisodePeople {
   final List<EpisodeCharacter>? cast;
   final EpisodeCrewList? crew;
+  @JsonKey(name: 'guest_stars')
+  final List<EpisodeCharacter>? guestStars;
 
-  EpisodePeople(this.cast, this.crew);
+  EpisodePeople(this.cast, this.crew, this.guestStars);
 
   factory EpisodePeople.fromJson(Map<String, dynamic> json) =>
       _$EpisodePeopleFromJson(json);

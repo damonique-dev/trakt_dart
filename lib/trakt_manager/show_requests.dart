@@ -111,9 +111,9 @@ extension ShowRequests on TraktManager {
   //TODO: Add Reset Watched Progress Requests with OAuth is implemented.
 
   Future<ShowPeople> getShowPeople(String id,
-      {bool extendedFull = false}) async {
+      {bool extendedFull = false, bool includeGuestStars = false}) async {
     return await _get<ShowPeople>("shows/$id/people",
-        extendedFull: extendedFull);
+        extendedFull: extendedFull, includeGuestStars: includeGuestStars);
   }
 
   Future<Rating> getShowRatings(String id) async {

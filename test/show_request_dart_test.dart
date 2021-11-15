@@ -106,7 +106,8 @@ void main() {
   });
 
   test('Get Show People', () async {
-    final people = await TraktManager.instance.getShowPeople("game-of-thrones");
+    final people = await TraktManager.instance.getShowPeople("game-of-thrones",
+        extendedFull: true, includeGuestStars: true);
     expect(people.cast?.length, equals(44));
     expect(people.crew?.crew?.length, equals(4));
     expect(people.crew?.costumeAndMakeUp?.length, equals(3));
@@ -118,6 +119,7 @@ void main() {
     expect(people.crew?.writing?.length, equals(7));
     expect(people.crew?.camera?.length, equals(15));
     expect(people.crew?.art?.length, equals(9));
+    expect(people.guestStars?.length, equals(507));
   });
 
   test('Get Show Rating', () async {

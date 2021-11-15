@@ -51,15 +51,24 @@ class TraktManager {
   }
 
   Future<T> _get<T>(String request,
-      {bool extendedFull = false, RequestPagination? pagination}) async {
+      {bool extendedFull = false,
+      bool includeGuestStars = false,
+      RequestPagination? pagination}) async {
     assert(_clientId != null && _clientSecret != null,
         "Call initializeTraktMananager before making any requests");
 
     final queryParams = <String, String>{};
     queryParams.addAll(pagination?.toMap() ?? {});
 
+    List<String> extendedParams = [];
     if (extendedFull) {
-      queryParams["extended"] = "full";
+      extendedParams.add("full");
+    }
+    if (includeGuestStars) {
+      extendedParams.add("guest_stars");
+    }
+    if (extendedParams.isNotEmpty) {
+      queryParams["extended"] = extendedParams.join(",");
     }
 
     final url = Uri.https(_baseURL, request, queryParams);

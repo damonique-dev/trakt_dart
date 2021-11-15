@@ -143,6 +143,9 @@ ShowPeople _$ShowPeopleFromJson(Map<String, dynamic> json) => ShowPeople(
       json['crew'] == null
           ? null
           : ShowCrewList.fromJson(json['crew'] as Map<String, dynamic>),
+      (json['guest_stars'] as List<dynamic>?)
+          ?.map((e) => ShowCharacter.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 EpisodePeople _$EpisodePeopleFromJson(Map<String, dynamic> json) =>
@@ -153,6 +156,9 @@ EpisodePeople _$EpisodePeopleFromJson(Map<String, dynamic> json) =>
       json['crew'] == null
           ? null
           : EpisodeCrewList.fromJson(json['crew'] as Map<String, dynamic>),
+      (json['guest_stars'] as List<dynamic>?)
+          ?.map((e) => EpisodeCharacter.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 MovieCharacter _$MovieCharacterFromJson(Map<String, dynamic> json) =>
