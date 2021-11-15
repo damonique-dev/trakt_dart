@@ -16,12 +16,12 @@ extension PeopleRequests on TraktManager {
     return await _get("people/$id/shows", extendedFull: extendedFull);
   }
 
-  Future<List<TraktList>> getPersonEpisodeLists(String id,
+  Future<List<TraktList>> getPersonLists(String id,
       {ListType type = ListType.personal,
       ListSort sortBy = ListSort.popular,
       RequestPagination? pagination}) async {
     return await _getList<TraktList>(
-        "people/$id/lists/${type.toString()}/${sortBy.toString()}",
+        "people/$id/lists/${type.value}/${sortBy.value}",
         pagination: pagination);
   }
 }

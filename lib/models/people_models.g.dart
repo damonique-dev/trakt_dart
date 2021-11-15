@@ -199,36 +199,7 @@ PersonMovieCredits _$PersonMovieCreditsFromJson(Map<String, dynamic> json) =>
       (json['cast'] as List<dynamic>)
           .map((e) => MovieCharacterCredits.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['production'] as List<dynamic>?)
-          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['art'] as List<dynamic>?)
-          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['sound'] as List<dynamic>?)
-          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['writing'] as List<dynamic>?)
-          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['camera'] as List<dynamic>?)
-          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['directing'] as List<dynamic>?)
-          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['lighting'] as List<dynamic>?)
-          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['crew'] as List<dynamic>?)
-          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['costume & make-up'] as List<dynamic>)
-          .map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['visual effects'] as List<dynamic>)
-          .map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      PersonMovieCrewCreditsList.fromJson(json['crew'] as Map<String, dynamic>),
     );
 
 MovieCharacterCredits _$MovieCharacterCreditsFromJson(
@@ -249,6 +220,60 @@ PersonShowCredits _$PersonShowCreditsFromJson(Map<String, dynamic> json) =>
       (json['cast'] as List<dynamic>)
           .map((e) => ShowCharacterCredits.fromJson(e as Map<String, dynamic>))
           .toList(),
+      PersonShowCrewCreditsList.fromJson(json['crew'] as Map<String, dynamic>),
+    );
+
+ShowCharacterCredits _$ShowCharacterCreditsFromJson(
+        Map<String, dynamic> json) =>
+    ShowCharacterCredits(
+      (json['characters'] as List<dynamic>).map((e) => e as String).toList(),
+      Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
+ShowCrewCredits _$ShowCrewCreditsFromJson(Map<String, dynamic> json) =>
+    ShowCrewCredits(
+      (json['jobs'] as List<dynamic>).map((e) => e as String).toList(),
+      Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
+PersonMovieCrewCreditsList _$PersonMovieCrewCreditsListFromJson(
+        Map<String, dynamic> json) =>
+    PersonMovieCrewCreditsList(
+      (json['production'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['art'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['sound'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['writing'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['camera'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['directing'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['lighting'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['crew'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['costume & make-up'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['visual effects'] as List<dynamic>?)
+          ?.map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+PersonShowCrewCreditsList _$PersonShowCrewCreditsListFromJson(
+        Map<String, dynamic> json) =>
+    PersonShowCrewCreditsList(
       (json['production'] as List<dynamic>?)
           ?.map((e) => ShowCrewCredits.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -273,23 +298,10 @@ PersonShowCredits _$PersonShowCreditsFromJson(Map<String, dynamic> json) =>
       (json['crew'] as List<dynamic>?)
           ?.map((e) => ShowCrewCredits.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['costume & make-up'] as List<dynamic>)
-          .map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+      (json['costume & make-up'] as List<dynamic>?)
+          ?.map((e) => ShowCrewCredits.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['visual effects'] as List<dynamic>)
-          .map((e) => MovieCrewCredits.fromJson(e as Map<String, dynamic>))
+      (json['visual effects'] as List<dynamic>?)
+          ?.map((e) => ShowCrewCredits.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
-
-ShowCharacterCredits _$ShowCharacterCreditsFromJson(
-        Map<String, dynamic> json) =>
-    ShowCharacterCredits(
-      (json['characters'] as List<dynamic>).map((e) => e as String).toList(),
-      Show.fromJson(json['show'] as Map<String, dynamic>),
-    );
-
-ShowCrewCredits _$ShowCrewCreditsFromJson(Map<String, dynamic> json) =>
-    ShowCrewCredits(
-      (json['jobs'] as List<dynamic>).map((e) => e as String).toList(),
-      Show.fromJson(json['show'] as Map<String, dynamic>),
     );

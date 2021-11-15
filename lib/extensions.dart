@@ -38,7 +38,6 @@ extension TraktModel on Type {
     UpdatedShow: UpdatedShow.fromJsonModel,
     ShowCertification: ShowCertification.fromJsonModel,
     ShowTranslation: ShowTranslation.fromJsonModel,
-    ShowPeople: ShowPeople.fromJsonModel,
     ShowStats: ShowStats.fromJsonModel,
 
     // User Models
@@ -55,7 +54,13 @@ extension TraktModel on Type {
     MoviePeople: MoviePeople.fromJsonModel,
     MovieCrewList: MovieCrewList.fromJsonModel,
     ShowCrewList: ShowCrewList.fromJsonModel,
+    ShowPeople: ShowPeople.fromJsonModel,
     EpisodeCrewList: EpisodeCrewList.fromJsonModel,
+    PersonMovieCredits: PersonMovieCredits.fromJsonModel,
+    PersonMovieCrewCreditsList: PersonMovieCrewCreditsList.fromJsonModel,
+    PersonShowCrewCreditsList: PersonShowCrewCreditsList.fromJsonModel,
+    PersonShowCredits: PersonShowCredits.fromJsonModel,
+    EpisodePeople: EpisodePeople.fromJsonModel,
 
     // Season Models
     Season: Season.fromJsonModel,
@@ -63,7 +68,6 @@ extension TraktModel on Type {
 
     // Episode Models
     Episode: Episode.fromJsonModel,
-    EpisodePeople: EpisodePeople.fromJsonModel,
     EpisodeStats: EpisodeStats.fromJsonModel,
   };
 
