@@ -16,11 +16,13 @@ class Person {
   @JsonKey(name: 'social_ids')
   final SocialIds? socialIds;
 
-  Person(this.name, this.ids, this.biography, this.birthday, this.death, this.birthplace, this.homepage, this.socialIds);
+  Person(this.name, this.ids, this.biography, this.birthday, this.death,
+      this.birthplace, this.homepage, this.socialIds);
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
 
-  static Person fromJsonModel(Map<String, dynamic> json) => Person.fromJson(json);
+  static Person fromJsonModel(Map<String, dynamic> json) =>
+      Person.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -29,45 +31,82 @@ class SocialIds {
 
   SocialIds(this.twitter, this.facebook, this.instagram, this.wikipedia);
 
-  factory SocialIds.fromJson(Map<String, dynamic> json) => _$SocialIdsFromJson(json);
+  factory SocialIds.fromJson(Map<String, dynamic> json) =>
+      _$SocialIdsFromJson(json);
 
-  static SocialIds fromJsonModel(Map<String, dynamic> json) => SocialIds.fromJson(json);
+  static SocialIds fromJsonModel(Map<String, dynamic> json) =>
+      SocialIds.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
 class MoviePeople {
   final List<MovieCharacter>? cast;
-  final List<MovieCrew>? production, art, sound, writing, camera, directing, lighting, crew;
+  final MovieCrewList? crew;
+
+  MoviePeople(this.cast, this.crew);
+
+  factory MoviePeople.fromJson(Map<String, dynamic> json) =>
+      _$MoviePeopleFromJson(json);
+
+  static MoviePeople fromJsonModel(Map<String, dynamic> json) =>
+      MoviePeople.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class MovieCrewList {
+  final List<MovieCrew>? production,
+      art,
+      sound,
+      writing,
+      camera,
+      directing,
+      lighting,
+      crew;
 
   @JsonKey(name: 'costume & make-up')
-  final List<MovieCrew> costumeAndMakeUp;
+  final List<MovieCrew>? costumeAndMakeUp;
 
   @JsonKey(name: 'visual effects')
-  final List<MovieCrew> visualEffects;
+  final List<MovieCrew>? visualEffects;
 
-  MoviePeople(this.cast, this.production, this.art, this.sound, this.writing, this.camera, this.directing, this.lighting, this.crew, this.costumeAndMakeUp, this.visualEffects);
+  MovieCrewList(
+      this.production,
+      this.art,
+      this.sound,
+      this.writing,
+      this.camera,
+      this.directing,
+      this.lighting,
+      this.crew,
+      this.costumeAndMakeUp,
+      this.visualEffects);
 
-  factory MoviePeople.fromJson(Map<String, dynamic> json) => _$MoviePeopleFromJson(json);
+  factory MovieCrewList.fromJson(Map<String, dynamic> json) =>
+      _$MovieCrewListFromJson(json);
 
-  static MoviePeople fromJsonModel(Map<String, dynamic> json) => MoviePeople.fromJson(json);
+  static MovieCrewList fromJsonModel(Map<String, dynamic> json) =>
+      MovieCrewList.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
 class ShowPeople {
   final List<ShowCharacter>? cast;
   final List<ShowCrew>? crew, writing, directing, sound, production;
-  
+
   @JsonKey(name: 'costume & make-up')
   final List<ShowCrew>? costumeAndMakeUp;
 
   @JsonKey(name: 'visual effects')
   final List<ShowCrew>? visualEffects;
 
-  ShowPeople(this.cast, this.crew, this.writing, this.directing, this.sound, this.production, this.costumeAndMakeUp, this.visualEffects);
+  ShowPeople(this.cast, this.crew, this.writing, this.directing, this.sound,
+      this.production, this.costumeAndMakeUp, this.visualEffects);
 
-  factory ShowPeople.fromJson(Map<String, dynamic> json) => _$ShowPeopleFromJson(json);
+  factory ShowPeople.fromJson(Map<String, dynamic> json) =>
+      _$ShowPeopleFromJson(json);
 
-  static ShowPeople fromJsonModel(Map<String, dynamic> json) => ShowPeople.fromJson(json);
+  static ShowPeople fromJsonModel(Map<String, dynamic> json) =>
+      ShowPeople.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -78,9 +117,11 @@ class MovieCharacter {
 
   MovieCharacter(this.character, this.characters, this.person);
 
-  factory MovieCharacter.fromJson(Map<String, dynamic> json) => _$MovieCharacterFromJson(json);
+  factory MovieCharacter.fromJson(Map<String, dynamic> json) =>
+      _$MovieCharacterFromJson(json);
 
-  static MovieCharacter fromJsonModel(Map<String, dynamic> json) => MovieCharacter.fromJson(json);
+  static MovieCharacter fromJsonModel(Map<String, dynamic> json) =>
+      MovieCharacter.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -91,9 +132,11 @@ class MovieCrew {
 
   MovieCrew(this.job, this.jobs, this.person);
 
-  factory MovieCrew.fromJson(Map<String, dynamic> json) => _$MovieCrewFromJson(json);
+  factory MovieCrew.fromJson(Map<String, dynamic> json) =>
+      _$MovieCrewFromJson(json);
 
-  static MovieCrew fromJsonModel(Map<String, dynamic> json) => MovieCrew.fromJson(json);
+  static MovieCrew fromJsonModel(Map<String, dynamic> json) =>
+      MovieCrew.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -104,11 +147,14 @@ class ShowCharacter {
   @JsonKey(name: 'episode_count')
   final int episodeCount;
 
-  ShowCharacter(this.character, this.characters, this.person, this.episodeCount);
+  ShowCharacter(
+      this.character, this.characters, this.person, this.episodeCount);
 
-  factory ShowCharacter.fromJson(Map<String, dynamic> json) => _$ShowCharacterFromJson(json);
+  factory ShowCharacter.fromJson(Map<String, dynamic> json) =>
+      _$ShowCharacterFromJson(json);
 
-  static ShowCharacter fromJsonModel(Map<String, dynamic> json) => ShowCharacter.fromJson(json);
+  static ShowCharacter fromJsonModel(Map<String, dynamic> json) =>
+      ShowCharacter.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -120,15 +166,24 @@ class ShowCrew {
 
   ShowCrew(this.jobs, this.person, this.episodeCount);
 
-  factory ShowCrew.fromJson(Map<String, dynamic> json) => _$ShowCrewFromJson(json);
+  factory ShowCrew.fromJson(Map<String, dynamic> json) =>
+      _$ShowCrewFromJson(json);
 
-  static ShowCrew fromJsonModel(Map<String, dynamic> json) => ShowCrew.fromJson(json);
+  static ShowCrew fromJsonModel(Map<String, dynamic> json) =>
+      ShowCrew.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
 class PersonMovieCredits {
   final List<MovieCharacterCredits> cast;
-  final List<MovieCrewCredits>? production, art, sound, writing, camera, directing, lighting, crew;
+  final List<MovieCrewCredits>? production,
+      art,
+      sound,
+      writing,
+      camera,
+      directing,
+      lighting,
+      crew;
 
   @JsonKey(name: 'costume & make-up')
   final List<MovieCrewCredits> costumeAndMakeUp;
@@ -136,11 +191,24 @@ class PersonMovieCredits {
   @JsonKey(name: 'visual effects')
   final List<MovieCrewCredits> visualEffects;
 
-  PersonMovieCredits(this.cast, this.production, this.art, this.sound, this.writing, this.camera, this.directing, this.lighting, this.crew, this.costumeAndMakeUp, this.visualEffects);
+  PersonMovieCredits(
+      this.cast,
+      this.production,
+      this.art,
+      this.sound,
+      this.writing,
+      this.camera,
+      this.directing,
+      this.lighting,
+      this.crew,
+      this.costumeAndMakeUp,
+      this.visualEffects);
 
-  factory PersonMovieCredits.fromJson(Map<String, dynamic> json) => _$PersonMovieCreditsFromJson(json);
+  factory PersonMovieCredits.fromJson(Map<String, dynamic> json) =>
+      _$PersonMovieCreditsFromJson(json);
 
-  static PersonMovieCredits fromJsonModel(Map<String, dynamic> json) => PersonMovieCredits.fromJson(json);
+  static PersonMovieCredits fromJsonModel(Map<String, dynamic> json) =>
+      PersonMovieCredits.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -150,9 +218,11 @@ class MovieCharacterCredits {
 
   MovieCharacterCredits(this.characters, this.movie);
 
-  factory MovieCharacterCredits.fromJson(Map<String, dynamic> json) => _$MovieCharacterCreditsFromJson(json);
+  factory MovieCharacterCredits.fromJson(Map<String, dynamic> json) =>
+      _$MovieCharacterCreditsFromJson(json);
 
-  static MovieCharacterCredits fromJsonModel(Map<String, dynamic> json) => MovieCharacterCredits.fromJson(json);
+  static MovieCharacterCredits fromJsonModel(Map<String, dynamic> json) =>
+      MovieCharacterCredits.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -162,15 +232,24 @@ class MovieCrewCredits {
 
   MovieCrewCredits(this.jobs, this.movie);
 
-  factory MovieCrewCredits.fromJson(Map<String, dynamic> json) => _$MovieCrewCreditsFromJson(json);
+  factory MovieCrewCredits.fromJson(Map<String, dynamic> json) =>
+      _$MovieCrewCreditsFromJson(json);
 
-  static MovieCrewCredits fromJsonModel(Map<String, dynamic> json) => MovieCrewCredits.fromJson(json);
+  static MovieCrewCredits fromJsonModel(Map<String, dynamic> json) =>
+      MovieCrewCredits.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
 class PersonShowCredits {
   final List<ShowCharacterCredits> cast;
-  final List<ShowCrewCredits>? production, art, sound, writing, camera, directing, lighting, crew;
+  final List<ShowCrewCredits>? production,
+      art,
+      sound,
+      writing,
+      camera,
+      directing,
+      lighting,
+      crew;
 
   @JsonKey(name: 'costume & make-up')
   final List<MovieCrewCredits> costumeAndMakeUp;
@@ -178,11 +257,24 @@ class PersonShowCredits {
   @JsonKey(name: 'visual effects')
   final List<MovieCrewCredits> visualEffects;
 
-  PersonShowCredits(this.cast, this.production, this.art, this.sound, this.writing, this.camera, this.directing, this.lighting, this.crew, this.costumeAndMakeUp, this.visualEffects);
+  PersonShowCredits(
+      this.cast,
+      this.production,
+      this.art,
+      this.sound,
+      this.writing,
+      this.camera,
+      this.directing,
+      this.lighting,
+      this.crew,
+      this.costumeAndMakeUp,
+      this.visualEffects);
 
-  factory PersonShowCredits.fromJson(Map<String, dynamic> json) => _$PersonShowCreditsFromJson(json);
+  factory PersonShowCredits.fromJson(Map<String, dynamic> json) =>
+      _$PersonShowCreditsFromJson(json);
 
-  static PersonShowCredits fromJsonModel(Map<String, dynamic> json) => PersonShowCredits.fromJson(json);
+  static PersonShowCredits fromJsonModel(Map<String, dynamic> json) =>
+      PersonShowCredits.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -192,9 +284,11 @@ class ShowCharacterCredits {
 
   ShowCharacterCredits(this.characters, this.show);
 
-  factory ShowCharacterCredits.fromJson(Map<String, dynamic> json) => _$ShowCharacterCreditsFromJson(json);
+  factory ShowCharacterCredits.fromJson(Map<String, dynamic> json) =>
+      _$ShowCharacterCreditsFromJson(json);
 
-  static ShowCharacterCredits fromJsonModel(Map<String, dynamic> json) => ShowCharacterCredits.fromJson(json);
+  static ShowCharacterCredits fromJsonModel(Map<String, dynamic> json) =>
+      ShowCharacterCredits.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -204,7 +298,9 @@ class ShowCrewCredits {
 
   ShowCrewCredits(this.jobs, this.show);
 
-  factory ShowCrewCredits.fromJson(Map<String, dynamic> json) => _$ShowCrewCreditsFromJson(json);
+  factory ShowCrewCredits.fromJson(Map<String, dynamic> json) =>
+      _$ShowCrewCreditsFromJson(json);
 
-  static ShowCrewCredits fromJsonModel(Map<String, dynamic> json) => ShowCrewCredits.fromJson(json);
+  static ShowCrewCredits fromJsonModel(Map<String, dynamic> json) =>
+      ShowCrewCredits.fromJson(json);
 }

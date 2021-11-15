@@ -3,13 +3,87 @@ import 'package:trakt_dart/models/users_models.dart';
 
 part 'common_models.g.dart';
 
-enum TimePeriod { daily , weekly , monthly , yearly , all }
+enum TimePeriod { daily, weekly, monthly, yearly, all }
 
-enum CommentsSortBy {newest , oldest , likes , replies , highest , lowest , plays}
+extension TimePeriodValue on TimePeriod {
+  String get value {
+    switch (this) {
+      case TimePeriod.weekly:
+        return "weekly";
+      case TimePeriod.monthly:
+        return "monthly";
+      case TimePeriod.yearly:
+        return "yearly";
+      case TimePeriod.all:
+        return "all";
+      case TimePeriod.daily:
+        return "daily";
+    }
+  }
+}
 
-enum ListType {all , personal , official , watchlists , recommendations}
+enum CommentsSortBy { newest, oldest, likes, replies, highest, lowest, plays }
 
-enum ListSort {popular , likes , comments , items , added , updated}
+extension CommentsSortByValue on CommentsSortBy {
+  String get value {
+    switch (this) {
+      case CommentsSortBy.newest:
+        return "newest";
+      case CommentsSortBy.oldest:
+        return "oldest";
+      case CommentsSortBy.likes:
+        return "likes";
+      case CommentsSortBy.replies:
+        return "replies";
+      case CommentsSortBy.highest:
+        return "highest";
+      case CommentsSortBy.lowest:
+        return "lowest";
+      case CommentsSortBy.plays:
+        return "plays";
+    }
+  }
+}
+
+enum ListType { all, personal, official, watchlists, recommendations }
+
+extension ListTypeValue on ListType {
+  String get value {
+    switch (this) {
+      case ListType.all:
+        return "all";
+      case ListType.personal:
+        return "personal";
+      case ListType.official:
+        return "official";
+      case ListType.watchlists:
+        return "watchlists";
+      case ListType.recommendations:
+        return "recommendations";
+    }
+  }
+}
+
+enum ListSort { popular, likes, comments, items, added, updated }
+
+extension ListSortValue on ListSort {
+  String get value {
+    switch (this) {
+      case ListSort.popular:
+        return "popular";
+      case ListSort.likes:
+        return "likes";
+      case ListSort.comments:
+        return "comments";
+      case ListSort.items:
+        return "items";
+      case ListSort.added:
+        return "added";
+      case ListSort.updated:
+        return "updated";
+    }
+  }
+}
 
 @JsonSerializable(createToJson: false)
 class MovieShowMetadata {
@@ -19,9 +93,11 @@ class MovieShowMetadata {
 
   MovieShowMetadata(this.title, this.year, this.ids);
 
-  factory MovieShowMetadata.fromJson(Map<String, dynamic> json) => _$MovieShowMetadataFromJson(json);
+  factory MovieShowMetadata.fromJson(Map<String, dynamic> json) =>
+      _$MovieShowMetadataFromJson(json);
 
-  static MovieShowMetadata fromJsonModel(Map<String, dynamic> json) => MovieShowMetadata.fromJson(json);
+  static MovieShowMetadata fromJsonModel(Map<String, dynamic> json) =>
+      MovieShowMetadata.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -59,11 +135,25 @@ class Comment {
   @JsonKey(name: 'user_stats')
   final UserStats userStats;
 
-  Comment(this.id, this.replies, this.likes, this.comment, this.spoiler, this.review, this.parentId, this.createdAt, this.updatedAt, this.userRating, this.userStats, this.user);
+  Comment(
+      this.id,
+      this.replies,
+      this.likes,
+      this.comment,
+      this.spoiler,
+      this.review,
+      this.parentId,
+      this.createdAt,
+      this.updatedAt,
+      this.userRating,
+      this.userStats,
+      this.user);
 
-  factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
+  factory Comment.fromJson(Map<String, dynamic> json) =>
+      _$CommentFromJson(json);
 
-  static Comment fromJsonModel(Map<String, dynamic> json) => Comment.fromJson(json);
+  static Comment fromJsonModel(Map<String, dynamic> json) =>
+      Comment.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -72,7 +162,7 @@ class TraktList {
   final int likes;
   final User user;
   final Ids ids;
-  
+
   @JsonKey(name: 'display_numbers')
   final bool displayNumbers;
 
@@ -97,11 +187,27 @@ class TraktList {
   @JsonKey(name: 'comment_count')
   final int commentCount;
 
-  TraktList(this.name, this.description, this.privacy, this.likes, this.user, this.ids, this.displayNumbers, this.allowComments, this.sortBy, this.sortHow, this.createdAt, this.updatedAt, this.itemCount, this.commentCount);
+  TraktList(
+      this.name,
+      this.description,
+      this.privacy,
+      this.likes,
+      this.user,
+      this.ids,
+      this.displayNumbers,
+      this.allowComments,
+      this.sortBy,
+      this.sortHow,
+      this.createdAt,
+      this.updatedAt,
+      this.itemCount,
+      this.commentCount);
 
-  factory TraktList.fromJson(Map<String, dynamic> json) => _$TraktListFromJson(json);
+  factory TraktList.fromJson(Map<String, dynamic> json) =>
+      _$TraktListFromJson(json);
 
-  static TraktList fromJsonModel(Map<String, dynamic> json) => TraktList.fromJson(json);
+  static TraktList fromJsonModel(Map<String, dynamic> json) =>
+      TraktList.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -115,7 +221,8 @@ class Rating {
 
   factory Rating.fromJson(Map<String, dynamic> json) => _$RatingFromJson(json);
 
-  static Rating fromJsonModel(Map<String, dynamic> json) => Rating.fromJson(json);
+  static Rating fromJsonModel(Map<String, dynamic> json) =>
+      Rating.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -124,7 +231,9 @@ class MovieShowAlias {
 
   MovieShowAlias(this.title, this.country);
 
-  factory MovieShowAlias.fromJson(Map<String, dynamic> json) => _$MovieShowAliasFromJson(json);
+  factory MovieShowAlias.fromJson(Map<String, dynamic> json) =>
+      _$MovieShowAliasFromJson(json);
 
-  static MovieShowAlias fromJsonModel(Map<String, dynamic> json) => MovieShowAlias.fromJson(json);
+  static MovieShowAlias fromJsonModel(Map<String, dynamic> json) =>
+      MovieShowAlias.fromJson(json);
 }

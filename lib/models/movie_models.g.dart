@@ -64,16 +64,16 @@ BoxOfficeMovie _$BoxOfficeMovieFromJson(Map<String, dynamic> json) =>
     );
 
 UpdatedMovie _$UpdatedMovieFromJson(Map<String, dynamic> json) => UpdatedMovie(
-      json['updated_at'] as int,
+      json['updated_at'] as String,
       Movie.fromJson(json['movie'] as Map<String, dynamic>),
     );
 
 MovieRelease _$MovieReleaseFromJson(Map<String, dynamic> json) => MovieRelease(
-      json['country'] as String,
-      json['certification'] as String,
-      json['release_date'] as String,
-      json['release_type'] as String,
-      json['note'] as String,
+      json['country'] as String?,
+      json['certification'] as String?,
+      json['release_date'] as String?,
+      json['release_type'] as String?,
+      json['note'] as String?,
     );
 
 MovieTranslation _$MovieTranslationFromJson(Map<String, dynamic> json) =>

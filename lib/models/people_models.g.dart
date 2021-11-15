@@ -30,6 +30,13 @@ MoviePeople _$MoviePeopleFromJson(Map<String, dynamic> json) => MoviePeople(
       (json['cast'] as List<dynamic>?)
           ?.map((e) => MovieCharacter.fromJson(e as Map<String, dynamic>))
           .toList(),
+      json['crew'] == null
+          ? null
+          : MovieCrewList.fromJson(json['crew'] as Map<String, dynamic>),
+    );
+
+MovieCrewList _$MovieCrewListFromJson(Map<String, dynamic> json) =>
+    MovieCrewList(
       (json['production'] as List<dynamic>?)
           ?.map((e) => MovieCrew.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -54,11 +61,11 @@ MoviePeople _$MoviePeopleFromJson(Map<String, dynamic> json) => MoviePeople(
       (json['crew'] as List<dynamic>?)
           ?.map((e) => MovieCrew.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['costume & make-up'] as List<dynamic>)
-          .map((e) => MovieCrew.fromJson(e as Map<String, dynamic>))
+      (json['costume & make-up'] as List<dynamic>?)
+          ?.map((e) => MovieCrew.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['visual effects'] as List<dynamic>)
-          .map((e) => MovieCrew.fromJson(e as Map<String, dynamic>))
+      (json['visual effects'] as List<dynamic>?)
+          ?.map((e) => MovieCrew.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

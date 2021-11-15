@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'dart:developer';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' show Client, Response;
 import 'package:trakt_dart/extensions.dart';
 import 'package:trakt_dart/models/common_models.dart';
 import 'package:trakt_dart/models/episode_models.dart';
@@ -24,15 +23,19 @@ class TraktManager {
   String _baseURL = "api.trakt.tv";
   Map<String, String> _headers = {};
 
-  static final TraktManager instance = TraktManager._internal();
+  Client client;
+  static final TraktManager instance = TraktManager._internal(Client());
 
-  TraktManager._internal();
+  TraktManager._internal(this.client);
 
   factory TraktManager() {
     return instance;
   }
 
-  void initializeTraktMananager({required String clientId, required String clientSecret,  bool useStaging = false}) {
+  void initializeTraktMananager(
+      {required String clientId,
+      required String clientSecret,
+      bool useStaging = false}) {
     _clientId = clientId;
     _clientSecret = clientSecret;
 
@@ -47,43 +50,53 @@ class TraktManager {
     }
   }
 
-  Future<T> _get<T>(String request, {bool extendedFull = false, RequestPagination? pagination}) async {
-    assert(_clientId != null && _clientSecret != null, "Call initializeTraktMananager before making any requests");
-    
+  Future<T> _get<T>(String request,
+      {bool extendedFull = false, RequestPagination? pagination}) async {
+    assert(_clientId != null && _clientSecret != null,
+        "Call initializeTraktMananager before making any requests");
+
     final queryParams = <String, String>{};
     queryParams.addAll(pagination?.toMap() ?? {});
-    
+
     if (extendedFull) {
       queryParams["extended"] = "full";
     }
 
-    final url  = Uri.https(_baseURL, request, queryParams);
-    final response = await http.get(url, headers: _headers);
+    final url = Uri.https(_baseURL, request, queryParams);
+    final response = await client.get(url, headers: _headers);
 
-    // TODO: Parse Response Code
-    log('Response status: ${response.statusCode}');
+    if (![200, 201, 204].contains(response.statusCode)) {
+      throw TraktManagerAPIError(
+          response.statusCode, response.reasonPhrase, response);
+    }
 
     final jsonResult = jsonDecode(response.body);
     return (T).jsonDecoder(jsonResult);
   }
 
-  Future<List<T>> _getList<T>(String request, {bool extendedFull = false, RequestPagination? pagination, Filters? filters}) async {
-    assert(_clientId != null && _clientSecret != null, "Call initializeTraktMananager before making any requests");
-    
+  Future<List<T>> _getList<T>(String request,
+      {bool extendedFull = false,
+      RequestPagination? pagination,
+      Filters? filters}) async {
+    assert(_clientId != null && _clientSecret != null,
+        "Call initializeTraktMananager before making any requests");
+
     final queryParams = <String, String>{};
-    
+
     queryParams.addAll(pagination?.toMap() ?? {});
     queryParams.addAll(filters?.toMap() ?? {});
-    
+
     if (extendedFull) {
       queryParams["extended"] = "full";
     }
 
-    final url  = Uri.https(_baseURL, request, queryParams);
-    final response = await http.get(url, headers: _headers);
+    final url = Uri.https(_baseURL, request, queryParams);
+    final response = await client.get(url, headers: _headers);
 
-    // TODO: Parse Response Code
-    log('Response status: ${response.statusCode}');
+    if (![200, 201, 204].contains(response.statusCode)) {
+      throw TraktManagerAPIError(
+          response.statusCode, response.reasonPhrase, response);
+    }
 
     final jsonResult = jsonDecode(response.body);
 
@@ -92,4 +105,36 @@ class TraktManager {
     }
     return [];
   }
+
+  Future<List<int>> _getIds<T>(String request,
+      {RequestPagination? pagination}) async {
+    assert(_clientId != null && _clientSecret != null,
+        "Call initializeTraktMananager before making any requests");
+
+    final queryParams = <String, String>{};
+
+    queryParams.addAll(pagination?.toMap() ?? {});
+
+    final url = Uri.https(_baseURL, request, queryParams);
+    final response = await client.get(url, headers: _headers);
+
+    if (![200, 201, 204].contains(response.statusCode)) {
+      throw TraktManagerAPIError(
+          response.statusCode, response.reasonPhrase, response);
+    }
+
+    final jsonResult = jsonDecode(response.body);
+    if (jsonResult is Iterable) {
+      return jsonResult.toList().cast<int>();
+    }
+    return [];
+  }
+}
+
+class TraktManagerAPIError {
+  final int statusCode;
+  final String? reasonPhrase;
+  final Response response;
+
+  TraktManagerAPIError(this.statusCode, this.reasonPhrase, this.response);
 }

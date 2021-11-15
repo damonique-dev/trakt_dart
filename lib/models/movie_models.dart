@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:trakt_dart/models/common_models.dart';
-import 'package:trakt_dart/models/people_models.dart';
 
 part 'movie_models.g.dart';
 
@@ -137,7 +136,7 @@ class BoxOfficeMovie {
 @JsonSerializable(createToJson: false)
 class UpdatedMovie {
   @JsonKey(name: 'updated_at')
-  final int updatedAt;
+  final String updatedAt;
   final Movie movie;
 
   UpdatedMovie(this.updatedAt, this.movie);
@@ -151,11 +150,11 @@ class UpdatedMovie {
 
 @JsonSerializable(createToJson: false)
 class MovieRelease {
-  final String country, certification, note;
+  final String? country, certification, note;
   @JsonKey(name: 'release_date')
-  final String releaseDate;
+  final String? releaseDate;
   @JsonKey(name: 'release_type')
-  final String releaseType;
+  final String? releaseType;
 
   MovieRelease(this.country, this.certification, this.releaseDate,
       this.releaseType, this.note);

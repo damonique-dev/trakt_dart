@@ -14,7 +14,7 @@ extension TraktModel on Type {
     TraktList: TraktList.fromJsonModel,
     Rating: Rating.fromJsonModel,
     MovieStats: MovieStats.fromJsonModel,
-    
+
     // Movie Models
     Movie: Movie.fromJsonModel,
     TrendingMovie: TrendingMovie.fromJsonModel,
@@ -26,7 +26,6 @@ extension TraktModel on Type {
     MovieShowAlias: MovieShowAlias.fromJsonModel,
     MovieRelease: MovieRelease.fromJsonModel,
     MovieTranslation: MovieTranslation.fromJsonModel,
-    MoviePeople: MoviePeople.fromJsonModel,
 
     // Show Models
     Show: Show.fromJsonModel,
@@ -52,6 +51,8 @@ extension TraktModel on Type {
     SocialIds: SocialIds.fromJsonModel,
     MovieCharacter: MovieCharacter.fromJsonModel,
     MovieCrew: MovieCrew.fromJsonModel,
+    MoviePeople: MoviePeople.fromJsonModel,
+    MovieCrewList: MovieCrewList.fromJsonModel,
 
     // Season Models
     Season: Season.fromJsonModel,

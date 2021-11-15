@@ -21,7 +21,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/recommended/${period.toString()}",
+    return await _getList("movies/recommended/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -30,7 +30,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/played/${period.toString()}",
+    return await _getList("movies/played/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -39,7 +39,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/watched/${period.toString()}",
+    return await _getList("movies/watched/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -48,7 +48,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/collected/${period.toString()}",
+    return await _getList("movies/collected/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -67,13 +67,13 @@ extension MovieRequests on TraktManager {
 
   Future<List<UpdatedMovie>> getUpdatedMovies(String startDate,
       {bool extendedFull = false, RequestPagination? pagination}) async {
-    return await _getList("movies/updates/startDate",
+    return await _getList("movies/updates/$startDate",
         extendedFull: extendedFull, pagination: pagination);
   }
 
-  Future<List<int>> getUpdatedMovieIds(
-      String startDate, RequestPagination? pagination) async {
-    return await _getList("movies/updates/id/startDate",
+  Future<List<int>> getUpdatedMovieIds(String startDate,
+      {RequestPagination? pagination}) async {
+    return await _getIds("movies/updates/id/$startDate",
         pagination: pagination);
   }
 
@@ -98,7 +98,7 @@ extension MovieRequests on TraktManager {
   Future<List<Comment>> getMovieComments(String id,
       {CommentsSortBy sortBy = CommentsSortBy.newest,
       RequestPagination? pagination}) async {
-    return await _getList<Comment>("movies/$id/comments/${sortBy.toString()}",
+    return await _getList<Comment>("movies/$id/comments/${sortBy.value}",
         pagination: pagination);
   }
 
@@ -107,7 +107,7 @@ extension MovieRequests on TraktManager {
       ListSort sortBy = ListSort.popular,
       RequestPagination? pagination}) async {
     return await _getList<TraktList>(
-        "movies/$id/lists/${type.toString()}/${sortBy.toString()}",
+        "movies/$id/lists/${type.value}/${sortBy.value}",
         pagination: pagination);
   }
 
