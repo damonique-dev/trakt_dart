@@ -1,7 +1,7 @@
 name: trakt_dart
 description: Dart client-side API package for the Trakt.tv API
 version: 0.1.0
-homepage:
+repository: https://github.com/nikkithomas2012/trakt_dart
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
