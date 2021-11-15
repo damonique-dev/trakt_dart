@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:trakt_dart/models/common_models.dart';
 
 import 'package:trakt_dart/trakt_manager/trakt_manager.dart';
 
@@ -25,8 +24,8 @@ void main() {
   });
 
   test('Get Show Season Summary', () async {
-    final summary =
-        await TraktManager.instance.getShowSeasonSummary("game-of-thrones", 1);
+    final summary = await TraktManager.instance
+        .getShowSeasonSummary("game-of-thrones", 1, extendedFull: true);
     expect(summary.length, equals(10));
   });
 
@@ -42,7 +41,7 @@ void main() {
     expect(lists.length, equals(10));
   });
 
-  test('Get Show Season Lists', () async {
+  test('Get Show Season People', () async {
     final people =
         await TraktManager.instance.getShowSeasonPeople("game-of-thrones", 1);
     expect(people.cast?.length, equals(19));

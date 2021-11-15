@@ -55,6 +55,7 @@ extension TraktModel on Type {
     MoviePeople: MoviePeople.fromJsonModel,
     MovieCrewList: MovieCrewList.fromJsonModel,
     ShowCrewList: ShowCrewList.fromJsonModel,
+    EpisodeCrewList: EpisodeCrewList.fromJsonModel,
 
     // Season Models
     Season: Season.fromJsonModel,
@@ -62,6 +63,8 @@ extension TraktModel on Type {
 
     // Episode Models
     Episode: Episode.fromJsonModel,
+    EpisodePeople: EpisodePeople.fromJsonModel,
+    EpisodeStats: EpisodeStats.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

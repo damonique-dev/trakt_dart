@@ -80,8 +80,8 @@ ShowCertification _$ShowCertificationFromJson(Map<String, dynamic> json) =>
 ShowTranslation _$ShowTranslationFromJson(Map<String, dynamic> json) =>
     ShowTranslation(
       json['title'] as String?,
-      json['overview'] as String,
-      json['language'] as String,
+      json['overview'] as String?,
+      json['language'] as String?,
     );
 
 ShowStats _$ShowStatsFromJson(Map<String, dynamic> json) => ShowStats(

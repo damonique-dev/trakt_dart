@@ -28,9 +28,37 @@ class Episode {
   @JsonKey(name: 'available_translations')
   final List<String>? availableTranslations;
 
-  Episode(this.season, this.number, this.title, this.ids, this.overview, this.rating, this.votes, this.runtime, this.commentCount, this.firstAired, this.updatedAt, this.availableTranslations);
+  Episode(
+      this.season,
+      this.number,
+      this.title,
+      this.ids,
+      this.overview,
+      this.rating,
+      this.votes,
+      this.runtime,
+      this.commentCount,
+      this.firstAired,
+      this.updatedAt,
+      this.availableTranslations);
 
-  factory Episode.fromJson(Map<String, dynamic> json) => _$EpisodeFromJson(json);
+  factory Episode.fromJson(Map<String, dynamic> json) =>
+      _$EpisodeFromJson(json);
 
-  static Episode fromJsonModel(Map<String, dynamic> json) => Episode.fromJson(json);
+  static Episode fromJsonModel(Map<String, dynamic> json) =>
+      Episode.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class EpisodeStats {
+  final int watchers, plays, collectors, comments, lists, votes;
+
+  EpisodeStats(this.watchers, this.plays, this.collectors, this.comments,
+      this.lists, this.votes);
+
+  factory EpisodeStats.fromJson(Map<String, dynamic> json) =>
+      _$EpisodeStatsFromJson(json);
+
+  static EpisodeStats fromJsonModel(Map<String, dynamic> json) =>
+      EpisodeStats.fromJson(json);
 }

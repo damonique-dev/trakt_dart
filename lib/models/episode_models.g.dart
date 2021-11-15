@@ -22,3 +22,12 @@ Episode _$EpisodeFromJson(Map<String, dynamic> json) => Episode(
           ?.map((e) => e as String)
           .toList(),
     );
+
+EpisodeStats _$EpisodeStatsFromJson(Map<String, dynamic> json) => EpisodeStats(
+      json['watchers'] as int,
+      json['plays'] as int,
+      json['collectors'] as int,
+      json['comments'] as int,
+      json['lists'] as int,
+      json['votes'] as int,
+    );

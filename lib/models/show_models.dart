@@ -173,8 +173,7 @@ class ShowCertification {
 
 @JsonSerializable(createToJson: false)
 class ShowTranslation {
-  final String? title;
-  final String overview, language;
+  final String? title, overview, language;
 
   ShowTranslation(this.title, this.overview, this.language);
 
