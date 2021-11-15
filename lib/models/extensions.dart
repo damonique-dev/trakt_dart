@@ -1,10 +1,4 @@
-import 'package:trakt_dart/models/common_models.dart';
-import 'package:trakt_dart/models/episode_models.dart';
-import 'package:trakt_dart/models/movie_models.dart';
-import 'package:trakt_dart/models/people_models.dart';
-import 'package:trakt_dart/models/season_models.dart';
-import 'package:trakt_dart/models/show_models.dart';
-import 'package:trakt_dart/models/users_models.dart';
+part of trakt_dart;
 
 extension TraktModel on Type {
   static final Map<Type, Function(Map<String, dynamic>)> _processorMap = {

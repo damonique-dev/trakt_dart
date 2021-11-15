@@ -1,4 +1,4 @@
-part of 'trakt_manager.dart';
+part of trakt_dart;
 
 extension PeopleRequests on TraktManager {
   Future<Person> getPersonSummary(String id,

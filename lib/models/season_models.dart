@@ -1,7 +1,7 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:trakt_dart/models/common_models.dart';
+part of trakt_dart;
 
-part 'season_models.g.dart';
+// import 'package:json_annotation/json_annotation.dart';
+// import 'package:trakt_dart/models/common_models.dart';
 
 @JsonSerializable(createToJson: false)
 class Season {

@@ -1,21 +1,26 @@
+library trakt_dart;
+
 import 'dart:convert';
 
 import 'package:http/http.dart' show Client, Response;
-import 'package:trakt_dart/extensions.dart';
-import 'package:trakt_dart/models/common_models.dart';
-import 'package:trakt_dart/models/episode_models.dart';
-import 'package:trakt_dart/models/movie_models.dart';
-import 'package:trakt_dart/models/people_models.dart';
-import 'package:trakt_dart/models/season_models.dart';
-import 'package:trakt_dart/models/show_models.dart';
-import 'package:trakt_dart/models/users_models.dart';
-import 'package:trakt_dart/trakt_manager/request_models.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'episode_requests.dart';
-part 'movie_requests.dart';
-part 'people_requests.dart';
-part 'season_requests.dart';
-part 'show_requests.dart';
+part 'models/common_models.dart';
+part 'models/episode_models.dart';
+part 'models/extensions.dart';
+part 'models/movie_models.dart';
+part 'models/people_models.dart';
+part 'models/season_models.dart';
+part 'models/show_models.dart';
+part 'models/users_models.dart';
+part 'models/request_models.dart';
+part 'trakt_manager_requests/episode_requests.dart';
+part 'trakt_manager_requests/movie_requests.dart';
+part 'trakt_manager_requests/people_requests.dart';
+part 'trakt_manager_requests/season_requests.dart';
+part 'trakt_manager_requests/show_requests.dart';
+
+part 'trakt_dart.g.dart';
 
 class TraktManager {
   String? _clientId;

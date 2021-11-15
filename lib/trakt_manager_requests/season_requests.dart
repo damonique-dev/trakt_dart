@@ -1,4 +1,4 @@
-part of 'trakt_manager.dart';
+part of trakt_dart;
 
 extension SeasonRequests on TraktManager {
   Future<List<Season>> getShowSeasons(String id,

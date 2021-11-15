@@ -1,10 +1,183 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'people_models.dart';
+part of trakt_dart;
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
+
+MovieShowMetadata _$MovieShowMetadataFromJson(Map<String, dynamic> json) =>
+    MovieShowMetadata(
+      json['title'] as String,
+      json['year'] as int,
+      Ids.fromJson(json['ids'] as Map<String, dynamic>),
+    );
+
+Ids _$IdsFromJson(Map<String, dynamic> json) => Ids(
+      json['trakt'] as int?,
+      json['slug'] as String?,
+      json['tvdb'] as int?,
+      json['imdb'] as String?,
+      json['tmdb'] as int?,
+    );
+
+Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
+      json['id'] as int,
+      json['replies'] as int,
+      json['likes'] as int,
+      json['comment'] as String,
+      json['spoiler'] as bool,
+      json['review'] as bool,
+      json['parent_id'] as int,
+      json['created_at'] as String,
+      json['updated_at'] as String,
+      json['user_rating'] as int?,
+      UserStats.fromJson(json['user_stats'] as Map<String, dynamic>),
+      User.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+TraktList _$TraktListFromJson(Map<String, dynamic> json) => TraktList(
+      json['name'] as String,
+      json['description'] as String,
+      json['privacy'] as String,
+      json['likes'] as int,
+      User.fromJson(json['user'] as Map<String, dynamic>),
+      Ids.fromJson(json['ids'] as Map<String, dynamic>),
+      json['display_numbers'] as bool,
+      json['allow_comments'] as bool,
+      json['sort_by'] as String,
+      json['sort_how'] as String,
+      json['created_at'] as String,
+      json['updated_at'] as String,
+      json['item_count'] as int,
+      json['comment_count'] as int,
+    );
+
+Rating _$RatingFromJson(Map<String, dynamic> json) => Rating(
+      (json['rating'] as num).toDouble(),
+      json['votes'] as int,
+      Map<String, int>.from(json['distribution'] as Map),
+    );
+
+MovieShowAlias _$MovieShowAliasFromJson(Map<String, dynamic> json) =>
+    MovieShowAlias(
+      json['title'] as String,
+      json['country'] as String,
+    );
+
+Episode _$EpisodeFromJson(Map<String, dynamic> json) => Episode(
+      json['season'] as int,
+      json['number'] as int,
+      json['title'] as String,
+      Ids.fromJson(json['ids'] as Map<String, dynamic>),
+      json['overview'] as String?,
+      (json['rating'] as num?)?.toDouble(),
+      json['votes'] as int?,
+      json['runtime'] as int?,
+      json['comment_count'] as int?,
+      json['first_aired'] as String?,
+      json['updated_at'] as String?,
+      (json['available_translations'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+EpisodeStats _$EpisodeStatsFromJson(Map<String, dynamic> json) => EpisodeStats(
+      json['watchers'] as int,
+      json['plays'] as int,
+      json['collectors'] as int,
+      json['comments'] as int,
+      json['lists'] as int,
+      json['votes'] as int,
+    );
+
+Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(
+      json['title'] as String,
+      json['overview'] as String?,
+      json['country'] as String?,
+      json['language'] as String?,
+      json['certification'] as String?,
+      json['year'] as int?,
+      json['runtime'] as int?,
+      json['votes'] as int?,
+      json['comment_count'] as int?,
+      Ids.fromJson(json['ids'] as Map<String, dynamic>),
+      json['tagline'] as String?,
+      json['trailer'] as String?,
+      json['homepage'] as String?,
+      json['status'] as String?,
+      (json['rating'] as num?)?.toDouble(),
+      (json['available_translations'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      json['released'] as String?,
+      json['updatedAt'] as String?,
+    );
+
+TrendingMovie _$TrendingMovieFromJson(Map<String, dynamic> json) =>
+    TrendingMovie(
+      json['watchers'] as int,
+      Movie.fromJson(json['movie'] as Map<String, dynamic>),
+    );
+
+RecommendedMovie _$RecommendedMovieFromJson(Map<String, dynamic> json) =>
+    RecommendedMovie(
+      json['user_count'] as int,
+      Movie.fromJson(json['movie'] as Map<String, dynamic>),
+    );
+
+PlayedWatchedCollectedMovie _$PlayedWatchedCollectedMovieFromJson(
+        Map<String, dynamic> json) =>
+    PlayedWatchedCollectedMovie(
+      json['watcher_count'] as int,
+      json['play_count'] as int,
+      json['collected_count'] as int,
+      Movie.fromJson(json['movie'] as Map<String, dynamic>),
+    );
+
+AnticipatedMovie _$AnticipatedMovieFromJson(Map<String, dynamic> json) =>
+    AnticipatedMovie(
+      json['list_count'] as int,
+      Movie.fromJson(json['movie'] as Map<String, dynamic>),
+    );
+
+BoxOfficeMovie _$BoxOfficeMovieFromJson(Map<String, dynamic> json) =>
+    BoxOfficeMovie(
+      json['revenue'] as int,
+      Movie.fromJson(json['movie'] as Map<String, dynamic>),
+    );
+
+UpdatedMovie _$UpdatedMovieFromJson(Map<String, dynamic> json) => UpdatedMovie(
+      json['updated_at'] as String,
+      Movie.fromJson(json['movie'] as Map<String, dynamic>),
+    );
+
+MovieRelease _$MovieReleaseFromJson(Map<String, dynamic> json) => MovieRelease(
+      json['country'] as String?,
+      json['certification'] as String?,
+      json['release_date'] as String?,
+      json['release_type'] as String?,
+      json['note'] as String?,
+    );
+
+MovieTranslation _$MovieTranslationFromJson(Map<String, dynamic> json) =>
+    MovieTranslation(
+      json['title'] as String,
+      json['overview'] as String,
+      json['tagline'] as String,
+      json['language'] as String,
+    );
+
+MovieStats _$MovieStatsFromJson(Map<String, dynamic> json) => MovieStats(
+      json['watchers'] as int,
+      json['plays'] as int,
+      json['collectors'] as int,
+      json['comments'] as int,
+      json['lists'] as int,
+      json['votes'] as int,
+      json['recommended'] as int,
+    );
 
 Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       json['name'] as String,
@@ -310,4 +483,148 @@ PersonShowCrewCreditsList _$PersonShowCrewCreditsListFromJson(
       (json['visual effects'] as List<dynamic>?)
           ?.map((e) => ShowCrewCredits.fromJson(e as Map<String, dynamic>))
           .toList(),
+    );
+
+Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
+      json['number'] as int,
+      Ids.fromJson(json['ids'] as Map<String, dynamic>),
+      json['title'] as String?,
+      json['overview'] as String?,
+      json['network'] as String?,
+      (json['rating'] as num?)?.toDouble(),
+      json['votes'] as int?,
+      json['episode_count'] as int?,
+      json['aired_episodes'] as int?,
+      json['first_aired'] as String?,
+      json['updated_at'] as String?,
+    );
+
+SeasonStats _$SeasonStatsFromJson(Map<String, dynamic> json) => SeasonStats(
+      json['watchers'] as int,
+      json['plays'] as int,
+      json['collectors'] as int,
+      json['comments'] as int,
+      json['lists'] as int,
+      json['votes'] as int,
+      json['collected_episodes'] as int,
+    );
+
+Show _$ShowFromJson(Map<String, dynamic> json) => Show(
+      json['title'] as String,
+      json['year'] as int?,
+      Ids.fromJson(json['ids'] as Map<String, dynamic>),
+      json['overview'] as String?,
+      json['certification'] as String?,
+      json['network'] as String?,
+      json['country'] as String?,
+      json['trailer'] as String?,
+      json['homepage'] as String?,
+      json['status'] as String?,
+      json['updated_at'] as String?,
+      json['language'] as String?,
+      json['runtime'] as int?,
+      json['votes'] as int?,
+      json['airs'] == null
+          ? null
+          : AirTime.fromJson(json['airs'] as Map<String, dynamic>),
+      (json['rating'] as num?)?.toDouble(),
+      (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      json['first_aired'] as String?,
+      json['comment_count'] as int?,
+      (json['available_translations'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      json['aired_episodes'] as int?,
+    );
+
+AirTime _$AirTimeFromJson(Map<String, dynamic> json) => AirTime(
+      json['day'] as String?,
+      json['time'] as String?,
+      json['timezone'] as String?,
+    );
+
+TrendingShow _$TrendingShowFromJson(Map<String, dynamic> json) => TrendingShow(
+      json['watchers'] as int,
+      Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
+RecommendedShow _$RecommendedShowFromJson(Map<String, dynamic> json) =>
+    RecommendedShow(
+      json['user_count'] as int,
+      Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
+PlayedWatchedCollectedShow _$PlayedWatchedCollectedShowFromJson(
+        Map<String, dynamic> json) =>
+    PlayedWatchedCollectedShow(
+      json['watcher_count'] as int,
+      json['play_count'] as int,
+      json['collected_count'] as int,
+      Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
+AnticipatedShow _$AnticipatedShowFromJson(Map<String, dynamic> json) =>
+    AnticipatedShow(
+      json['list_count'] as int,
+      Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
+UpdatedShow _$UpdatedShowFromJson(Map<String, dynamic> json) => UpdatedShow(
+      json['updated_at'] as String,
+      Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
+ShowCertification _$ShowCertificationFromJson(Map<String, dynamic> json) =>
+    ShowCertification(
+      json['certification'] as String,
+      json['country'] as String,
+    );
+
+ShowTranslation _$ShowTranslationFromJson(Map<String, dynamic> json) =>
+    ShowTranslation(
+      json['title'] as String?,
+      json['overview'] as String?,
+      json['language'] as String?,
+    );
+
+ShowStats _$ShowStatsFromJson(Map<String, dynamic> json) => ShowStats(
+      json['watchers'] as int,
+      json['plays'] as int,
+      json['collectors'] as int,
+      json['comments'] as int,
+      json['lists'] as int,
+      json['votes'] as int,
+      json['recommended'] as int,
+      json['collected_episodes'] as int,
+    );
+
+User _$UserFromJson(Map<String, dynamic> json) => User(
+      json['username'] as String,
+      json['name'] as String?,
+      json['private'] as bool,
+      json['vip'] as bool? ?? false,
+      json['vip_ep'] as bool? ?? false,
+      Ids.fromJson(json['ids'] as Map<String, dynamic>),
+      json['location'] as String?,
+      json['about'] as String?,
+      json['gender'] as String?,
+      json['age'] as int?,
+      json['images'] == null
+          ? null
+          : Images.fromJson(json['images'] as Map<String, dynamic>),
+      json['joined_at'] as String?,
+    );
+
+UserStats _$UserStatsFromJson(Map<String, dynamic> json) => UserStats(
+      json['rating'] as int?,
+      json['play_count'] as int,
+      json['completed_count'] as int,
+    );
+
+Images _$ImagesFromJson(Map<String, dynamic> json) => Images(
+      Avatar.fromJson(json['avatar'] as Map<String, dynamic>),
+    );
+
+Avatar _$AvatarFromJson(Map<String, dynamic> json) => Avatar(
+      json['full'] as String,
     );

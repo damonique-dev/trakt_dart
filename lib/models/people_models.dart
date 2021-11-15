@@ -1,9 +1,11 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:trakt_dart/models/common_models.dart';
-import 'package:trakt_dart/models/movie_models.dart';
-import 'package:trakt_dart/models/show_models.dart';
+part of trakt_dart;
 
-part 'people_models.g.dart';
+// import 'package:json_annotation/json_annotation.dart';
+// import 'package:trakt_dart/models/common_models.dart';
+// import 'package:trakt_dart/models/movie_models.dart';
+// import 'package:trakt_dart/models/show_models.dart';
+
+// part 'people_models.g.dart';
 
 @JsonSerializable(createToJson: false)
 class Person {

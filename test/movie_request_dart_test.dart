@@ -1,8 +1,7 @@
 import 'package:dotenv/dotenv.dart' show load, clean;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:trakt_dart/models/common_models.dart';
 
-import 'package:trakt_dart/trakt_manager/trakt_manager.dart';
+import 'package:trakt_dart/trakt_dart.dart';
 
 import 'setup_script.dart';
 
