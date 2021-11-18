@@ -10,6 +10,7 @@ part 'models/episode_models.dart';
 part 'models/extensions.dart';
 part 'models/movie_models.dart';
 part 'models/people_models.dart';
+part 'models/search_models.dart';
 part 'models/season_models.dart';
 part 'models/show_models.dart';
 part 'models/users_models.dart';
@@ -17,6 +18,7 @@ part 'models/request_models.dart';
 part 'trakt_manager_requests/episode_requests.dart';
 part 'trakt_manager_requests/movie_requests.dart';
 part 'trakt_manager_requests/people_requests.dart';
+part 'trakt_manager_requests/search_requests.dart';
 part 'trakt_manager_requests/season_requests.dart';
 part 'trakt_manager_requests/show_requests.dart';
 
@@ -91,11 +93,12 @@ class TraktManager {
   Future<List<T>> _getList<T>(String request,
       {bool extendedFull = false,
       RequestPagination? pagination,
-      Filters? filters}) async {
+      Filters? filters,
+      Map<String, String>? queryParamameters}) async {
     assert(_clientId != null && _clientSecret != null,
         "Call initializeTraktMananager before making any requests");
 
-    final queryParams = <String, String>{};
+    final queryParams = queryParamameters ?? {};
 
     queryParams.addAll(pagination?.toMap() ?? {});
     queryParams.addAll(filters?.toMap() ?? {});

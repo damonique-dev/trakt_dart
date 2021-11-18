@@ -63,6 +63,9 @@ extension TraktModel on Type {
     // Episode Models
     Episode: Episode.fromJsonModel,
     EpisodeStats: EpisodeStats.fromJsonModel,
+
+    // Search Models
+    SearchResult: SearchResult.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

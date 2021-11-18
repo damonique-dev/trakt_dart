@@ -184,7 +184,7 @@ class TraktList {
   final String updatedAt;
 
   @JsonKey(name: 'item_count')
-  final int itemCount;
+  final int? itemCount;
 
   @JsonKey(name: 'comment_count')
   final int commentCount;

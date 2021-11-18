@@ -49,7 +49,7 @@ TraktList _$TraktListFromJson(Map<String, dynamic> json) => TraktList(
       json['sort_how'] as String,
       json['created_at'] as String,
       json['updated_at'] as String,
-      json['item_count'] as int,
+      json['item_count'] as int?,
       json['comment_count'] as int,
     );
 
@@ -483,6 +483,26 @@ PersonShowCrewCreditsList _$PersonShowCrewCreditsListFromJson(
       (json['visual effects'] as List<dynamic>?)
           ?.map((e) => ShowCrewCredits.fromJson(e as Map<String, dynamic>))
           .toList(),
+    );
+
+SearchResult _$SearchResultFromJson(Map<String, dynamic> json) => SearchResult(
+      json['type'] as String,
+      (json['score'] as num).toDouble(),
+      json['movie'] == null
+          ? null
+          : Movie.fromJson(json['movie'] as Map<String, dynamic>),
+      json['show'] == null
+          ? null
+          : Show.fromJson(json['show'] as Map<String, dynamic>),
+      json['episode'] == null
+          ? null
+          : Episode.fromJson(json['episode'] as Map<String, dynamic>),
+      json['list'] == null
+          ? null
+          : TraktList.fromJson(json['list'] as Map<String, dynamic>),
+      json['person'] == null
+          ? null
+          : Person.fromJson(json['person'] as Map<String, dynamic>),
     );
 
 Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
