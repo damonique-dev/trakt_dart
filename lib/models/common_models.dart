@@ -1,10 +1,5 @@
 part of trakt_dart;
 
-// import 'package:json_annotation/json_annotation.dart';
-// import 'package:trakt_dart/models/users_models.dart';
-
-// part 'common_models.g.dart';
-
 enum TimePeriod { daily, weekly, monthly, yearly, all }
 
 extension TimePeriodValue on TimePeriod {

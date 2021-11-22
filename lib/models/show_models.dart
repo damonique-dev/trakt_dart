@@ -1,9 +1,3 @@
-// import 'package:json_annotation/json_annotation.dart';
-// import 'package:trakt_dart/models/common_models.dart';
-// import 'package:trakt_dart/models/people_models.dart';
-
-// part 'show_models.g.dart';
-
 part of trakt_dart;
 
 @JsonSerializable(createToJson: false)

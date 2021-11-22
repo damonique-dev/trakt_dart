@@ -1,10 +1,5 @@
 part of trakt_dart;
 
-// import 'package:json_annotation/json_annotation.dart';
-// import 'package:trakt_dart/models/common_models.dart';
-
-// part 'episode_models.g.dart';
-
 @JsonSerializable(createToJson: false)
 class Episode {
   // Extended: metadata (minimum data provided)

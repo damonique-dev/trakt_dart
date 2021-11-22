@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' show Client, Response;
 import 'package:json_annotation/json_annotation.dart';
 
+part 'models/certification_models.dart';
 part 'models/common_models.dart';
 part 'models/episode_models.dart';
 part 'models/extensions.dart';
@@ -15,6 +16,7 @@ part 'models/season_models.dart';
 part 'models/show_models.dart';
 part 'models/users_models.dart';
 part 'models/request_models.dart';
+part 'trakt_manager_requests/certification_requests.dart';
 part 'trakt_manager_requests/episode_requests.dart';
 part 'trakt_manager_requests/movie_requests.dart';
 part 'trakt_manager_requests/people_requests.dart';

@@ -6,6 +6,21 @@ part of trakt_dart;
 // JsonSerializableGenerator
 // **************************************************************************
 
+CertificationsResult _$CertificationsResultFromJson(
+        Map<String, dynamic> json) =>
+    CertificationsResult(
+      (json['us'] as List<dynamic>)
+          .map((e) => Certification.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Certification _$CertificationFromJson(Map<String, dynamic> json) =>
+    Certification(
+      json['name'] as String,
+      json['slug'] as String,
+      json['description'] as String,
+    );
+
 MovieShowMetadata _$MovieShowMetadataFromJson(Map<String, dynamic> json) =>
     MovieShowMetadata(
       json['title'] as String,
