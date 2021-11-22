@@ -25,7 +25,7 @@ void main() {
   test('Get Person Movie Credits', () async {
     final personMovies = await TraktManager.instance
         .getPersonMovieCredits("ryan-reynolds", extendedFull: true);
-    expect(personMovies.cast.length, equals(91));
+    expect(personMovies.cast.length, equals(92));
     expect(personMovies.crew.crew, isNull);
     expect(personMovies.crew.costumeAndMakeUp, isNull);
     expect(personMovies.crew.directing, isNull);

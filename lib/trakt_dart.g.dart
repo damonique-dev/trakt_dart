@@ -51,23 +51,6 @@ Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
       User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
-TraktList _$TraktListFromJson(Map<String, dynamic> json) => TraktList(
-      json['name'] as String,
-      json['description'] as String,
-      json['privacy'] as String,
-      json['likes'] as int,
-      User.fromJson(json['user'] as Map<String, dynamic>),
-      Ids.fromJson(json['ids'] as Map<String, dynamic>),
-      json['display_numbers'] as bool,
-      json['allow_comments'] as bool,
-      json['sort_by'] as String,
-      json['sort_how'] as String,
-      json['created_at'] as String,
-      json['updated_at'] as String,
-      json['item_count'] as int?,
-      json['comment_count'] as int,
-    );
-
 Rating _$RatingFromJson(Map<String, dynamic> json) => Rating(
       (json['rating'] as num).toDouble(),
       json['votes'] as int,
@@ -119,6 +102,60 @@ Genre _$GenreFromJson(Map<String, dynamic> json) => Genre(
 Language _$LanguageFromJson(Map<String, dynamic> json) => Language(
       json['name'] as String,
       json['code'] as String,
+    );
+
+TraktList _$TraktListFromJson(Map<String, dynamic> json) => TraktList(
+      json['name'] as String,
+      json['description'] as String,
+      json['privacy'] as String,
+      json['likes'] as int,
+      json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      Ids.fromJson(json['ids'] as Map<String, dynamic>),
+      json['display_numbers'] as bool,
+      json['allow_comments'] as bool,
+      json['sort_by'] as String,
+      json['sort_how'] as String,
+      json['created_at'] as String,
+      json['updated_at'] as String,
+      json['item_count'] as int?,
+      json['comment_count'] as int,
+    );
+
+TrendingPopularList _$TrendingPopularListFromJson(Map<String, dynamic> json) =>
+    TrendingPopularList(
+      TraktList.fromJson(json['list'] as Map<String, dynamic>),
+      json['like_count'] as int,
+      json['comment_count'] as int,
+    );
+
+ListLikes _$ListLikesFromJson(Map<String, dynamic> json) => ListLikes(
+      json['liked_at'] as String,
+      User.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+ListItem _$ListItemFromJson(Map<String, dynamic> json) => ListItem(
+      json['rank'] as int,
+      json['id'] as int,
+      json['listed_at'] as String,
+      json['notes'] as String?,
+      json['type'] as String,
+      json['movie'] == null
+          ? null
+          : Movie.fromJson(json['movie'] as Map<String, dynamic>),
+      json['show'] == null
+          ? null
+          : Show.fromJson(json['show'] as Map<String, dynamic>),
+      json['season'] == null
+          ? null
+          : Season.fromJson(json['season'] as Map<String, dynamic>),
+      json['episode'] == null
+          ? null
+          : Episode.fromJson(json['episode'] as Map<String, dynamic>),
+      json['person'] == null
+          ? null
+          : Person.fromJson(json['person'] as Map<String, dynamic>),
     );
 
 Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(

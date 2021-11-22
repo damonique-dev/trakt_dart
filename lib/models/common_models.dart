@@ -154,60 +154,6 @@ class Comment {
 }
 
 @JsonSerializable(createToJson: false)
-class TraktList {
-  final String name, description, privacy;
-  final int likes;
-  final User user;
-  final Ids ids;
-
-  @JsonKey(name: 'display_numbers')
-  final bool displayNumbers;
-
-  @JsonKey(name: 'allow_comments')
-  final bool allowComments;
-
-  @JsonKey(name: 'sort_by')
-  final String sortBy;
-
-  @JsonKey(name: 'sort_how')
-  final String sortHow;
-
-  @JsonKey(name: 'created_at')
-  final String createdAt;
-
-  @JsonKey(name: 'updated_at')
-  final String updatedAt;
-
-  @JsonKey(name: 'item_count')
-  final int? itemCount;
-
-  @JsonKey(name: 'comment_count')
-  final int commentCount;
-
-  TraktList(
-      this.name,
-      this.description,
-      this.privacy,
-      this.likes,
-      this.user,
-      this.ids,
-      this.displayNumbers,
-      this.allowComments,
-      this.sortBy,
-      this.sortHow,
-      this.createdAt,
-      this.updatedAt,
-      this.itemCount,
-      this.commentCount);
-
-  factory TraktList.fromJson(Map<String, dynamic> json) =>
-      _$TraktListFromJson(json);
-
-  static TraktList fromJsonModel(Map<String, dynamic> json) =>
-      TraktList.fromJson(json);
-}
-
-@JsonSerializable(createToJson: false)
 class Rating {
   final double rating;
   final int votes;

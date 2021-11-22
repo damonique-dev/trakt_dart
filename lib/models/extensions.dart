@@ -6,7 +6,6 @@ extension TraktModel on Type {
     MovieShowMetadata: MovieShowMetadata.fromJsonModel,
     Ids: Ids.fromJsonModel,
     Comment: Comment.fromJsonModel,
-    TraktList: TraktList.fromJsonModel,
     Rating: Rating.fromJsonModel,
     MovieStats: MovieStats.fromJsonModel,
 
@@ -79,6 +78,12 @@ extension TraktModel on Type {
 
     // Language Models
     Language: Language.fromJsonModel,
+
+    // List Models
+    TraktList: TraktList.fromJsonModel,
+    ListLikes: ListLikes.fromJsonModel,
+    ListItem: ListItem.fromJsonModel,
+    TrendingPopularList: TrendingPopularList.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {
