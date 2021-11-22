@@ -111,6 +111,11 @@ EpisodeStats _$EpisodeStatsFromJson(Map<String, dynamic> json) => EpisodeStats(
       json['votes'] as int,
     );
 
+Genre _$GenreFromJson(Map<String, dynamic> json) => Genre(
+      json['name'] as String,
+      json['slug'] as String,
+    );
+
 Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(
       json['title'] as String,
       json['overview'] as String?,
