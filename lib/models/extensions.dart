@@ -70,6 +70,9 @@ extension TraktModel on Type {
     // Certification Models
     CertificationsResult: CertificationsResult.fromJsonModel,
     Certification: Certification.fromJsonModel,
+
+    // Country Models
+    Country: Country.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

@@ -80,6 +80,11 @@ MovieShowAlias _$MovieShowAliasFromJson(Map<String, dynamic> json) =>
       json['country'] as String,
     );
 
+Country _$CountryFromJson(Map<String, dynamic> json) => Country(
+      json['name'] as String,
+      json['code'] as String,
+    );
+
 Episode _$EpisodeFromJson(Map<String, dynamic> json) => Episode(
       json['season'] as int,
       json['number'] as int,
