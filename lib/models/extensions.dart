@@ -84,6 +84,9 @@ extension TraktModel on Type {
     ListLikes: ListLikes.fromJsonModel,
     ListItem: ListItem.fromJsonModel,
     TrendingPopularList: TrendingPopularList.fromJsonModel,
+
+    // Network Models
+    Network: Network.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

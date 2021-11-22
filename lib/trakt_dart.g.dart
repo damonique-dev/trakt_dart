@@ -246,6 +246,10 @@ MovieStats _$MovieStatsFromJson(Map<String, dynamic> json) => MovieStats(
       json['recommended'] as int,
     );
 
+Network _$NetworkFromJson(Map<String, dynamic> json) => Network(
+      json['name'] as String,
+    );
+
 Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       json['name'] as String,
       Ids.fromJson(json['ids'] as Map<String, dynamic>),
