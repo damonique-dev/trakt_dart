@@ -1,8 +1,5 @@
 # track_dart
 
-<!-- markdownlint-disable MD033 -->
-<img src="trakt_logo.svg" height=100px width="50%">
-
 A Trakt client library for dart.
 
 To learn more about Trakt visit [*offical site*](https://www.trakt.tv)
