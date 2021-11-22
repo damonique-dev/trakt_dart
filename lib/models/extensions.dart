@@ -76,6 +76,9 @@ extension TraktModel on Type {
 
     // Genre Models
     Genre: Genre.fromJsonModel,
+
+    // Language Models
+    Language: Language.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

@@ -116,6 +116,11 @@ Genre _$GenreFromJson(Map<String, dynamic> json) => Genre(
       json['slug'] as String,
     );
 
+Language _$LanguageFromJson(Map<String, dynamic> json) => Language(
+      json['name'] as String,
+      json['code'] as String,
+    );
+
 Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(
       json['title'] as String,
       json['overview'] as String?,
