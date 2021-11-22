@@ -11,11 +11,8 @@ To learn more about the Trakt API visit [*offical site*](https://trakt.docs.apia
 
 ## Features
 Current API calls implemented:
-- All Movie Requests
-- All Show Requests that require no OAuth
-- All Show Season Requests
-- All Show Episode Requests
-- All People Requests
+- Added in v0.2.0: All Certification, Country, Genre, Language, Lists, Network, and Search
+- Added in v0.1.0: All Movie, Show, Season, Episode, People Requests the do not require OAuth
 
 **Note:** This packaage is still in beta. [File any issues you see or feature requests](https://github.com/nikkithomas2012/trakt_dart/issues/new)
 
