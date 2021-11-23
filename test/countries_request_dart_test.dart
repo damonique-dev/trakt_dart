@@ -13,7 +13,9 @@ void main() {
           "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
     TraktManager.instance.initializeTraktMananager(
-        clientId: Keys.clientId!, clientSecret: Keys.clientSecret!);
+        clientId: Keys.clientId!,
+        clientSecret: Keys.clientSecret!,
+        redirectURI: "");
   });
 
   test('Get Countries', () async {

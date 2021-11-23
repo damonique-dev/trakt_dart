@@ -87,6 +87,9 @@ extension TraktModel on Type {
 
     // Network Models
     Network: Network.fromJsonModel,
+
+    // Authentication Models
+    AccessTokenResponse: AccessTokenResponse.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

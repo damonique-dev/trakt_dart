@@ -6,6 +6,16 @@ part of trakt_dart;
 // JsonSerializableGenerator
 // **************************************************************************
 
+AccessTokenResponse _$AccessTokenResponseFromJson(Map<String, dynamic> json) =>
+    AccessTokenResponse(
+      json['access_token'] as String,
+      json['token_type'] as String,
+      json['expires_in'] as int,
+      json['refresh_token'] as String,
+      json['scope'] as String,
+      json['created_at'] as int,
+    );
+
 CertificationsResult _$CertificationsResultFromJson(
         Map<String, dynamic> json) =>
     CertificationsResult(

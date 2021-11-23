@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' show Client, Response;
 import 'package:json_annotation/json_annotation.dart';
 
+part 'models/authentication_models.dart';
 part 'models/certification_models.dart';
 part 'models/common_models.dart';
 part 'models/countries_models.dart';
@@ -21,6 +22,7 @@ part 'models/season_models.dart';
 part 'models/show_models.dart';
 part 'models/users_models.dart';
 part 'models/request_models.dart';
+part 'trakt_manager_requests/authentication_requests.dart';
 part 'trakt_manager_requests/certification_requests.dart';
 part 'trakt_manager_requests/countries_requests.dart';
 part 'trakt_manager_requests/episode_requests.dart';
@@ -39,7 +41,11 @@ part 'trakt_dart.g.dart';
 class TraktManager {
   String? _clientId;
   String? _clientSecret;
+  String? _redirectURI;
   String _baseURL = "api.trakt.tv";
+  late String _oauthURL;
+  String? _accessToken;
+  String? _refreshToken;
   Map<String, String> _headers = {};
 
   Client client;
@@ -51,12 +57,20 @@ class TraktManager {
     return instance;
   }
 
+  /// Initializes the TraktManager for making API calls. This must be called before making any API calls!
+  ///
+  /// [clientId] - The ClientId listed under your Trakt applications
+  /// [clientSecret] - The Client secret listed under your Trakt applications
+  /// [redirectURI] - the redirect uri set under your Trakt applications for OAuth.
+  /// [useStaging] - whether to use the Trakt Staging environment. Default to false.
   void initializeTraktMananager(
       {required String clientId,
       required String clientSecret,
+      required String redirectURI,
       bool useStaging = false}) {
     _clientId = clientId;
     _clientSecret = clientSecret;
+    _redirectURI = redirectURI;
 
     _headers = {
       "trakt-api-version": "2",
@@ -67,6 +81,9 @@ class TraktManager {
     if (useStaging) {
       _baseURL = "api-staging.trakt.tv";
     }
+
+    _oauthURL =
+        "https://trakt.tv/oauth/authorize?response_type=code&client_id=$_clientId&redirect_uri=$_redirectURI";
   }
 
   Future<T> _get<T>(String request,
