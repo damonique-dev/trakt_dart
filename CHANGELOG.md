@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 0.3.0
+- Features
+    - Added OAuth requests
+    - Added remaining Show requests that required OAuth
+
 ## 0.2.2
 - Added Example App to package
 
