@@ -43,7 +43,7 @@ void main() {
     final people = await TraktManager.instance.getEpisodePeople(
         "game-of-thrones", 1, 1,
         extendedFull: true, includeGuestStars: true);
-    expect(people.cast?.length, equals(19));
+    expect(people.cast?.length, equals(18));
     expect(people.crew?.crew, isNull);
     expect(people.crew?.costumeAndMakeUp, isNull);
     expect(people.crew?.directing?.length, equals(1));
