@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dotenv/dotenv.dart' show load;
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
@@ -147,5 +151,32 @@ void main() {
     final episode =
         await TraktManager.instance.getShowLastEpisode("game-of-thrones");
     expect(episode.title, equals("The Iron Throne"));
+  });
+
+  test('Parse Show Collection Progress', () async {
+    final file = File('test/test_data/show_collection_progress.json');
+    final json = jsonDecode(await file.readAsString());
+    final showCollectionProgress = ShowCollectionProgress.fromJsonModel(json);
+
+    expect(showCollectionProgress.aired, equals(8));
+    expect(showCollectionProgress.seasons.length, equals(1));
+    expect(showCollectionProgress.seasons[0].episodes.length, equals(8));
+    expect(showCollectionProgress.hiddenSeasons!.length, equals(1));
+    expect(showCollectionProgress.nextEpisode, isNotNull);
+    expect(showCollectionProgress.lastEpisode, isNotNull);
+  });
+
+  test('Parse Show Watched Progress', () async {
+    final file = File('test/test_data/show_watched_progress.json');
+    final json = jsonDecode(await file.readAsString());
+    final showWatchedProgress = ShowWatchedProgress.fromJsonModel(json);
+
+    expect(showWatchedProgress.aired, equals(8));
+    expect(showWatchedProgress.resetAt, isNull);
+    expect(showWatchedProgress.seasons.length, equals(1));
+    expect(showWatchedProgress.seasons[0].episodes.length, equals(8));
+    expect(showWatchedProgress.hiddenSeasons!.length, equals(1));
+    expect(showWatchedProgress.nextEpisode, isNotNull);
+    expect(showWatchedProgress.lastEpisode, isNotNull);
   });
 }

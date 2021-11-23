@@ -20,6 +20,6 @@ void main() {
 
   test('Get Networks', () async {
     final networks = await TraktManager.instance.getNetworks();
-    expect(networks.length, equals(2562));
+    expect(networks.length, isNonZero);
   });
 }

@@ -89,11 +89,12 @@ class TraktManager {
   Future<T> _get<T>(String request,
       {bool extendedFull = false,
       bool includeGuestStars = false,
-      RequestPagination? pagination}) async {
+      RequestPagination? pagination,
+      Map<String, String>? queryParamameters}) async {
     assert(_clientId != null && _clientSecret != null,
         "Call initializeTraktMananager before making any requests");
 
-    final queryParams = <String, String>{};
+    final queryParams = queryParamameters ?? {};
     queryParams.addAll(pagination?.toMap() ?? {});
 
     List<String> extendedParams = [];
@@ -106,6 +107,29 @@ class TraktManager {
     if (extendedParams.isNotEmpty) {
       queryParams["extended"] = extendedParams.join(",");
     }
+
+    final url = Uri.https(_baseURL, request, queryParams);
+    final response = await client.get(url, headers: _headers);
+
+    if (![200, 201, 204].contains(response.statusCode)) {
+      throw TraktManagerAPIError(
+          response.statusCode, response.reasonPhrase, response);
+    }
+
+    final jsonResult = jsonDecode(response.body);
+    return (T).jsonDecoder(jsonResult);
+  }
+
+  Future<T> _authenticatedGet<T>(String request,
+      {Map<String, String>? queryParamameters}) async {
+    assert(_clientId != null && _clientSecret != null,
+        "Call initializeTraktMananager before making any requests");
+    assert(_accessToken != null,
+        "Autheticate app and get access token before making authenticated request.");
+
+    final queryParams = queryParamameters ?? {};
+    final headers = _headers;
+    headers["Authorization"] = "Bearer ${_accessToken!}";
 
     final url = Uri.https(_baseURL, request, queryParams);
     final response = await client.get(url, headers: _headers);
@@ -174,6 +198,27 @@ class TraktManager {
       return jsonResult.toList().cast<int>();
     }
     return [];
+  }
+
+  Future<T> _authenticatedPost<T>(String request) async {
+    assert(_clientId != null && _clientSecret != null,
+        "Call initializeTraktMananager before making any requests");
+    assert(_accessToken != null,
+        "Autheticate app and get access token before making authenticated request.");
+
+    final headers = _headers;
+    headers["Authorization"] = "Bearer ${_accessToken!}";
+
+    final url = Uri.https(_baseURL, request);
+    final response = await client.post(url, headers: _headers);
+
+    if (![200, 201, 204].contains(response.statusCode)) {
+      throw TraktManagerAPIError(
+          response.statusCode, response.reasonPhrase, response);
+    }
+
+    final jsonResult = jsonDecode(response.body);
+    return (T).jsonDecoder(jsonResult);
   }
 }
 

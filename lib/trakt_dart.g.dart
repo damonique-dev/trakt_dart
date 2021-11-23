@@ -699,6 +699,69 @@ ShowStats _$ShowStatsFromJson(Map<String, dynamic> json) => ShowStats(
       json['collected_episodes'] as int,
     );
 
+ShowCollectionProgress _$ShowCollectionProgressFromJson(
+        Map<String, dynamic> json) =>
+    ShowCollectionProgress(
+      json['aired'] as int,
+      json['completed'] as int,
+      (json['seasons'] as List<dynamic>)
+          .map((e) => ShowSeasonProgress.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['last_collected_at'] as String,
+      (json['hidden_seasons'] as List<dynamic>?)
+          ?.map((e) => Season.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['next_episode'] == null
+          ? null
+          : Episode.fromJson(json['next_episode'] as Map<String, dynamic>),
+      json['last_episode'] == null
+          ? null
+          : Episode.fromJson(json['last_episode'] as Map<String, dynamic>),
+    );
+
+ShowWatchedProgress _$ShowWatchedProgressFromJson(Map<String, dynamic> json) =>
+    ShowWatchedProgress(
+      json['aired'] as int,
+      json['completed'] as int,
+      (json['seasons'] as List<dynamic>)
+          .map((e) => ShowSeasonProgress.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['last_watched_at'] as String,
+      (json['hidden_seasons'] as List<dynamic>?)
+          ?.map((e) => Season.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['next_episode'] == null
+          ? null
+          : Episode.fromJson(json['next_episode'] as Map<String, dynamic>),
+      json['last_episode'] == null
+          ? null
+          : Episode.fromJson(json['last_episode'] as Map<String, dynamic>),
+      json['reset_at'] as String?,
+    );
+
+ShowSeasonProgress _$ShowSeasonProgressFromJson(Map<String, dynamic> json) =>
+    ShowSeasonProgress(
+      json['number'] as int,
+      json['aired'] as int,
+      json['completed'] as int,
+      json['title'] as String,
+      (json['episodes'] as List<dynamic>)
+          .map((e) => ShowEpisodeProgress.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+ShowEpisodeProgress _$ShowEpisodeProgressFromJson(Map<String, dynamic> json) =>
+    ShowEpisodeProgress(
+      json['number'] as int,
+      json['completed'] as bool,
+      json['collected_at'] as String?,
+    );
+
+ShowProgressReset _$ShowProgressResetFromJson(Map<String, dynamic> json) =>
+    ShowProgressReset(
+      json['reset_at'] as String,
+    );
+
 User _$UserFromJson(Map<String, dynamic> json) => User(
       json['username'] as String,
       json['name'] as String?,

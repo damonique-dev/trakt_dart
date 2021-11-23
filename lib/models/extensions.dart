@@ -32,6 +32,11 @@ extension TraktModel on Type {
     ShowCertification: ShowCertification.fromJsonModel,
     ShowTranslation: ShowTranslation.fromJsonModel,
     ShowStats: ShowStats.fromJsonModel,
+    ShowCollectionProgress: ShowCollectionProgress.fromJsonModel,
+    ShowWatchedProgress: ShowWatchedProgress.fromJsonModel,
+    ShowSeasonProgress: ShowSeasonProgress.fromJsonModel,
+    ShowEpisodeProgress: ShowEpisodeProgress.fromJsonModel,
+    ShowProgressReset: ShowProgressReset.fromJsonModel,
 
     // User Models
     User: User.fromJsonModel,

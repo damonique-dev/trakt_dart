@@ -9,7 +9,7 @@ class TraktDartApp extends StatelessWidget {
   Future<List<TrendingMovie>> getTrendingMovies() {
     // Replace with your clientId and clientId from Trakt API.
     TraktManager.instance.initializeTraktMananager(
-        clientId: "clientId", clientSecret: "clientId");
+        clientId: "clientId", clientSecret: "clientId", redirectURI: "");
 
     return TraktManager.instance.getTrendingMovies();
   }

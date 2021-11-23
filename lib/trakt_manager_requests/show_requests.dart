@@ -210,11 +210,109 @@ extension ShowRequests on TraktManager {
         pagination: pagination);
   }
 
-  //TODO: Add Collection Progress Requests with OAuth is implemented.
+  /// Returns collection progress for a show including details on all aired seasons and episodes.
+  ///
+  /// The next_episode will be the next episode the user should collect, if there are no upcoming episodes it will be set to null.
+  /// By default, any hidden seasons will be removed from the response and stats.
+  /// To include these and adjust the completion stats, set the [hidden] flag to true.
+  /// By default, specials will be excluded from the response.
+  /// Set the [specials] flag to true to include season 0 and adjust the stats accordingly.
+  /// If you'd like to include specials, but not adjust the stats, set [countSpecials] to false.
+  ///
+  /// Note: Only aired episodes are used to calculate progress. Episodes in the future or without an air date are ignored.
+  ///
+  /// [id] - Trakt ID, Trakt slug, or IMDB ID
+  /// [hidden] - include any hidden seasons
+  /// [specials] - include specials as season 0
+  /// [countSpecials] - count specials in the overall stats (only applies if specials are included)
+  ///
+  /// 🔒 OAuth Required
+  Future<ShowCollectionProgress> getShowCollectionProgress(String id,
+      {bool hidden = false, bool specials = false, bool? countSpecials}) async {
+    Map<String, String> params = {
+      "hidden": hidden.toString(),
+      "specials": specials.toString()
+    };
 
-  //TODO: Add Watched Progress Requests with OAuth is implemented.
+    if (specials && countSpecials != null) {
+      params["count_specials"] = countSpecials.toString();
+    }
+    return await _authenticatedGet<ShowCollectionProgress>(
+        "shows/$id/progress/collection",
+        queryParamameters: params);
+  }
 
-  //TODO: Add Reset Watched Progress Requests with OAuth is implemented.
+  /// Returns watched progress for a show including details on all aired seasons and episodes.
+  ///
+  /// The next_episode will be the next episode the user should watch, if there are no upcoming episodes it will be set to null.
+  /// If not null, the reset_at date is when the user started re-watching the show.
+  /// Your app can adjust the progress by ignoring episodes with a last_watched_at prior to the reset_at.
+  ///
+  /// By default, any hidden seasons will be removed from the response and stats.
+  /// To include these and adjust the completion stats, set the [hidden] flag to true.
+  ///
+  /// By default, specials will be excluded from the response.
+  /// Set the [specials] flag to true to include season 0 and adjust the stats accordingly.
+  /// If you'd like to include specials, but not adjust the stats, set [countSpecials] to false.
+  ///
+  /// Note: Only aired episodes are used to calculate progress. Episodes in the future or without an air date are ignored.
+  ///
+  /// [id] - Trakt ID, Trakt slug, or IMDB ID
+  /// [hidden] - include any hidden seasons
+  /// [specials] - include specials as season 0
+  /// [countSpecials] - count specials in the overall stats (only applies if specials are included)
+  ///
+  /// 🔒 OAuth Required
+  Future<ShowWatchedProgress> getShowWatchedProgress(String id,
+      {bool hidden = false, bool specials = false, bool? countSpecials}) async {
+    Map<String, String> params = {
+      "hidden": hidden.toString(),
+      "specials": specials.toString()
+    };
+
+    if (specials && countSpecials != null) {
+      params["count_specials"] = countSpecials.toString();
+    }
+    return await _authenticatedGet<ShowWatchedProgress>(
+        "shows/$id/progress/watched",
+        queryParamameters: params);
+  }
+
+  /// Reset a show's progress when the user started re-watching the show.
+  ///
+  /// You can optionally specify the reset_at date to have it calculate progress from that specific date onwards.
+  ///
+  /// [id] - Trakt ID, Trakt slug, or IMDB ID
+  ///
+  /// 🔒 OAuth Required 🔥 VIP Only
+  Future<ShowProgressReset> resetShowProgress(String id) async {
+    return await _authenticatedPost<ShowProgressReset>(
+        "shows/$id/progress/watched/reset");
+  }
+
+  /// Undo the reset and have watched progress use all watched history for the show.
+  ///
+  /// [id] - Trakt ID, Trakt slug, or IMDB ID
+  ///
+  /// 🔒 OAuth Required 🔥 VIP Only
+  Future<void> undoResetShowProgress(String id) async {
+    assert(_clientId != null && _clientSecret != null,
+        "Call initializeTraktMananager before making any requests");
+    assert(_accessToken != null,
+        "Autheticate app and get access token before making authenticated request.");
+
+    final headers = _headers;
+    headers["Authorization"] = "Bearer ${_accessToken!}";
+
+    final url = Uri.https(_baseURL, "shows/$id/progress/watched/reset");
+    final response = await client.delete(url, headers: _headers);
+
+    if (![200, 201, 204].contains(response.statusCode)) {
+      throw TraktManagerAPIError(
+          response.statusCode, response.reasonPhrase, response);
+    }
+    return;
+  }
 
   /// Returns all cast and crew for a show, including the episode_count for which they appears.
   ///

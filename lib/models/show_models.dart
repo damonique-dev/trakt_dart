@@ -197,3 +197,120 @@ class ShowStats {
   static ShowStats fromJsonModel(Map<String, dynamic> json) =>
       ShowStats.fromJson(json);
 }
+
+@JsonSerializable(createToJson: false)
+class ShowCollectionProgress {
+  final int aired, completed;
+  final List<ShowSeasonProgress> seasons;
+
+  @JsonKey(name: 'last_collected_at')
+  final String lastCollectedAt;
+
+  @JsonKey(name: 'hidden_seasons')
+  final List<Season>? hiddenSeasons;
+
+  @JsonKey(name: 'next_episode')
+  final Episode? nextEpisode;
+
+  @JsonKey(name: 'last_episode')
+  final Episode? lastEpisode;
+
+  ShowCollectionProgress(
+      this.aired,
+      this.completed,
+      this.seasons,
+      this.lastCollectedAt,
+      this.hiddenSeasons,
+      this.nextEpisode,
+      this.lastEpisode);
+
+  factory ShowCollectionProgress.fromJson(Map<String, dynamic> json) =>
+      _$ShowCollectionProgressFromJson(json);
+
+  static ShowCollectionProgress fromJsonModel(Map<String, dynamic> json) =>
+      ShowCollectionProgress.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class ShowWatchedProgress {
+  final int aired, completed;
+  final List<ShowSeasonProgress> seasons;
+
+  @JsonKey(name: 'reset_at')
+  final String? resetAt;
+
+  @JsonKey(name: 'last_watched_at')
+  final String lastWatchedAt;
+
+  @JsonKey(name: 'hidden_seasons')
+  final List<Season>? hiddenSeasons;
+
+  @JsonKey(name: 'next_episode')
+  final Episode? nextEpisode;
+
+  @JsonKey(name: 'last_episode')
+  final Episode? lastEpisode;
+
+  ShowWatchedProgress(
+      this.aired,
+      this.completed,
+      this.seasons,
+      this.lastWatchedAt,
+      this.hiddenSeasons,
+      this.nextEpisode,
+      this.lastEpisode,
+      this.resetAt);
+
+  factory ShowWatchedProgress.fromJson(Map<String, dynamic> json) =>
+      _$ShowWatchedProgressFromJson(json);
+
+  static ShowWatchedProgress fromJsonModel(Map<String, dynamic> json) =>
+      ShowWatchedProgress.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class ShowSeasonProgress {
+  final int number, aired, completed;
+  final String title;
+  final List<ShowEpisodeProgress> episodes;
+
+  ShowSeasonProgress(
+      this.number, this.aired, this.completed, this.title, this.episodes);
+
+  factory ShowSeasonProgress.fromJson(Map<String, dynamic> json) =>
+      _$ShowSeasonProgressFromJson(json);
+
+  static ShowSeasonProgress fromJsonModel(Map<String, dynamic> json) =>
+      ShowSeasonProgress.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class ShowEpisodeProgress {
+  final int number;
+  final bool completed;
+
+  @JsonKey(name: 'collected_at')
+  final String? collectedAt;
+
+  ShowEpisodeProgress(this.number, this.completed, this.collectedAt);
+
+  factory ShowEpisodeProgress.fromJson(Map<String, dynamic> json) =>
+      _$ShowEpisodeProgressFromJson(json);
+
+  static ShowEpisodeProgress fromJsonModel(Map<String, dynamic> json) =>
+      ShowEpisodeProgress.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class ShowProgressReset {
+  @JsonKey(name: 'reset_at')
+  final String resetAt;
+
+  ShowProgressReset(this.resetAt);
+
+  factory ShowProgressReset.fromJson(Map<String, dynamic> json) =>
+      _$ShowProgressResetFromJson(json);
+
+  static ShowProgressReset fromJsonModel(Map<String, dynamic> json) =>
+      ShowProgressReset.fromJson(json);
+}
