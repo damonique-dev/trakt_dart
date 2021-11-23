@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.2.1
+- Features
+    - Added Documentation to all implemented requests.
+
 ## 0.2.0
 - Features
     - Added All Certification, Country, Genre, Language, Lists, Network, and Search Requests

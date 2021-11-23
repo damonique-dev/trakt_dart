@@ -23,7 +23,7 @@ Current API calls implemented:
 
     ```yaml
     dependencies:
-      trakt_dart: ^0.2.0
+      trakt_dart: ^0.2.1
     ```
 
 2) **Import it**
