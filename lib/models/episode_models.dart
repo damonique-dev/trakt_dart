@@ -5,7 +5,7 @@ class Episode {
   // Extended: metadata (minimum data provided)
   final int season;
   final int number;
-  final String title;
+  final String? title;
   final Ids ids;
 
   // Extended: full

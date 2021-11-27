@@ -95,6 +95,10 @@ extension TraktModel on Type {
 
     // Authentication Models
     AccessTokenResponse: AccessTokenResponse.fromJsonModel,
+
+    // Calendar Models
+    MyCalendarShow: MyCalendarShow.fromJsonModel,
+    MyCalendarMovie: MyCalendarMovie.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

@@ -16,6 +16,19 @@ AccessTokenResponse _$AccessTokenResponseFromJson(Map<String, dynamic> json) =>
       json['created_at'] as int,
     );
 
+MyCalendarShow _$MyCalendarShowFromJson(Map<String, dynamic> json) =>
+    MyCalendarShow(
+      json['first_aired'] as String,
+      Episode.fromJson(json['episode'] as Map<String, dynamic>),
+      Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
+MyCalendarMovie _$MyCalendarMovieFromJson(Map<String, dynamic> json) =>
+    MyCalendarMovie(
+      json['released'] as String,
+      Movie.fromJson(json['movie'] as Map<String, dynamic>),
+    );
+
 CertificationsResult _$CertificationsResultFromJson(
         Map<String, dynamic> json) =>
     CertificationsResult(
@@ -81,7 +94,7 @@ Country _$CountryFromJson(Map<String, dynamic> json) => Country(
 Episode _$EpisodeFromJson(Map<String, dynamic> json) => Episode(
       json['season'] as int,
       json['number'] as int,
-      json['title'] as String,
+      json['title'] as String?,
       Ids.fromJson(json['ids'] as Map<String, dynamic>),
       json['overview'] as String?,
       (json['rating'] as num?)?.toDouble(),
