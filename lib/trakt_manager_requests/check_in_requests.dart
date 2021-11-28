@@ -19,10 +19,10 @@ extension CheckInRequests on TraktManager {
     String? message,
     CheckInSharing? sharing,
   }) async {
-    // assert((movie == null || episode == null),
-    //     "Cannot check in both a movie and episode in one request.");
     assert((movie != null || episode != null),
-        "Cannot check in both a movie and episode in one request.");
+        "A movie or episode must be provided");
+    assert((movie == null || episode == null),
+        "Cannot check in a movie and episode in one request.");
     final Map<String, dynamic> body = {
       "app_version": appVersion,
       "app_date": appDate

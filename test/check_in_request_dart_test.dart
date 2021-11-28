@@ -21,6 +21,23 @@ void main() {
         redirectURI: "");
   });
 
+  test('Checkin assertions - both null', () async {
+    expect(() async {
+      await TraktManager.instance
+          .checkIn(movie: null, episode: null, appDate: '', appVersion: '');
+    }, throwsAssertionError);
+  });
+
+  test('Checkin assertions - both provided', () async {
+    final movie = await TraktManager.instance.getMovieSummary("deadpool-2016");
+    final episode =
+        await TraktManager.instance.getEpisodeSummary("game-of-thrones", 1, 1);
+    expect(() async {
+      await TraktManager.instance
+          .checkIn(movie: movie, episode: episode, appDate: '', appVersion: '');
+    }, throwsAssertionError);
+  });
+
   test('Parse checkin movie response', () async {
     final file = File('test/test_data/check_in_movie_response.json');
     final json = jsonDecode(await file.readAsString());
