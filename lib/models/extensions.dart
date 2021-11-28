@@ -99,6 +99,10 @@ extension TraktModel on Type {
     // Calendar Models
     MyCalendarShow: MyCalendarShow.fromJsonModel,
     MyCalendarMovie: MyCalendarMovie.fromJsonModel,
+
+    //Check in Models
+    CheckInSharing: CheckInSharing.fromJsonModel,
+    CheckInResponse: CheckInResponse.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

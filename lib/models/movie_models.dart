@@ -1,6 +1,6 @@
 part of trakt_dart;
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class Movie {
   // Extended: metadata (minimum data provided)
   final String title;
@@ -48,6 +48,7 @@ class Movie {
       this.updatedAt);
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
+  Map<String, dynamic> toJson() => _$MovieToJson(this);
 
   static Movie fromJsonModel(Map<String, dynamic> json) => Movie.fromJson(json);
 }

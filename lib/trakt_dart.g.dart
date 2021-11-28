@@ -44,6 +44,34 @@ Certification _$CertificationFromJson(Map<String, dynamic> json) =>
       json['description'] as String,
     );
 
+CheckInSharing _$CheckInSharingFromJson(Map<String, dynamic> json) =>
+    CheckInSharing(
+      twitter: json['twitter'] as bool,
+      tumblr: json['tumblr'] as bool,
+    );
+
+Map<String, dynamic> _$CheckInSharingToJson(CheckInSharing instance) =>
+    <String, dynamic>{
+      'twitter': instance.twitter,
+      'tumblr': instance.tumblr,
+    };
+
+CheckInResponse _$CheckInResponseFromJson(Map<String, dynamic> json) =>
+    CheckInResponse(
+      json['id'] as int,
+      json['watched_at'] as String,
+      CheckInSharing.fromJson(json['sharing'] as Map<String, dynamic>),
+      json['movie'] == null
+          ? null
+          : Movie.fromJson(json['movie'] as Map<String, dynamic>),
+      json['episode'] == null
+          ? null
+          : Episode.fromJson(json['episode'] as Map<String, dynamic>),
+      json['show'] == null
+          ? null
+          : Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
 MovieShowMetadata _$MovieShowMetadataFromJson(Map<String, dynamic> json) =>
     MovieShowMetadata(
       json['title'] as String,
@@ -58,6 +86,14 @@ Ids _$IdsFromJson(Map<String, dynamic> json) => Ids(
       json['imdb'] as String?,
       json['tmdb'] as int?,
     );
+
+Map<String, dynamic> _$IdsToJson(Ids instance) => <String, dynamic>{
+      'slug': instance.slug,
+      'trakt': instance.trakt,
+      'tmdb': instance.tmdb,
+      'tvdb': instance.tvdb,
+      'imdb': instance.imdb,
+    };
 
 Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
       json['id'] as int,
@@ -107,6 +143,21 @@ Episode _$EpisodeFromJson(Map<String, dynamic> json) => Episode(
           ?.map((e) => e as String)
           .toList(),
     );
+
+Map<String, dynamic> _$EpisodeToJson(Episode instance) => <String, dynamic>{
+      'season': instance.season,
+      'number': instance.number,
+      'title': instance.title,
+      'ids': instance.ids,
+      'overview': instance.overview,
+      'rating': instance.rating,
+      'votes': instance.votes,
+      'runtime': instance.runtime,
+      'comment_count': instance.commentCount,
+      'first_aired': instance.firstAired,
+      'updated_at': instance.updatedAt,
+      'available_translations': instance.availableTranslations,
+    };
 
 EpisodeStats _$EpisodeStatsFromJson(Map<String, dynamic> json) => EpisodeStats(
       json['watchers'] as int,
@@ -204,6 +255,28 @@ Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(
       json['released'] as String?,
       json['updatedAt'] as String?,
     );
+
+Map<String, dynamic> _$MovieToJson(Movie instance) => <String, dynamic>{
+      'title': instance.title,
+      'year': instance.year,
+      'ids': instance.ids,
+      'overview': instance.overview,
+      'country': instance.country,
+      'language': instance.language,
+      'certification': instance.certification,
+      'tagline': instance.tagline,
+      'trailer': instance.trailer,
+      'homepage': instance.homepage,
+      'status': instance.status,
+      'released': instance.released,
+      'updatedAt': instance.updatedAt,
+      'runtime': instance.runtime,
+      'votes': instance.votes,
+      'rating': instance.rating,
+      'available_translations': instance.availableTranslations,
+      'genres': instance.genres,
+      'comment_count': instance.commentCount,
+    };
 
 TrendingMovie _$TrendingMovieFromJson(Map<String, dynamic> json) =>
     TrendingMovie(

@@ -97,7 +97,7 @@ class MovieShowMetadata {
       MovieShowMetadata.fromJson(json);
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class Ids {
   final String? slug;
   final int? trakt, tmdb, tvdb;
@@ -106,6 +106,7 @@ class Ids {
   Ids(this.trakt, this.slug, this.tvdb, this.imdb, this.tmdb);
 
   factory Ids.fromJson(Map<String, dynamic> json) => _$IdsFromJson(json);
+  Map<String, dynamic> toJson() => _$IdsToJson(this);
 
   static Ids fromJsonModel(Map<String, dynamic> json) => Ids.fromJson(json);
 }

@@ -8,6 +8,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'models/authentication_models.dart';
 part 'models/calendar_models.dart';
 part 'models/certification_models.dart';
+part 'models/check_in_models.dart';
 part 'models/common_models.dart';
 part 'models/countries_models.dart';
 part 'models/episode_models.dart';
@@ -26,6 +27,7 @@ part 'models/request_models.dart';
 part 'trakt_manager_requests/authentication_requests.dart';
 part 'trakt_manager_requests/calendar_requests.dart';
 part 'trakt_manager_requests/certification_requests.dart';
+part 'trakt_manager_requests/check_in_requests.dart';
 part 'trakt_manager_requests/countries_requests.dart';
 part 'trakt_manager_requests/episode_requests.dart';
 part 'trakt_manager_requests/genre_requests.dart';
@@ -238,7 +240,7 @@ class TraktManager {
     return [];
   }
 
-  Future<T> _authenticatedPost<T>(String request) async {
+  Future<T> _authenticatedPost<T>(String request, {String? body}) async {
     assert(_clientId != null && _clientSecret != null,
         "Call initializeTraktMananager before making any requests");
     assert(_accessToken != null,
@@ -248,7 +250,7 @@ class TraktManager {
     headers["Authorization"] = "Bearer ${_accessToken!}";
 
     final url = Uri.https(_baseURL, request);
-    final response = await client.post(url, headers: _headers);
+    final response = await client.post(url, headers: _headers, body: body);
 
     if (![200, 201, 204].contains(response.statusCode)) {
       throw TraktManagerAPIError(
@@ -257,6 +259,25 @@ class TraktManager {
 
     final jsonResult = jsonDecode(response.body);
     return (T).jsonDecoder(jsonResult);
+  }
+
+  Future<void> _authenticatedDelete(String request) async {
+    assert(_clientId != null && _clientSecret != null,
+        "Call initializeTraktMananager before making any requests");
+    assert(_accessToken != null,
+        "Autheticate app and get access token before making authenticated request.");
+
+    final headers = _headers;
+    headers["Authorization"] = "Bearer ${_accessToken!}";
+
+    final url = Uri.https(_baseURL, request);
+    final response = await client.delete(url, headers: _headers);
+
+    if (![200, 201, 204].contains(response.statusCode)) {
+      throw TraktManagerAPIError(
+          response.statusCode, response.reasonPhrase, response);
+    }
+    return;
   }
 }
 

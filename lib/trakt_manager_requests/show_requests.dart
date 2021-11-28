@@ -296,22 +296,7 @@ extension ShowRequests on TraktManager {
   ///
   /// 🔒 OAuth Required 🔥 VIP Only
   Future<void> undoResetShowProgress(String id) async {
-    assert(_clientId != null && _clientSecret != null,
-        "Call initializeTraktMananager before making any requests");
-    assert(_accessToken != null,
-        "Autheticate app and get access token before making authenticated request.");
-
-    final headers = _headers;
-    headers["Authorization"] = "Bearer ${_accessToken!}";
-
-    final url = Uri.https(_baseURL, "shows/$id/progress/watched/reset");
-    final response = await client.delete(url, headers: _headers);
-
-    if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
-    }
-    return;
+    return await _authenticatedDelete("shows/$id/progress/watched/reset");
   }
 
   /// Returns all cast and crew for a show, including the episode_count for which they appears.

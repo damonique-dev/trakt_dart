@@ -1,6 +1,6 @@
 part of trakt_dart;
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class Episode {
   // Extended: metadata (minimum data provided)
   final int season;
@@ -41,6 +41,7 @@ class Episode {
 
   factory Episode.fromJson(Map<String, dynamic> json) =>
       _$EpisodeFromJson(json);
+  Map<String, dynamic> toJson() => _$EpisodeToJson(this);
 
   static Episode fromJsonModel(Map<String, dynamic> json) =>
       Episode.fromJson(json);
