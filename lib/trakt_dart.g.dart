@@ -955,6 +955,9 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
           ? null
           : Images.fromJson(json['images'] as Map<String, dynamic>),
       json['joined_at'] as String?,
+      json['vip_og'] as bool?,
+      json['vip_years'] as int?,
+      json['vip_cover_image'] as String?,
     );
 
 UserStats _$UserStatsFromJson(Map<String, dynamic> json) => UserStats(
@@ -1001,4 +1004,41 @@ UserSharingText _$UserSharingTextFromJson(Map<String, dynamic> json) =>
       json['watching'] as String?,
       json['watched'] as String?,
       json['rated'] as String?,
+    );
+
+FollowRequest _$FollowRequestFromJson(Map<String, dynamic> json) =>
+    FollowRequest(
+      json['id'] as int,
+      User.fromJson(json['user'] as Map<String, dynamic>),
+      json['requested_at'] as String,
+    );
+
+Follower _$FollowerFromJson(Map<String, dynamic> json) => Follower(
+      User.fromJson(json['user'] as Map<String, dynamic>),
+      json['followed_at'] as String,
+    );
+
+HiddenItem _$HiddenItemFromJson(Map<String, dynamic> json) => HiddenItem(
+      json['type'] as String,
+      json['movie'] == null
+          ? null
+          : Movie.fromJson(json['movie'] as Map<String, dynamic>),
+      json['show'] == null
+          ? null
+          : Show.fromJson(json['show'] as Map<String, dynamic>),
+      json['season'] == null
+          ? null
+          : Season.fromJson(json['season'] as Map<String, dynamic>),
+      json['hidden_at'] as String,
+    );
+
+UserLike _$UserLikeFromJson(Map<String, dynamic> json) => UserLike(
+      json['type'] as String,
+      json['liked_at'] as String,
+      json['comment'] == null
+          ? null
+          : Comment.fromJson(json['comment'] as Map<String, dynamic>),
+      json['list'] == null
+          ? null
+          : TraktList.fromJson(json['list'] as Map<String, dynamic>),
     );
