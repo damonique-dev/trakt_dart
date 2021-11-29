@@ -40,6 +40,8 @@ class Season {
 
   static Season fromJsonModel(Map<String, dynamic> json) =>
       Season.fromJson(json);
+
+  Map<String, dynamic> get metadata => {"ids": ids};
 }
 
 @JsonSerializable(createToJson: false)

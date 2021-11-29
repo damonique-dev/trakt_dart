@@ -62,6 +62,9 @@ class Show {
   factory Show.fromJson(Map<String, dynamic> json) => _$ShowFromJson(json);
 
   static Show fromJsonModel(Map<String, dynamic> json) => Show.fromJson(json);
+
+  Map<String, dynamic> get metadata =>
+      {"title": title, "year": year, "ids": ids};
 }
 
 @JsonSerializable(createToJson: false)

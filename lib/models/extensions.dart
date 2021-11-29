@@ -43,6 +43,13 @@ extension TraktModel on Type {
     UserStats: UserStats.fromJsonModel,
     Images: Images.fromJsonModel,
     Avatar: Avatar.fromJsonModel,
+    UserSettings: UserSettings.fromJsonModel,
+    UserAccount: UserAccount.fromJsonModel,
+    UserConnections: UserConnections.fromJsonModel,
+    UserSharingText: UserSharingText.fromJsonModel,
+    FollowRequest: FollowRequest.fromJsonModel,
+    Follower: Follower.fromJsonModel,
+    HiddenItem: HiddenItem.fromJsonModel,
 
     // People Models
     Person: Person.fromJsonModel,

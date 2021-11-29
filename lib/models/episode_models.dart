@@ -45,6 +45,8 @@ class Episode {
 
   static Episode fromJsonModel(Map<String, dynamic> json) =>
       Episode.fromJson(json);
+
+  Map<String, dynamic> get metadata => {"ids": ids};
 }
 
 @JsonSerializable(createToJson: false)

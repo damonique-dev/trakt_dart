@@ -44,6 +44,7 @@ part 'trakt_manager_requests/scrobble_requests.dart';
 part 'trakt_manager_requests/search_requests.dart';
 part 'trakt_manager_requests/season_requests.dart';
 part 'trakt_manager_requests/show_requests.dart';
+part 'trakt_manager_requests/user_requests.dart';
 
 part 'trakt_dart.g.dart';
 
@@ -99,7 +100,7 @@ class TraktManager {
       {bool extendedFull = false,
       bool includeGuestStars = false,
       RequestPagination? pagination,
-      Map<String, String>? queryParamameters}) async {
+      Map<String, dynamic>? queryParamameters}) async {
     assert(_clientId != null && _clientSecret != null,
         "Call initializeTraktMananager before making any requests");
 
@@ -130,7 +131,7 @@ class TraktManager {
   }
 
   Future<T> _authenticatedGet<T>(String request,
-      {Map<String, String>? queryParamameters}) async {
+      {Map<String, dynamic>? queryParamameters}) async {
     assert(_clientId != null && _clientSecret != null,
         "Call initializeTraktMananager before making any requests");
     assert(_accessToken != null,

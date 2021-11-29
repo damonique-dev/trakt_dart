@@ -34,30 +34,19 @@ extension CommentRequests on TraktManager {
     final Map<String, dynamic> body = {"comment": comment, "spoiler": spoiler};
 
     if (movie != null) {
-      body["movie"] = {
-        "title": movie.title,
-        "year": movie.year,
-        "ids": movie.ids,
-      };
+      body["movie"] = movie.metadata;
     }
 
     if (show != null) {
-      body["show"] = {
-        "title": show.title,
-        "ids": show.ids,
-      };
+      body["show"] = show.metadata;
     }
 
     if (season != null) {
-      body["season"] = {
-        "ids": season.ids,
-      };
+      body["season"] = season.metadata;
     }
 
     if (episode != null) {
-      body["episode"] = {
-        "ids": episode.ids,
-      };
+      body["episode"] = episode.metadata;
     }
 
     if (list != null) {

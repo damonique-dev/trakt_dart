@@ -51,6 +51,9 @@ class Movie {
   Map<String, dynamic> toJson() => _$MovieToJson(this);
 
   static Movie fromJsonModel(Map<String, dynamic> json) => Movie.fromJson(json);
+
+  Map<String, dynamic> get metadata =>
+      {"title": title, "year": year, "ids": ids};
 }
 
 @JsonSerializable(createToJson: false)

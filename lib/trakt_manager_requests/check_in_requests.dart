@@ -34,15 +34,9 @@ extension CheckInRequests on TraktManager {
     Map<String, dynamic> body = {};
 
     if (movie != null) {
-      body["movie"] = {
-        "title": movie.title,
-        "year": movie.year,
-        "ids": movie.ids,
-      };
+      body["movie"] = movie.metadata;
     } else {
-      body["episode"] = {
-        "ids": episode!.ids,
-      };
+      body["episode"] = episode!.metadata;
     }
 
     if (message != null) {

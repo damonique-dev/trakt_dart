@@ -970,3 +970,35 @@ Images _$ImagesFromJson(Map<String, dynamic> json) => Images(
 Avatar _$AvatarFromJson(Map<String, dynamic> json) => Avatar(
       json['full'] as String,
     );
+
+UserSettings _$UserSettingsFromJson(Map<String, dynamic> json) => UserSettings(
+      User.fromJson(json['user'] as Map<String, dynamic>),
+      UserAccount.fromJson(json['account'] as Map<String, dynamic>),
+      UserConnections.fromJson(json['connections'] as Map<String, dynamic>),
+      UserSharingText.fromJson(json['sharing_text'] as Map<String, dynamic>),
+    );
+
+UserAccount _$UserAccountFromJson(Map<String, dynamic> json) => UserAccount(
+      json['timezone'] as String,
+      json['date_format'] as String,
+      json['time_24hr'] as bool,
+      json['cover_image'] as String?,
+    );
+
+UserConnections _$UserConnectionsFromJson(Map<String, dynamic> json) =>
+    UserConnections(
+      json['facebook'] as bool,
+      json['twitter'] as bool,
+      json['google'] as bool,
+      json['tumblr'] as bool,
+      json['medium'] as bool,
+      json['slack'] as bool,
+      json['apple'] as bool,
+    );
+
+UserSharingText _$UserSharingTextFromJson(Map<String, dynamic> json) =>
+    UserSharingText(
+      json['watching'] as String?,
+      json['watched'] as String?,
+      json['rated'] as String?,
+    );
