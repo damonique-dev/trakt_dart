@@ -82,6 +82,27 @@ extension ListSortValue on ListSort {
   }
 }
 
+enum MediaType { all, movies, shows, seasons, episodes, lists }
+
+extension MediaTypeValue on MediaType {
+  String get value {
+    switch (this) {
+      case MediaType.all:
+        return "all";
+      case MediaType.movies:
+        return "movies";
+      case MediaType.shows:
+        return "shows";
+      case MediaType.seasons:
+        return "seasons";
+      case MediaType.episodes:
+        return "episodes";
+      case MediaType.lists:
+        return "lists";
+    }
+  }
+}
+
 @JsonSerializable(createToJson: false)
 class MovieShowMetadata {
   final String title;

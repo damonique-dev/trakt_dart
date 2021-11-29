@@ -72,6 +72,81 @@ CheckInResponse _$CheckInResponseFromJson(Map<String, dynamic> json) =>
           : Show.fromJson(json['show'] as Map<String, dynamic>),
     );
 
+CommentSharing _$CommentSharingFromJson(Map<String, dynamic> json) =>
+    CommentSharing(
+      twitter: json['twitter'] as bool,
+      tumblr: json['tumblr'] as bool,
+      medium: json['medium'] as bool,
+    );
+
+Map<String, dynamic> _$CommentSharingToJson(CommentSharing instance) =>
+    <String, dynamic>{
+      'twitter': instance.twitter,
+      'tumblr': instance.tumblr,
+      'medium': instance.medium,
+    };
+
+CommentResponse _$CommentResponseFromJson(Map<String, dynamic> json) =>
+    CommentResponse(
+      json['id'] as int,
+      json['replies'] as int,
+      json['likes'] as int,
+      json['sharing'] == null
+          ? null
+          : CommentSharing.fromJson(json['sharing'] as Map<String, dynamic>),
+      json['comment'] as String,
+      json['spoiler'] as bool,
+      json['review'] as bool,
+      User.fromJson(json['user'] as Map<String, dynamic>),
+      json['parent_id'] as int,
+      UserStats.fromJson(json['user_stats'] as Map<String, dynamic>),
+      json['created_at'] as String,
+      json['updated_at'] as String,
+    );
+
+CommentMediaItem _$CommentMediaItemFromJson(Map<String, dynamic> json) =>
+    CommentMediaItem(
+      json['type'] as String,
+      json['movie'] == null
+          ? null
+          : Movie.fromJson(json['movie'] as Map<String, dynamic>),
+      json['show'] == null
+          ? null
+          : Show.fromJson(json['show'] as Map<String, dynamic>),
+      json['episode'] == null
+          ? null
+          : Episode.fromJson(json['episode'] as Map<String, dynamic>),
+      json['list'] == null
+          ? null
+          : TraktList.fromJson(json['list'] as Map<String, dynamic>),
+    );
+
+CommentLike _$CommentLikeFromJson(Map<String, dynamic> json) => CommentLike(
+      json['liked_at'] as String,
+      User.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+TrendingComment _$TrendingCommentFromJson(Map<String, dynamic> json) =>
+    TrendingComment(
+      json['type'] as String,
+      json['movie'] == null
+          ? null
+          : Movie.fromJson(json['movie'] as Map<String, dynamic>),
+      json['show'] == null
+          ? null
+          : Show.fromJson(json['show'] as Map<String, dynamic>),
+      json['season'] == null
+          ? null
+          : Season.fromJson(json['season'] as Map<String, dynamic>),
+      json['episode'] == null
+          ? null
+          : Episode.fromJson(json['episode'] as Map<String, dynamic>),
+      json['list'] == null
+          ? null
+          : TraktList.fromJson(json['list'] as Map<String, dynamic>),
+      Comment.fromJson(json['comment'] as Map<String, dynamic>),
+    );
+
 MovieShowMetadata _$MovieShowMetadataFromJson(Map<String, dynamic> json) =>
     MovieShowMetadata(
       json['title'] as String,

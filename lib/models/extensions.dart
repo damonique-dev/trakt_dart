@@ -103,6 +103,13 @@ extension TraktModel on Type {
     //Check in Models
     CheckInSharing: CheckInSharing.fromJsonModel,
     CheckInResponse: CheckInResponse.fromJsonModel,
+
+    // Comment Models
+    CommentSharing: CommentSharing.fromJsonModel,
+    CommentResponse: CommentResponse.fromJsonModel,
+    CommentMediaItem: CommentMediaItem.fromJsonModel,
+    CommentLike: CommentLike.fromJsonModel,
+    TrendingComment: TrendingComment.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

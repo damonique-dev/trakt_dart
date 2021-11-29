@@ -7,8 +7,16 @@ extension CheckInRequests on TraktManager {
   /// The item will display as watching on the site, then automatically switch to watched status once the duration has elapsed.
   /// A unique history id (64-bit integer) will be returned and can be used to reference this checkin directly.
   ///
-  /// [movie] - The movie to checkin
-  /// [episode] - The episode to checkin
+  /// The sharing object is optional and will apply the user's settings if not sent.
+  /// If sharing is sent, each key will override the user's setting for that social network.
+  /// Send true to post or false to not post on the indicated social network.
+  /// You can see which social networks a user has connected with the /users/settings method.
+  ///
+  /// [movie, episode] - The item to checkin
+  /// [message] - Message used for sharing. If not sent, it will use the watching string in the user settings.
+  /// [appVersion] - Version number of the app.
+  /// [appDate] - Build date of the app.
+  /// [sharing] - Control sharing to any connected social networks.
   ///
   /// 🔒 OAuth Required
   Future<CheckInResponse> checkIn({
