@@ -110,6 +110,9 @@ extension TraktModel on Type {
     CommentMediaItem: CommentMediaItem.fromJsonModel,
     CommentLike: CommentLike.fromJsonModel,
     TrendingComment: TrendingComment.fromJsonModel,
+
+    // Scrobble Models
+    ScrobbleResponse: ScrobbleResponse.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

@@ -727,6 +727,23 @@ PersonShowCrewCreditsList _$PersonShowCrewCreditsListFromJson(
           .toList(),
     );
 
+ScrobbleResponse _$ScrobbleResponseFromJson(Map<String, dynamic> json) =>
+    ScrobbleResponse(
+      json['id'] as int,
+      json['action'] as String,
+      (json['progress'] as num).toDouble(),
+      CheckInSharing.fromJson(json['sharing'] as Map<String, dynamic>),
+      json['movie'] == null
+          ? null
+          : Movie.fromJson(json['movie'] as Map<String, dynamic>),
+      json['episode'] == null
+          ? null
+          : Episode.fromJson(json['episode'] as Map<String, dynamic>),
+      json['show'] == null
+          ? null
+          : Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
 SearchResult _$SearchResultFromJson(Map<String, dynamic> json) => SearchResult(
       json['type'] as String,
       (json['score'] as num).toDouble(),

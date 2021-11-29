@@ -20,8 +20,8 @@ extension CheckInRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<CheckInResponse> checkIn({
-    required String appVersion,
-    required String appDate,
+    String? appVersion,
+    String? appDate,
     Movie? movie,
     Episode? episode,
     String? message,
@@ -31,10 +31,7 @@ extension CheckInRequests on TraktManager {
         "A movie or episode must be provided");
     assert((movie == null || episode == null),
         "Cannot check in a movie and episode in one request.");
-    final Map<String, dynamic> body = {
-      "app_version": appVersion,
-      "app_date": appDate
-    };
+    Map<String, dynamic> body = {};
 
     if (movie != null) {
       body["movie"] = {
@@ -54,6 +51,14 @@ extension CheckInRequests on TraktManager {
 
     if (sharing != null) {
       body["sharing"] = sharing.toJson();
+    }
+
+    if (appVersion != null) {
+      body["app_version"] = appVersion;
+    }
+
+    if (appDate != null) {
+      body["app_date"] = appDate;
     }
 
     return await _authenticatedPost<CheckInResponse>("checking",
