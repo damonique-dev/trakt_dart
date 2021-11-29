@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.4.0
+- Features
+    - Added Calendar, Checkin, Comment, Recommendation, and Scrobble requests
+
 ## 0.3.0
 - Features
     - Added OAuth requests
