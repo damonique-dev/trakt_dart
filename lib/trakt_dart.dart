@@ -38,6 +38,7 @@ part 'trakt_manager_requests/list_requests.dart';
 part 'trakt_manager_requests/movie_requests.dart';
 part 'trakt_manager_requests/network_requests.dart';
 part 'trakt_manager_requests/people_requests.dart';
+part 'trakt_manager_requests/recommendation_requests.dart';
 part 'trakt_manager_requests/search_requests.dart';
 part 'trakt_manager_requests/season_requests.dart';
 part 'trakt_manager_requests/show_requests.dart';
@@ -186,7 +187,7 @@ class TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       Filters? filters,
-      Map<String, String>? queryParamameters}) async {
+      Map<String, dynamic>? queryParamameters}) async {
     assert(_clientId != null && _clientSecret != null,
         "Call initializeTraktMananager before making any requests");
 
