@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' show Client, Response;
 import 'package:json_annotation/json_annotation.dart';
 
+part 'category/category.dart';
 part 'models/authentication_models.dart';
 part 'models/calendar_models.dart';
 part 'models/certification_models.dart';
@@ -58,13 +59,44 @@ class TraktManager {
   Map<String, String> _headers = {};
 
   Client client;
-  static final TraktManager instance = TraktManager._internal(Client());
 
-  TraktManager._internal(this.client);
+  Authentication? _authentication;
+  Calendar? _calendar;
+  Certifications? _certifications;
+  CheckIn? _checkIn;
+  Comments? _comments;
+  Countries? _countries;
+  Episodes? _episodes;
+  Genres? _genres;
+  Languages? _languages;
+  Lists? _lists;
+  Movies? _movies;
+  Networks? _networks;
+  People? _people;
+  Recommendations? _recommendations;
+  Scrobble? _scrobble;
+  Search? _search;
+  Seasons? _seasons;
+  Shows? _shows;
 
-  factory TraktManager() {
-    return instance;
-  }
+  Authentication get authentication => _authentication!;
+  Calendar get calendar => _calendar!;
+  Certifications get certifications => _certifications!;
+  CheckIn get checkIn => _checkIn!;
+  Comments get comments => _comments!;
+  Countries get countries => _countries!;
+  Episodes get episodes => _episodes!;
+  Genres get genres => _genres!;
+  Languages get languages => _languages!;
+  Lists get lists => _lists!;
+  Movies get movies => _movies!;
+  Networks get networks => _networks!;
+  People get people => _people!;
+  Recommendations get recommendations => _recommendations!;
+  Scrobble get scrobble => _scrobble!;
+  Search get search => _search!;
+  Seasons get seasons => _seasons!;
+  Shows get shows => _shows!;
 
   /// Initializes the TraktManager for making API calls. This must be called before making any API calls!
   ///
@@ -72,11 +104,12 @@ class TraktManager {
   /// [clientSecret] - The Client secret listed under your Trakt applications
   /// [redirectURI] - the redirect uri set under your Trakt applications for OAuth.
   /// [useStaging] - whether to use the Trakt Staging environment. Default to false.
-  void initializeTraktMananager(
+  TraktManager(
       {required String clientId,
       required String clientSecret,
       required String redirectURI,
-      bool useStaging = false}) {
+      bool useStaging = false})
+      : client = Client() {
     _clientId = clientId;
     _clientSecret = clientSecret;
     _redirectURI = redirectURI;
@@ -93,16 +126,32 @@ class TraktManager {
 
     _oauthURL =
         "https://trakt.tv/oauth/authorize?response_type=code&client_id=$_clientId&redirect_uri=$_redirectURI";
+
+    _authentication = Authentication(this);
+    _calendar = Calendar(this);
+    _certifications = Certifications(this);
+    _checkIn = CheckIn(this);
+    _comments = Comments(this);
+    _countries = Countries(this);
+    _episodes = Episodes(this);
+    _genres = Genres(this);
+    _languages = Languages(this);
+    _lists = Lists(this);
+    _movies = Movies(this);
+    _networks = Networks(this);
+    _people = People(this);
+    _recommendations = Recommendations(this);
+    _scrobble = Scrobble(this);
+    _search = Search(this);
+    _seasons = Seasons(this);
+    _shows = Shows(this);
   }
 
   Future<T> _get<T>(String request,
       {bool extendedFull = false,
       bool includeGuestStars = false,
       RequestPagination? pagination,
-      Map<String, String>? queryParamameters}) async {
-    assert(_clientId != null && _clientSecret != null,
-        "Call initializeTraktMananager before making any requests");
-
+      Map<String, dynamic>? queryParamameters}) async {
     final queryParams = queryParamameters ?? {};
     queryParams.addAll(pagination?.toMap() ?? {});
 
@@ -131,8 +180,6 @@ class TraktManager {
 
   Future<T> _authenticatedGet<T>(String request,
       {Map<String, String>? queryParamameters}) async {
-    assert(_clientId != null && _clientSecret != null,
-        "Call initializeTraktMananager before making any requests");
     assert(_accessToken != null,
         "Autheticate app and get access token before making authenticated request.");
 
@@ -157,9 +204,6 @@ class TraktManager {
       RequestPagination? pagination,
       Filters? filters,
       Map<String, dynamic>? queryParamameters}) async {
-    assert(_clientId != null && _clientSecret != null,
-        "Call initializeTraktMananager before making any requests");
-
     final queryParams = queryParamameters ?? {};
 
     queryParams.addAll(pagination?.toMap() ?? {});
@@ -190,9 +234,6 @@ class TraktManager {
       RequestPagination? pagination,
       Filters? filters,
       Map<String, dynamic>? queryParamameters}) async {
-    assert(_clientId != null && _clientSecret != null,
-        "Call initializeTraktMananager before making any requests");
-
     final queryParams = queryParamameters ?? {};
 
     queryParams.addAll(pagination?.toMap() ?? {});
@@ -223,10 +264,7 @@ class TraktManager {
 
   Future<List<int>> _getIds<T>(String request,
       {RequestPagination? pagination}) async {
-    assert(_clientId != null && _clientSecret != null,
-        "Call initializeTraktMananager before making any requests");
-
-    final queryParams = <String, String>{};
+    final queryParams = <String, dynamic>{};
 
     queryParams.addAll(pagination?.toMap() ?? {});
 
@@ -246,8 +284,6 @@ class TraktManager {
   }
 
   Future<T> _authenticatedPost<T>(String request, {String? body}) async {
-    assert(_clientId != null && _clientSecret != null,
-        "Call initializeTraktMananager before making any requests");
     assert(_accessToken != null,
         "Autheticate app and get access token before making authenticated request.");
 
@@ -267,8 +303,6 @@ class TraktManager {
   }
 
   Future<T> _authenticatedPut<T>(String request, {String? body}) async {
-    assert(_clientId != null && _clientSecret != null,
-        "Call initializeTraktMananager before making any requests");
     assert(_accessToken != null,
         "Autheticate app and get access token before making authenticated request.");
 
@@ -288,8 +322,6 @@ class TraktManager {
   }
 
   Future<void> _authenticatedDelete(String request) async {
-    assert(_clientId != null && _clientSecret != null,
-        "Call initializeTraktMananager before making any requests");
     assert(_accessToken != null,
         "Autheticate app and get access token before making authenticated request.");
 

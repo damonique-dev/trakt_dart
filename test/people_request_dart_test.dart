@@ -6,26 +6,28 @@ import 'package:trakt_dart/trakt_dart.dart';
 import 'setup_script.dart';
 
 void main() {
+  late TraktManager traktManager;
+
   setUp(() {
     load();
     if (Keys.clientId == null || Keys.clientSecret == null) {
       throw Exception(
           "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    TraktManager.instance.initializeTraktMananager(
+    traktManager = TraktManager(
         clientId: Keys.clientId!,
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
 
   test('Get Person Summary', () async {
-    final person = await TraktManager.instance
+    final person = await traktManager.people
         .getPersonSummary("ryan-reynolds", extendedFull: true);
     expect(person.name, equals("Ryan Reynolds"));
   });
 
   test('Get Person Movie Credits', () async {
-    final personMovies = await TraktManager.instance
+    final personMovies = await traktManager.people
         .getPersonMovieCredits("ryan-reynolds", extendedFull: true);
     expect(personMovies.cast.length, equals(92));
     expect(personMovies.crew.crew, isNull);
@@ -41,7 +43,7 @@ void main() {
   });
 
   test('Get Person Show Credits', () async {
-    final personShows = await TraktManager.instance
+    final personShows = await traktManager.people
         .getPersonShowCredits("ryan-reynolds", extendedFull: true);
     expect(personShows.cast.length, equals(26));
     expect(personShows.crew.crew, isNull);
@@ -57,7 +59,7 @@ void main() {
   });
 
   test('Get People Lists', () async {
-    final lists = await TraktManager.instance.getPersonLists("ryan-reynolds");
+    final lists = await traktManager.people.getPersonLists("ryan-reynolds");
     expect(lists.length, equals(10));
   });
 }

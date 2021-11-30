@@ -10,106 +10,107 @@ import 'package:trakt_dart/trakt_dart.dart';
 import 'setup_script.dart';
 
 void main() {
+  late TraktManager traktManager;
+
   setUp(() {
     load();
     if (Keys.clientId == null || Keys.clientSecret == null) {
       throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables in an .env file to run local tests");
+          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    TraktManager.instance.initializeTraktMananager(
+    traktManager = TraktManager(
         clientId: Keys.clientId!,
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
 
   test('Get Trending shows', () async {
-    final shows = await TraktManager.instance.getTrendingShows();
+    final shows = await traktManager.shows.getTrendingShows();
     expect(shows.length, equals(10));
   });
 
   test('Get Popular shows', () async {
-    final shows = await TraktManager.instance.getPopularShows();
+    final shows = await traktManager.shows.getPopularShows();
     expect(shows.length, equals(10));
   });
 
   test('Get Recommended shows', () async {
     final shows =
-        await TraktManager.instance.getRecommendedShows(TimePeriod.weekly);
+        await traktManager.shows.getRecommendedShows(TimePeriod.weekly);
     expect(shows.length, equals(10));
   });
 
   test('Get Most Played shows', () async {
     final shows =
-        await TraktManager.instance.getMostPlayedShows(TimePeriod.weekly);
+        await traktManager.shows.getMostPlayedShows(TimePeriod.weekly);
     expect(shows.length, equals(10));
   });
 
   test('Get Most Watched shows', () async {
     final shows =
-        await TraktManager.instance.getMostWatchedShows(TimePeriod.weekly);
+        await traktManager.shows.getMostWatchedShows(TimePeriod.weekly);
     expect(shows.length, equals(10));
   });
 
   test('Get Most Collected shows', () async {
     final shows =
-        await TraktManager.instance.getMostCollectedShows(TimePeriod.weekly);
+        await traktManager.shows.getMostCollectedShows(TimePeriod.weekly);
     expect(shows.length, equals(10));
   });
 
   test('Get Most Anticipated shows', () async {
-    final shows = await TraktManager.instance.getMostAnticipatedShows();
+    final shows = await traktManager.shows.getMostAnticipatedShows();
     expect(shows.length, equals(10));
   });
 
   test('Get Updated shows', () async {
-    final shows = await TraktManager.instance
+    final shows = await traktManager.shows
         .getUpdatedShows(DateTime.now().toIso8601String());
     expect(shows.length, lessThanOrEqualTo(10));
   });
 
   test('Get Updated show ids', () async {
-    final ids = await TraktManager.instance
+    final ids = await traktManager.shows
         .getUpdatedShowIds(DateTime.now().toIso8601String());
     expect(ids.length, lessThanOrEqualTo(10));
   });
 
   test('Get Show Summary', () async {
-    final show = await TraktManager.instance
+    final show = await traktManager.shows
         .getShowSummary("game-of-thrones", extendedFull: true);
     expect(show.title, "Game of Thrones");
   });
 
   test('Get Show Aliases', () async {
-    final aliases =
-        await TraktManager.instance.getShowAliases("game-of-thrones");
+    final aliases = await traktManager.shows.getShowAliases("game-of-thrones");
     expect(aliases.length, isNonZero);
   });
 
   // test('Get Show Certifications', () async {
   //   final certs =
-  //       await TraktManager.instance.getShowCertifications("game-of-thrones");
+  //       await traktManager.shows.getShowCertifications("game-of-thrones");
   //   expect(certs.length, equals(10));
   // });
 
   test('Get Show Translations', () async {
     final translations =
-        await TraktManager.instance.getShowTranslations("game-of-thrones");
+        await traktManager.shows.getShowTranslations("game-of-thrones");
     expect(translations.length, equals(46));
   });
 
   test('Get Show Comments', () async {
     final comments =
-        await TraktManager.instance.getShowComments("game-of-thrones");
+        await traktManager.shows.getShowComments("game-of-thrones");
     expect(comments.length, equals(10));
   });
 
   test('Get Show Lists', () async {
-    final lists = await TraktManager.instance.getShowLists("game-of-thrones");
+    final lists = await traktManager.shows.getShowLists("game-of-thrones");
     expect(lists.length, equals(10));
   });
 
   test('Get Show People', () async {
-    final people = await TraktManager.instance.getShowPeople("game-of-thrones",
+    final people = await traktManager.shows.getShowPeople("game-of-thrones",
         extendedFull: true, includeGuestStars: true);
     expect(people.cast?.length, isNonZero);
     expect(people.crew?.crew?.length, equals(4));
@@ -126,18 +127,17 @@ void main() {
   });
 
   test('Get Show Rating', () async {
-    final rating =
-        await TraktManager.instance.getShowRatings("game-of-thrones");
+    final rating = await traktManager.shows.getShowRatings("game-of-thrones");
     expect(rating.distribution.length, equals(10));
   });
 
   test('Get Related Show', () async {
-    final shows = await TraktManager.instance.getRelatedShow("game-of-thrones");
+    final shows = await traktManager.shows.getRelatedShow("game-of-thrones");
     expect(shows.length, equals(10));
   });
 
   test('Get Show Stats ', () async {
-    final stats = await TraktManager.instance.getShowStats("game-of-thrones");
+    final stats = await traktManager.shows.getShowStats("game-of-thrones");
     expect(stats.watchers, isNonZero);
     expect(stats.votes, isNonZero);
     expect(stats.recommended, isNonZero);
@@ -149,7 +149,7 @@ void main() {
 
   test('Get Show Last Episode', () async {
     final episode =
-        await TraktManager.instance.getShowLastEpisode("game-of-thrones");
+        await traktManager.shows.getShowLastEpisode("game-of-thrones");
     expect(episode.title, equals("The Iron Throne"));
   });
 

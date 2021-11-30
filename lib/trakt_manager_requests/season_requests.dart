@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension SeasonRequests on TraktManager {
+class Seasons extends Category {
+  Seasons(TraktManager manager) : super(manager);
+
   /// Returns all seasons for a show including the number of episodes in each season.
   ///
   /// Episodes:
@@ -24,7 +26,8 @@ extension SeasonRequests on TraktManager {
       params = {};
       params["extended"] = extendedParams.join(",");
     }
-    return await _getList("shows/$id/seasons", queryParamameters: params);
+    return await _manager._getList("shows/$id/seasons",
+        queryParamameters: params);
   }
 
   /// Returns all episodes for a specific season of a show.
@@ -42,7 +45,7 @@ extension SeasonRequests on TraktManager {
       {String? translations, bool extendedFull = false}) async {
     Map<String, String>? params =
         translations == null ? null : {"translations": translations};
-    return await _getList("shows/$id/seasons/$seasonNumber",
+    return await _manager._getList("shows/$id/seasons/$seasonNumber",
         extendedFull: extendedFull, queryParamameters: params);
   }
 
@@ -59,7 +62,7 @@ extension SeasonRequests on TraktManager {
   Future<List<Comment>> getShowSeasonComments(String id, int seasonNumber,
       {CommentsSortBy sortBy = CommentsSortBy.newest,
       RequestPagination? pagination}) async {
-    return await _getList(
+    return await _manager._getList(
         "shows/$id/seasons/$seasonNumber/comments/${sortBy.value}",
         pagination: pagination);
   }
@@ -78,7 +81,7 @@ extension SeasonRequests on TraktManager {
       {ListType type = ListType.personal,
       ListSort sortBy = ListSort.popular,
       RequestPagination? pagination}) async {
-    return await _getList(
+    return await _manager._getList(
         "shows/$id/seasons/$seasonNumber/lists/${type.value}/${sortBy.value}",
         pagination: pagination);
   }
@@ -100,7 +103,7 @@ extension SeasonRequests on TraktManager {
   /// ✨ Extended Info
   Future<ShowPeople> getShowSeasonPeople(String id, int seasonNumber,
       {bool extendedFull = false, bool includeGuestStars = false}) async {
-    return await _get("shows/$id/seasons/$seasonNumber/people",
+    return await _manager._get("shows/$id/seasons/$seasonNumber/people",
         extendedFull: extendedFull, includeGuestStars: includeGuestStars);
   }
 
@@ -109,7 +112,7 @@ extension SeasonRequests on TraktManager {
   /// [id] - Trakt ID, Trakt slug, or IMDB ID.
   /// [seasonNumber] - season number
   Future<Rating> getShowSeasonRatings(String id, int seasonNumber) async {
-    return await _get("shows/$id/seasons/$seasonNumber/ratings");
+    return await _manager._get("shows/$id/seasons/$seasonNumber/ratings");
   }
 
   /// Returns lots of season stats.
@@ -117,7 +120,8 @@ extension SeasonRequests on TraktManager {
   /// [id] - Trakt ID, Trakt slug, or IMDB ID.
   /// [seasonNumber] - season number
   Future<SeasonStats> getShowSeasonsStats(String id, int seasonNumber) async {
-    return await _get<SeasonStats>("shows/$id/seasons/$seasonNumber/stats");
+    return await _manager
+        ._get<SeasonStats>("shows/$id/seasons/$seasonNumber/stats");
   }
 
   /// Returns all users watching this season right now.
@@ -128,7 +132,8 @@ extension SeasonRequests on TraktManager {
   /// ✨ Extended Info
   Future<List<User>> getShowSeasonWatchers(String id, int seasonNumber,
       {bool extendedFull = false}) async {
-    return await _getList<User>("shows/$id/seasons/$seasonNumber/watching",
+    return await _manager._getList<User>(
+        "shows/$id/seasons/$seasonNumber/watching",
         extendedFull: extendedFull);
   }
 }

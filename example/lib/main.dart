@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:trakt_dart/trakt_dart.dart';
 
-void main() => runApp(const TraktDartApp());
+void main() => runApp(TraktDartApp());
 
 class TraktDartApp extends StatelessWidget {
-  const TraktDartApp({Key? key}) : super(key: key);
+  late TraktManager traktManager;
+
+  TraktDartApp({Key? key}) : super(key: key) {
+    // Replace with your clientId and clientId from Trakt API.
+    traktManager = TraktManager(
+        clientId: "clientId", clientSecret: "clientId", redirectURI: "");
+  }
 
   Future<List<TrendingMovie>> getTrendingMovies() {
-    // Replace with your clientId and clientId from Trakt API.
-    TraktManager.instance.initializeTraktMananager(
-        clientId: "clientId", clientSecret: "clientId", redirectURI: "");
-
-    return TraktManager.instance.getTrendingMovies();
+    return traktManager.movies.getTrendingMovies();
   }
 
   @override

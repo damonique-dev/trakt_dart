@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension RecommendationRequests on TraktManager {
+class Recommendations extends Category {
+  Recommendations(TraktManager manager) : super(manager);
+
   /// Movie recommendations for a user.
   ///
   /// By default, 10 results are returned. You can send a limit to get up to 100 results per page.
@@ -11,7 +13,7 @@ extension RecommendationRequests on TraktManager {
   /// 🔒 OAuth Required ✨ Extended Info
   Future<List<Movie>> getMovieRecommendations(
       {bool? ignoreCollected, bool extendedFull = false}) async {
-    return await _authenticatedGetList<Movie>("recommendations/movies",
+    return await _manager._authenticatedGetList<Movie>("recommendations/movies",
         extendedFull: extendedFull,
         queryParamameters: (ignoreCollected ?? false)
             ? {"ignore_collected": ignoreCollected!}
@@ -24,7 +26,7 @@ extension RecommendationRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<void> hideMovieRecommendation(String id) async {
-    return await _authenticatedDelete("recommendations/movies/$id");
+    return await _manager._authenticatedDelete("recommendations/movies/$id");
   }
 
   /// TV show recommendations for a user.
@@ -37,7 +39,7 @@ extension RecommendationRequests on TraktManager {
   /// 🔒 OAuth Required ✨ Extended Info
   Future<List<Show>> getShowRecommendations(
       {bool? ignoreCollected, bool extendedFull = false}) async {
-    return await _authenticatedGetList<Show>("recommendations/shows",
+    return await _manager._authenticatedGetList<Show>("recommendations/shows",
         extendedFull: extendedFull,
         queryParamameters: (ignoreCollected ?? false)
             ? {"ignore_collected": ignoreCollected!}
@@ -50,6 +52,6 @@ extension RecommendationRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<void> hideShowRecommendation(String id) async {
-    return await _authenticatedDelete("recommendations/shows/$id");
+    return await _manager._authenticatedDelete("recommendations/shows/$id");
   }
 }

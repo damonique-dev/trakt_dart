@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension ShowRequests on TraktManager {
+class Shows extends Category {
+  Shows(TraktManager manager) : super(manager);
+
   /// Returns all shows being watched right now.
   ///
   /// Shows with the most users are returned first.
@@ -10,7 +12,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/trending",
+    return await _manager._getList("shows/trending",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -23,7 +25,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/popular",
+    return await _manager._getList("shows/popular",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -38,7 +40,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/recommended/${period.value}",
+    return await _manager._getList("shows/recommended/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -54,7 +56,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/played/${period.value}",
+    return await _manager._getList("shows/played/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -70,7 +72,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/watched/${period.value}",
+    return await _manager._getList("shows/watched/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -86,7 +88,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/collected/${period.value}",
+    return await _manager._getList("shows/collected/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -97,7 +99,7 @@ extension ShowRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       ShowFilters? filters}) async {
-    return await _getList("shows/anticipated",
+    return await _manager._getList("shows/anticipated",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -117,7 +119,7 @@ extension ShowRequests on TraktManager {
   /// 📄 Pagination ✨ Extended Info
   Future<List<UpdatedShow>> getUpdatedShows(String startDate,
       {bool extendedFull = false, RequestPagination? pagination}) async {
-    return await _getList("shows/updates/startDate",
+    return await _manager._getList("shows/updates/startDate",
         extendedFull: extendedFull, pagination: pagination);
   }
 
@@ -137,7 +139,8 @@ extension ShowRequests on TraktManager {
   /// 📄 Pagination ✨ Extended Info
   Future<List<int>> getUpdatedShowIds(String startDate,
       {RequestPagination? pagination}) async {
-    return await _getIds("shows/updates/id/startDate", pagination: pagination);
+    return await _manager._getIds("shows/updates/id/startDate",
+        pagination: pagination);
   }
 
   /// Returns a single shows's details.
@@ -152,19 +155,19 @@ extension ShowRequests on TraktManager {
   ///
   /// ✨ Extended Info
   Future<Show> getShowSummary(String id, {bool extendedFull = false}) async {
-    return await _get<Show>("shows/$id", extendedFull: extendedFull);
+    return await _manager._get<Show>("shows/$id", extendedFull: extendedFull);
   }
 
   /// Returns all title aliases for a show. Includes country where name is different.
   ///
   /// [id] - Trakt ID, Trakt slug, or IMDB ID
   Future<List<MovieShowAlias>> getShowAliases(String id) async {
-    return await _getList<MovieShowAlias>("shows/$id/aliases");
+    return await _manager._getList<MovieShowAlias>("shows/$id/aliases");
   }
 
   // TODO: returning 500 no matter the show id...?
   // Future<List<ShowCertification>> getShowCertifications(String id) async {
-  //   return await _getList<ShowCertification>("shows/$id/certification");
+  //   return await  _manager._getList<ShowCertification>("shows/$id/certification");
   // }
 
   /// Returns all translations for a show, including language and translated values for title and overview.
@@ -173,7 +176,8 @@ extension ShowRequests on TraktManager {
   /// [language] - 2 character language code
   Future<List<ShowTranslation>> getShowTranslations(String id,
       {String language = ""}) async {
-    return await _getList<ShowTranslation>("shows/$id/translations/$language");
+    return await _manager
+        ._getList<ShowTranslation>("shows/$id/translations/$language");
   }
 
   /// Returns all top level comments for a show.
@@ -188,7 +192,8 @@ extension ShowRequests on TraktManager {
   Future<List<Comment>> getShowComments(String id,
       {CommentsSortBy sortBy = CommentsSortBy.newest,
       RequestPagination? pagination}) async {
-    return await _getList<Comment>("shows/$id/comments/${sortBy.value}",
+    return await _manager._getList<Comment>(
+        "shows/$id/comments/${sortBy.value}",
         pagination: pagination);
   }
 
@@ -205,7 +210,7 @@ extension ShowRequests on TraktManager {
       {ListType type = ListType.personal,
       ListSort sortBy = ListSort.popular,
       RequestPagination? pagination}) async {
-    return await _getList<TraktList>(
+    return await _manager._getList<TraktList>(
         "shows/$id/lists/${type.value}/${sortBy.value}",
         pagination: pagination);
   }
@@ -237,7 +242,7 @@ extension ShowRequests on TraktManager {
     if (specials && countSpecials != null) {
       params["count_specials"] = countSpecials.toString();
     }
-    return await _authenticatedGet<ShowCollectionProgress>(
+    return await _manager._authenticatedGet<ShowCollectionProgress>(
         "shows/$id/progress/collection",
         queryParamameters: params);
   }
@@ -273,7 +278,7 @@ extension ShowRequests on TraktManager {
     if (specials && countSpecials != null) {
       params["count_specials"] = countSpecials.toString();
     }
-    return await _authenticatedGet<ShowWatchedProgress>(
+    return await _manager._authenticatedGet<ShowWatchedProgress>(
         "shows/$id/progress/watched",
         queryParamameters: params);
   }
@@ -286,7 +291,7 @@ extension ShowRequests on TraktManager {
   ///
   /// 🔒 OAuth Required 🔥 VIP Only
   Future<ShowProgressReset> resetShowProgress(String id) async {
-    return await _authenticatedPost<ShowProgressReset>(
+    return await _manager._authenticatedPost<ShowProgressReset>(
         "shows/$id/progress/watched/reset");
   }
 
@@ -296,7 +301,8 @@ extension ShowRequests on TraktManager {
   ///
   /// 🔒 OAuth Required 🔥 VIP Only
   Future<void> undoResetShowProgress(String id) async {
-    return await _authenticatedDelete("shows/$id/progress/watched/reset");
+    return await _manager
+        ._authenticatedDelete("shows/$id/progress/watched/reset");
   }
 
   /// Returns all cast and crew for a show, including the episode_count for which they appears.
@@ -315,7 +321,7 @@ extension ShowRequests on TraktManager {
   /// ✨ Extended Info
   Future<ShowPeople> getShowPeople(String id,
       {bool extendedFull = false, bool includeGuestStars = false}) async {
-    return await _get<ShowPeople>("shows/$id/people",
+    return await _manager._get<ShowPeople>("shows/$id/people",
         extendedFull: extendedFull, includeGuestStars: includeGuestStars);
   }
 
@@ -323,7 +329,7 @@ extension ShowRequests on TraktManager {
   ///
   /// [id] - Trakt ID, Trakt slug, or IMDB ID
   Future<Rating> getShowRatings(String id) async {
-    return await _get<Rating>("shows/$id/ratings");
+    return await _manager._get<Rating>("shows/$id/ratings");
   }
 
   /// Returns related and similar shows.
@@ -333,7 +339,7 @@ extension ShowRequests on TraktManager {
   /// 📄 Pagination ✨ Extended Info
   Future<List<Show>> getRelatedShow(String id,
       {bool extendedFull = false, RequestPagination? pagination}) async {
-    return await _getList<Show>("shows/$id/related",
+    return await _manager._getList<Show>("shows/$id/related",
         extendedFull: extendedFull, pagination: pagination);
   }
 
@@ -341,7 +347,7 @@ extension ShowRequests on TraktManager {
   ///
   /// [id] - Trakt ID, Trakt slug, or IMDB ID
   Future<ShowStats> getShowStats(String id) async {
-    return await _get<ShowStats>("shows/$id/stats");
+    return await _manager._get<ShowStats>("shows/$id/stats");
   }
 
   /// Returns all users watching this show right now.
@@ -351,7 +357,7 @@ extension ShowRequests on TraktManager {
   /// ✨ Extended Info
   Future<List<User>> getShowWatchers(String id,
       {bool extendedFull = false}) async {
-    return await _getList<User>("shows/$id/watching",
+    return await _manager._getList<User>("shows/$id/watching",
         extendedFull: extendedFull);
   }
 
@@ -364,7 +370,7 @@ extension ShowRequests on TraktManager {
   /// ✨ Extended Info
   Future<Episode> getShowNextEpisode(String id,
       {bool extendedFull = false}) async {
-    return await _get<Episode>("shows/$id/next_episode",
+    return await _manager._get<Episode>("shows/$id/next_episode",
         extendedFull: extendedFull);
   }
 
@@ -377,7 +383,7 @@ extension ShowRequests on TraktManager {
   /// ✨ Extended Info
   Future<Episode> getShowLastEpisode(String id,
       {bool extendedFull = false}) async {
-    return await _get<Episode>("shows/$id/last_episode",
+    return await _manager._get<Episode>("shows/$id/last_episode",
         extendedFull: extendedFull);
   }
 }

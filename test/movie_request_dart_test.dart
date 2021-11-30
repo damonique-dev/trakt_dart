@@ -6,107 +6,108 @@ import 'package:trakt_dart/trakt_dart.dart';
 import 'setup_script.dart';
 
 void main() {
+  late TraktManager traktManager;
+
   setUp(() {
     load();
     if (Keys.clientId == null || Keys.clientSecret == null) {
       throw Exception(
           "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    TraktManager.instance.initializeTraktMananager(
+    traktManager = TraktManager(
         clientId: Keys.clientId!,
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
 
   test('Get Trending Movie', () async {
-    final movies = await TraktManager.instance.getTrendingMovies();
+    final movies = await traktManager.movies.getTrendingMovies();
     expect(movies.length, equals(10));
   });
 
   test('Get Popular Movie', () async {
     final movies =
-        await TraktManager.instance.getPopularMovies(TimePeriod.weekly);
+        await traktManager.movies.getPopularMovies(TimePeriod.weekly);
     expect(movies.length, equals(10));
   });
 
   test('Get Most Played Movies', () async {
     final movies =
-        await TraktManager.instance.getMostPlayedMovies(TimePeriod.weekly);
+        await traktManager.movies.getMostPlayedMovies(TimePeriod.weekly);
     expect(movies.length, equals(10));
   });
 
   test('Get Most Watched Movies', () async {
     final movies =
-        await TraktManager.instance.getMostWatchedMovies(TimePeriod.weekly);
+        await traktManager.movies.getMostWatchedMovies(TimePeriod.weekly);
     expect(movies.length, equals(10));
   });
 
   test('Get Most Collected Movies', () async {
     final movies =
-        await TraktManager.instance.getMostCollectedMovies(TimePeriod.weekly);
+        await traktManager.movies.getMostCollectedMovies(TimePeriod.weekly);
     expect(movies.length, equals(10));
   });
 
   test('Get Most Anticipated Movies', () async {
-    final movies = await TraktManager.instance.getMostAnticipatedMovies();
+    final movies = await traktManager.movies.getMostAnticipatedMovies();
     expect(movies.length, equals(10));
   });
 
   test('Get Box Office Movies', () async {
-    final movies = await TraktManager.instance.getBoxOfficeMovies();
+    final movies = await traktManager.movies.getBoxOfficeMovies();
     expect(movies.length, equals(10));
   });
 
   test('Get Updated Movies', () async {
-    final movies = await TraktManager.instance
+    final movies = await traktManager.movies
         .getUpdatedMovies(DateTime.now().toIso8601String());
     expect(movies.length, lessThanOrEqualTo(10));
   });
 
   test('Get Updated Movie Ids', () async {
-    final moviesIds = await TraktManager.instance
+    final moviesIds = await traktManager.movies
         .getUpdatedMovieIds(DateTime.now().toIso8601String());
     expect(moviesIds.length, lessThanOrEqualTo(10));
   });
 
   test('Get Single Movie', () async {
-    final movie = await TraktManager.instance
+    final movie = await traktManager.movies
         .getMovieSummary("deadpool-2016", extendedFull: true);
 
     expect(movie.title, equals("Deadpool"));
   });
 
   test('Get Movie Aliases', () async {
-    final aliases =
-        await TraktManager.instance.getMovieAliases("deadpool-2016");
+    final aliases = await traktManager.movies.getMovieAliases("deadpool-2016");
     expect(aliases.length, equals(18));
   });
 
   test('Get Movie Releases', () async {
     final releases =
-        await TraktManager.instance.getMovieReleases("deadpool-2016", "us");
+        await traktManager.movies.getMovieReleases("deadpool-2016", "us");
     expect(releases.length, equals(2));
   });
 
   test('Get Movie Translations', () async {
-    final translations = await TraktManager.instance
+    final translations = await traktManager.movies
         .getMovieTranslations("deadpool-2016", language: "da");
     expect(translations.length, equals(2));
   });
 
   test('Get Movie Comments', () async {
     final comments =
-        await TraktManager.instance.getMovieComments("deadpool-2016");
+        await traktManager.movies.getMovieComments("deadpool-2016");
     expect(comments.length, equals(10));
   });
 
   test('Get Movie Lists', () async {
-    final lists = await TraktManager.instance.getMovieLists("deadpool-2016");
+    final lists = await traktManager.movies.getMovieLists("deadpool-2016");
     expect(lists.length, equals(10));
   });
 
   test('Get Movie People', () async {
-    final people = await TraktManager.instance.getMoviePeople("deadpool-2016");
+    final people = await traktManager.movies.getMoviePeople("deadpool-2016");
     expect(people.cast?.length, equals(35));
     expect(people.crew?.crew?.length, equals(47));
     expect(people.crew?.costumeAndMakeUp?.length, equals(32));
@@ -121,18 +122,17 @@ void main() {
   });
 
   test('Get Movie Ratings', () async {
-    final ratings =
-        await TraktManager.instance.getMovieRatings("deadpool-2016");
+    final ratings = await traktManager.movies.getMovieRatings("deadpool-2016");
     expect(ratings.distribution.length, equals(10));
   });
 
   test('Get Related Movies', () async {
-    final movies = await TraktManager.instance.getRelatedMovie("deadpool-2016");
+    final movies = await traktManager.movies.getRelatedMovie("deadpool-2016");
     expect(movies.length, equals(10));
   });
 
   test('Get Movie Stats', () async {
-    final stats = await TraktManager.instance.getMovieStats("deadpool-2016");
+    final stats = await traktManager.movies.getMovieStats("deadpool-2016");
     expect(stats.watchers, isNonZero);
     expect(stats.votes, isNonZero);
     expect(stats.recommended, isNonZero);

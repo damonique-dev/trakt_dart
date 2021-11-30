@@ -1,10 +1,12 @@
 part of trakt_dart;
 
-extension CountriesRequests on TraktManager {
+class Countries extends Category {
+  Countries(TraktManager manager) : super(manager);
+
   /// Get a list of all countries, including names and codes.
   ///
   /// [type] - Possible values:  movies , shows
   Future<List<Country>> getCountries(CountryType type) async {
-    return await _getList<Country>("countries/${type.value}");
+    return await _manager._getList<Country>("countries/${type.value}");
   }
 }

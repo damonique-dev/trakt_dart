@@ -38,21 +38,18 @@ Current API calls implemented:
 
 ## Usage
 
-### Initialize
-In order to make calls to the Trakt API, you must first inialize the TraktManager with your clientId and clientSecret. To get these, you must first register an account with Trakt, then complete the [Create An App Application](https://trakt.tv/oauth/applications/new).
-
-Once you have these values, initialize the TraktManager before making your first API call:
+### Create Instance
+In order to make calls to the Trakt API, you must first inialize the TraktManager with your clientId, clientSecret, ad redirectURI. To get these, you must first register an account with Trakt, then complete the [Create An App Application](https://trakt.tv/oauth/applications/new).
 
 ```dart
-TraktManager.instance.initializeTraktMananager(
-        clientId: "${clientId}", clientSecret: "${clientSecret}");
+final traktManager = TraktManager(clientId: "${clientId}", clientSecret: "${clientSecret}", redirectURI: "${redirectURI}");
 ```
 
 ### Example Usage
 To call the [trending movies endpoint](https://trakt.docs.apiary.io/#reference/movies/trending/get-trending-movies):
 
 ```dart
-final trendingMovies = await TraktManager.instance.getTrendingMovies(extendedFull: true);
+final trendingMovies = await traktManager.movies.getTrendingMovies(extendedFull: true);
 ```
 
 ## Planned Work

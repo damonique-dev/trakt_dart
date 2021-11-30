@@ -9,13 +9,15 @@ import 'package:trakt_dart/trakt_dart.dart';
 import 'setup_script.dart';
 
 void main() {
+  late TraktManager traktManager;
+
   setUp(() {
     load();
     if (Keys.clientId == null || Keys.clientSecret == null) {
       throw Exception(
           "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    TraktManager.instance.initializeTraktMananager(
+    traktManager = TraktManager(
         clientId: Keys.clientId!,
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
@@ -23,17 +25,17 @@ void main() {
 
   test('Checkin assertions - both null', () async {
     expect(() async {
-      await TraktManager.instance
+      await traktManager.checkIn
           .checkIn(movie: null, episode: null, appDate: '', appVersion: '');
     }, throwsAssertionError);
   });
 
   test('Checkin assertions - both provided', () async {
-    final movie = await TraktManager.instance.getMovieSummary("deadpool-2016");
+    final movie = await traktManager.movies.getMovieSummary("deadpool-2016");
     final episode =
-        await TraktManager.instance.getEpisodeSummary("game-of-thrones", 1, 1);
+        await traktManager.episodes.getEpisodeSummary("game-of-thrones", 1, 1);
     expect(() async {
-      await TraktManager.instance
+      await traktManager.checkIn
           .checkIn(movie: movie, episode: episode, appDate: '', appVersion: '');
     }, throwsAssertionError);
   });
