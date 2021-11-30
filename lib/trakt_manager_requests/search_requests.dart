@@ -32,7 +32,7 @@ class Search extends Category {
       Filters? filters,
       List<SearchField>? searchFields}) async {
     final type = searchTypes.map((type) => type.value).join(",");
-    final params = {"query": query};
+    Map<String, dynamic> params = {"query": query};
     if (searchFields?.isNotEmpty ?? false) {
       params["fields"] = searchFields!.map((type) => type.value).join(",");
     }

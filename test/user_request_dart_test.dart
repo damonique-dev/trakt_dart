@@ -9,13 +9,15 @@ import 'package:trakt_dart/trakt_dart.dart';
 import 'setup_script.dart';
 
 void main() {
+  late TraktManager traktManager;
+
   setUp(() {
     load();
     if (Keys.clientId == null || Keys.clientSecret == null) {
       throw Exception(
           "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    TraktManager.instance.initializeTraktMananager(
+    traktManager = TraktManager(
         clientId: Keys.clientId!,
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
@@ -30,7 +32,7 @@ void main() {
   });
 
   test('Parse follow request response', () async {
-    final file = File('test/test_data/follow_request_response.json');
+    final file = File('test/test_data/follow_request_data.json');
     final json = jsonDecode(await file.readAsString());
     final request = FollowRequest.fromJsonModel(json);
 

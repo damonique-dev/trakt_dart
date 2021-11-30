@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension UserRequests on TraktManager {
+class Users extends Category {
+  Users(TraktManager manager) : super(manager);
+
   /// Get the user's settings so you can align your app's experience with what they're used to on the trakt website.
   ///
   /// A globally unique uuid is also returned, which can be used to identify the user locally in your app if needed.
@@ -8,7 +10,7 @@ extension UserRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<UserSettings> getSettings() async {
-    return await _authenticatedGet<UserSettings>("users/settings");
+    return await _manager._authenticatedGet<UserSettings>("users/settings");
   }
 
   /// List a user's pending following requests that they're waiting for the other user's to approve.
@@ -16,7 +18,7 @@ extension UserRequests on TraktManager {
   /// 🔒 OAuth Required ✨ Extended Info
   Future<List<FollowRequest>> getFollowingRequests(
       {bool extendedFull = false}) async {
-    return await _authenticatedGetList<FollowRequest>(
+    return await _manager._authenticatedGetList<FollowRequest>(
         "users/requests/following",
         extendedFull: extendedFull);
   }
@@ -26,7 +28,7 @@ extension UserRequests on TraktManager {
   /// 🔒 OAuth Required ✨ Extended Info
   Future<List<FollowRequest>> getFollowerRequests(
       {bool extendedFull = false}) async {
-    return await _authenticatedGetList<FollowRequest>(
+    return await _manager._authenticatedGetList<FollowRequest>(
         "users/requests/following",
         extendedFull: extendedFull);
   }
@@ -39,7 +41,7 @@ extension UserRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<Follower> approveFollowerRequest(int id) async {
-    return await _authenticatedPost<Follower>("users/requests/$id");
+    return await _manager._authenticatedPost<Follower>("users/requests/$id");
   }
 
   /// Deny a follower using the id of the request.
@@ -50,7 +52,7 @@ extension UserRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<void> denyFollowerRequest(int id) async {
-    return await _authenticatedDelete("users/requests/$id");
+    return await _manager._authenticatedDelete("users/requests/$id");
   }
 
   /// Get hidden items for a section.
@@ -66,7 +68,7 @@ extension UserRequests on TraktManager {
       HiddenItemType? type,
       bool extendedFull = false,
       RequestPagination? pagination}) async {
-    return await _authenticatedGetList<HiddenItem>(
+    return await _manager._authenticatedGetList<HiddenItem>(
         "users/hidden/${section.value}",
         extendedFull: extendedFull,
         pagination: pagination,
@@ -101,7 +103,8 @@ extension UserRequests on TraktManager {
       body["seasons"] = metaSeasons;
     }
 
-    return await _authenticatedPost<HiddenItem>("users/hidden/${section.value}",
+    return await _manager._authenticatedPost<HiddenItem>(
+        "users/hidden/${section.value}",
         body: jsonEncode(body));
   }
 
@@ -133,7 +136,7 @@ extension UserRequests on TraktManager {
       body["seasons"] = metaSeasons;
     }
 
-    return await _authenticatedPost<HiddenItem>(
+    return await _manager._authenticatedPost<HiddenItem>(
         "users/hidden/${section.value}/remove",
         body: jsonEncode(body));
   }
@@ -147,7 +150,7 @@ extension UserRequests on TraktManager {
   /// 🔒 OAuth Required 📄 Pagination
   Future<List<UserLike>> getLikes(
       {UserLikesType? type, RequestPagination? pagination}) async {
-    return await _authenticatedGetList<UserLike>("users/likes/$type",
+    return await _manager._authenticatedGetList<UserLike>("users/likes/$type",
         pagination: pagination);
   }
 
@@ -173,7 +176,7 @@ extension UserRequests on TraktManager {
       params = {};
       params["extended"] = extended.join(",");
     }
-    return await _authenticatedGet<User>("users/$id",
+    return await _manager._authenticatedGet<User>("users/$id",
         queryParamameters: params);
   }
 }
