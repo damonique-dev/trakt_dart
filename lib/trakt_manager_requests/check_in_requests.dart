@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension CheckInRequests on TraktManager {
+class CheckIn extends Category {
+  CheckIn(TraktManager manager) : super(manager);
+
   /// Check into a movie or episode.
   ///
   /// This should be tied to a user action to manually indicate they are watching something.
@@ -55,7 +57,7 @@ extension CheckInRequests on TraktManager {
       body["app_date"] = appDate;
     }
 
-    return await _authenticatedPost<CheckInResponse>("checking",
+    return await _manager._authenticatedPost<CheckInResponse>("checking",
         body: jsonEncode(body));
   }
 
@@ -63,6 +65,6 @@ extension CheckInRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<void> delateActiveCheckins() async {
-    return await _authenticatedDelete("checkin");
+    return await _manager._authenticatedDelete("checkin");
   }
 }

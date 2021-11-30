@@ -9,13 +9,15 @@ import 'package:trakt_dart/trakt_dart.dart';
 import 'setup_script.dart';
 
 void main() {
+  late TraktManager traktManager;
+
   setUp(() {
     load();
     if (Keys.clientId == null || Keys.clientSecret == null) {
       throw Exception(
           "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    TraktManager.instance.initializeTraktMananager(
+    traktManager = TraktManager(
         clientId: Keys.clientId!,
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
@@ -23,7 +25,7 @@ void main() {
 
   test('Calendar Request - Null startdate - nonnull numberOfDays', () async {
     expect(() async {
-      await TraktManager.instance
+      await traktManager.calendar
           .getCalendarAllShows(startDate: null, numberOfDays: 7);
     }, throwsAssertionError);
   });
@@ -49,13 +51,13 @@ void main() {
 
   test('Get all calendar shows', () async {
     final shows =
-        await TraktManager.instance.getCalendarAllShows(extendedFull: true);
+        await traktManager.calendar.getCalendarAllShows(extendedFull: true);
     expect(shows.length, isNonZero);
   });
 
   test('Get all calendar movies', () async {
     final movies =
-        await TraktManager.instance.getCalendarAllMovies(extendedFull: true);
+        await traktManager.calendar.getCalendarAllMovies(extendedFull: true);
     expect(movies.length, isNonZero);
   });
 }

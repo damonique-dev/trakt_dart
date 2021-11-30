@@ -6,13 +6,15 @@ import 'package:trakt_dart/trakt_dart.dart';
 import 'setup_script.dart';
 
 void main() {
+  late TraktManager traktManager;
+
   setUp(() {
     load();
     if (Keys.clientId == null || Keys.clientSecret == null) {
       throw Exception(
           "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    TraktManager.instance.initializeTraktMananager(
+    traktManager = TraktManager(
         clientId: Keys.clientId!,
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
@@ -20,30 +22,30 @@ void main() {
 
   test('Get Show Seasons', () async {
     final seasons =
-        await TraktManager.instance.getShowSeasons("game-of-thrones");
+        await traktManager.seasons.getShowSeasons("game-of-thrones");
     expect(seasons.length, equals(9));
   });
 
   test('Get Show Season Summary', () async {
-    final summary = await TraktManager.instance
+    final summary = await traktManager.seasons
         .getShowSeasonSummary("game-of-thrones", 1, extendedFull: true);
     expect(summary.length, equals(10));
   });
 
   test('Get Show Season Comments', () async {
     final comments =
-        await TraktManager.instance.getShowSeasonComments("game-of-thrones", 1);
+        await traktManager.seasons.getShowSeasonComments("game-of-thrones", 1);
     expect(comments.length, equals(10));
   });
 
   test('Get Show Season Lists', () async {
     final lists =
-        await TraktManager.instance.getShowSeasonLists("game-of-thrones", 1);
+        await traktManager.seasons.getShowSeasonLists("game-of-thrones", 1);
     expect(lists.length, equals(10));
   });
 
   test('Get Show Season People', () async {
-    final people = await TraktManager.instance.getShowSeasonPeople(
+    final people = await traktManager.seasons.getShowSeasonPeople(
         "game-of-thrones", 1,
         extendedFull: true, includeGuestStars: true);
     expect(people.cast?.length, isNonZero);
@@ -62,13 +64,13 @@ void main() {
 
   test('Get Show Season Ratings', () async {
     final rating =
-        await TraktManager.instance.getShowSeasonRatings("game-of-thrones", 1);
+        await traktManager.seasons.getShowSeasonRatings("game-of-thrones", 1);
     expect(rating.distribution.length, equals(10));
   });
 
   test('Get Show Season Stats', () async {
     final stats =
-        await TraktManager.instance.getShowSeasonsStats("game-of-thrones", 1);
+        await traktManager.seasons.getShowSeasonsStats("game-of-thrones", 1);
     expect(stats.watchers, isNonZero);
     expect(stats.votes, isNonZero);
     expect(stats.plays, isNonZero);

@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 0.5.0
+- Restructred TraktManager from Singleton to class to be instantiated.
+
 ## 0.4.0
 - Features
     - Added Calendar, Checkin, Comment, Recommendation, and Scrobble requests

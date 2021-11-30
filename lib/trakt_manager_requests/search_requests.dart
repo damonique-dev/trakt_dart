@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension SearchRequests on TraktManager {
+class Search extends Category {
+  Search(TraktManager manager) : super(manager);
+
   /// Search all text fields that a media object contains (i.e. title, overview, etc).
   ///
   /// Results are ordered by the most relevant score. Specify the type of results by sending a
@@ -34,7 +36,7 @@ extension SearchRequests on TraktManager {
     if (searchFields?.isNotEmpty ?? false) {
       params["fields"] = searchFields!.map((type) => type.value).join(",");
     }
-    return await _getList<SearchResult>("search/$type",
+    return await _manager._getList<SearchResult>("search/$type",
         extendedFull: extendedFull,
         pagination: pagination,
         filters: filters,
@@ -64,7 +66,7 @@ extension SearchRequests on TraktManager {
       params = {"type": searchTypes!.map((type) => type.value).join(",")};
     }
 
-    return await _getList<SearchResult>("search/${idType.value}/$id",
+    return await _manager._getList<SearchResult>("search/${idType.value}/$id",
         extendedFull: extendedFull,
         pagination: pagination,
         queryParamameters: params);

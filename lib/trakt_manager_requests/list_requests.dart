@@ -1,12 +1,14 @@
 part of trakt_dart;
 
-extension ListRequests on TraktManager {
+class Lists extends Category {
+  Lists(TraktManager manager) : super(manager);
+
   /// Returns all lists with the most likes and comments over the last 7 days.
   ///
   /// 📄 Pagination 😁 Emojis
   Future<List<TrendingPopularList>> getTrendingLists(
       {RequestPagination? pagination}) async {
-    return await _getList<TrendingPopularList>("lists/trending",
+    return await _manager._getList<TrendingPopularList>("lists/trending",
         pagination: pagination);
   }
 
@@ -15,7 +17,7 @@ extension ListRequests on TraktManager {
   /// 📄 Pagination 😁 Emojis
   Future<List<TrendingPopularList>> getPopularLists(
       {RequestPagination? pagination}) async {
-    return await _getList<TrendingPopularList>("lists/popular",
+    return await _manager._getList<TrendingPopularList>("lists/popular",
         pagination: pagination);
   }
 
@@ -28,7 +30,7 @@ extension ListRequests on TraktManager {
   ///
   /// 😁 Emojis
   Future<TraktList> getList(int id) async {
-    return await _get<TraktList>("lists/$id");
+    return await _manager._get<TraktList>("lists/$id");
   }
 
   /// Returns all users who liked a list.
@@ -38,7 +40,8 @@ extension ListRequests on TraktManager {
   /// 📄 Pagination
   Future<List<ListLikes>> getListLikes(int id,
       {RequestPagination? pagination}) async {
-    return await _getList<ListLikes>("lists/$id/likes", pagination: pagination);
+    return await _manager._getList<ListLikes>("lists/$id/likes",
+        pagination: pagination);
   }
 
   /// Get all items on a custom list.
@@ -61,7 +64,7 @@ extension ListRequests on TraktManager {
     if (listType != null) {
       request = request + "/${listType.value}";
     }
-    return await _getList<ListItem>(request, pagination: pagination);
+    return await _manager._getList<ListItem>(request, pagination: pagination);
   }
 
   /// Returns all top level comments for a list.
@@ -75,7 +78,7 @@ extension ListRequests on TraktManager {
   Future<List<Comment>> getListComments(int id,
       {ListCommentsSortBy sort = ListCommentsSortBy.newest,
       RequestPagination? pagination}) async {
-    return await _getList<Comment>("lists/$id/comments/${sort.value}",
+    return await _manager._getList<Comment>("lists/$id/comments/${sort.value}",
         pagination: pagination);
   }
 }

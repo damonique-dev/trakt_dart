@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension CalendarRequests on TraktManager {
+class Calendar extends Category {
+  Calendar(TraktManager manager) : super(manager);
+
   /// Returns all shows airing during the time period specified.
   ///
   /// [startDate] - Start the calendar on this date.
@@ -21,7 +23,7 @@ extension CalendarRequests on TraktManager {
     if (startDate != null) {
       request = "/$startDate/$numberOfDays";
     }
-    return await _authenticatedGetList<MyCalendarShow>(
+    return await _manager._authenticatedGetList<MyCalendarShow>(
         "calendars/my/shows$request",
         extendedFull: extendedFull,
         filters: filters);
@@ -47,7 +49,7 @@ extension CalendarRequests on TraktManager {
     if (startDate != null) {
       request = "/$startDate/$numberOfDays";
     }
-    return await _authenticatedGetList<MyCalendarShow>(
+    return await _manager._authenticatedGetList<MyCalendarShow>(
         "calendars/my/shows/new$request",
         extendedFull: extendedFull,
         filters: filters);
@@ -73,7 +75,7 @@ extension CalendarRequests on TraktManager {
     if (startDate != null) {
       request = "/$startDate/$numberOfDays";
     }
-    return await _authenticatedGetList<MyCalendarShow>(
+    return await _manager._authenticatedGetList<MyCalendarShow>(
         "calendars/my/shows/premieres$request",
         extendedFull: extendedFull,
         filters: filters);
@@ -99,7 +101,7 @@ extension CalendarRequests on TraktManager {
     if (startDate != null) {
       request = "/$startDate/$numberOfDays";
     }
-    return await _authenticatedGetList<MyCalendarMovie>(
+    return await _manager._authenticatedGetList<MyCalendarMovie>(
         "calendars/my/movies$request",
         extendedFull: extendedFull,
         filters: filters);
@@ -126,7 +128,7 @@ extension CalendarRequests on TraktManager {
       request = "/$startDate/$numberOfDays";
     }
 
-    return await _authenticatedGetList<MyCalendarMovie>(
+    return await _manager._authenticatedGetList<MyCalendarMovie>(
         "calendars/my/dvd$request",
         extendedFull: extendedFull,
         filters: filters);
@@ -153,8 +155,10 @@ extension CalendarRequests on TraktManager {
       request = "/$startDate/$numberOfDays";
     }
 
-    return await _getList<MyCalendarShow>("calendars/all/shows$request",
-        extendedFull: extendedFull, filters: filters);
+    return await _manager._getList<MyCalendarShow>(
+        "calendars/all/shows$request",
+        extendedFull: extendedFull,
+        filters: filters);
   }
 
   /// Returns all new show premieres (season 1, episode 1) airing during the time period specified.
@@ -178,8 +182,10 @@ extension CalendarRequests on TraktManager {
       request = "/$startDate/$numberOfDays";
     }
 
-    return await _getList<MyCalendarShow>("calendars/all/shows/new$request",
-        extendedFull: extendedFull, filters: filters);
+    return await _manager._getList<MyCalendarShow>(
+        "calendars/all/shows/new$request",
+        extendedFull: extendedFull,
+        filters: filters);
   }
 
   /// Returns all show premieres (any season, episode 1) airing during the time period specified.
@@ -203,7 +209,7 @@ extension CalendarRequests on TraktManager {
       request = "/$startDate/$numberOfDays";
     }
 
-    return await _getList<MyCalendarShow>(
+    return await _manager._getList<MyCalendarShow>(
         "calendars/all/shows/premieres$request",
         extendedFull: extendedFull,
         filters: filters);
@@ -229,8 +235,10 @@ extension CalendarRequests on TraktManager {
     if (startDate != null) {
       request = "/$startDate/$numberOfDays";
     }
-    return await _getList<MyCalendarMovie>("calendars/all/movies$request",
-        extendedFull: extendedFull, filters: filters);
+    return await _manager._getList<MyCalendarMovie>(
+        "calendars/all/movies$request",
+        extendedFull: extendedFull,
+        filters: filters);
   }
 
   /// Returns all movies with a DVD release date during the time period specified.
@@ -253,7 +261,7 @@ extension CalendarRequests on TraktManager {
     if (startDate != null) {
       request = "/$startDate/$numberOfDays";
     }
-    return await _getList<MyCalendarMovie>("calendars/all/dvd$request",
+    return await _manager._getList<MyCalendarMovie>("calendars/all/dvd$request",
         extendedFull: extendedFull, filters: filters);
   }
 }

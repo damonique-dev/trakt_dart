@@ -10,7 +10,7 @@ class RequestPagination {
 
   RequestPagination({this.page = 1, this.limit = 10});
 
-  Map<String, String> toMap() => {"page": "$page", "limit": "$limit"};
+  Map<String, dynamic> toMap() => {"page": "$page", "limit": "$limit"};
 }
 
 class Filters {
@@ -26,8 +26,8 @@ class Filters {
       this.countries,
       this.languages});
 
-  Map<String, String> toMap() {
-    final map = <String, String>{};
+  Map<String, dynamic> toMap() {
+    final map = <String, dynamic>{};
     if (query != null) {
       map["query"] = query!;
     }
@@ -59,7 +59,7 @@ class MovieFilters extends Filters {
   List<String>? certifications;
 
   @override
-  Map<String, String> toMap() {
+  Map<String, dynamic> toMap() {
     final map = super.toMap();
     if (certifications != null) {
       map["certifications"] = certifications!.join(",");
@@ -75,7 +75,7 @@ class ShowFilters extends Filters {
   List<ShowStatus>? status;
 
   @override
-  Map<String, String> toMap() {
+  Map<String, dynamic> toMap() {
     final map = super.toMap();
     if (certifications != null) {
       map["certifications"] = certifications!.join(",");

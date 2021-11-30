@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension CommentRequests on TraktManager {
+class Comments extends Category {
+  Comments(TraktManager manager) : super(manager);
+
   /// Add a new comment to a movie, show, season, episode, or list.
   /// Make sure to allow and encourage spoilers to be indicated in your app and follow the rules listed above.
   ///
@@ -59,7 +61,7 @@ extension CommentRequests on TraktManager {
       body["sharing"] = sharing.toJson();
     }
 
-    return await _authenticatedPost<CommentResponse>("comments",
+    return await _manager._authenticatedPost<CommentResponse>("comments",
         body: jsonEncode(body));
   }
 
@@ -71,7 +73,7 @@ extension CommentRequests on TraktManager {
   ///
   /// 😁 Emojis
   Future<CommentResponse> getComment(String id) async {
-    return await _get<CommentResponse>("comments/$id");
+    return await _manager._get<CommentResponse>("comments/$id");
   }
 
   /// Update a single comment.
@@ -84,7 +86,7 @@ extension CommentRequests on TraktManager {
   Future<CommentResponse> updateCommentOrReply(String id,
       {required String comment, required bool spoiler}) async {
     final body = {"comment": comment, "spoiler": spoiler};
-    return await _authenticatedPut<CommentResponse>("comments/$id",
+    return await _manager._authenticatedPut<CommentResponse>("comments/$id",
         body: jsonEncode(body));
   }
 
@@ -99,7 +101,7 @@ extension CommentRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<void> deleteCommentOrReply(String id) async {
-    return await _authenticatedDelete("comments/$id");
+    return await _manager._authenticatedDelete("comments/$id");
   }
 
   /// Returns all replies for a comment.
@@ -111,7 +113,7 @@ extension CommentRequests on TraktManager {
   /// 📄 Pagination 😁 Emojis
   Future<List<CommentResponse>> getReplies(String id,
       {RequestPagination? pagination}) async {
-    return await _getList<CommentResponse>("comments/$id/replies",
+    return await _manager._getList<CommentResponse>("comments/$id/replies",
         pagination: pagination);
   }
 
@@ -125,7 +127,8 @@ extension CommentRequests on TraktManager {
   Future<CommentResponse> postCommentReply(String id,
       {required String comment, required bool spoiler}) async {
     final body = {"comment": comment, "spoiler": spoiler};
-    return await _authenticatedPost<CommentResponse>("comments/$id/replies",
+    return await _manager._authenticatedPost<CommentResponse>(
+        "comments/$id/replies",
         body: jsonEncode(body));
   }
 
@@ -138,7 +141,7 @@ extension CommentRequests on TraktManager {
   /// ✨ Extended Info
   Future<CommentMediaItem> getCommentMediaItem(String id,
       {bool extendedFull = false}) async {
-    return await _get<CommentMediaItem>("comments/$id/item",
+    return await _manager._get<CommentMediaItem>("comments/$id/item",
         extendedFull: extendedFull);
   }
 
@@ -151,7 +154,7 @@ extension CommentRequests on TraktManager {
   /// 📄 Pagination
   Future<List<CommentLike>> getCommentLikes(String id,
       {RequestPagination? pagination}) async {
-    return await _getList<CommentLike>("comments/$id/likes",
+    return await _manager._getList<CommentLike>("comments/$id/likes",
         pagination: pagination);
   }
 
@@ -161,7 +164,7 @@ extension CommentRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<void> likeComment(String id) async {
-    return await _authenticatedPost("comments/$id/like");
+    return await _manager._authenticatedPost("comments/$id/like");
   }
 
   /// Remove a like on a comment.
@@ -170,7 +173,7 @@ extension CommentRequests on TraktManager {
   ///
   /// 🔒 OAuth Required
   Future<void> removeLikeComment(String id) async {
-    return await _authenticatedDelete("comments/$id/like");
+    return await _manager._authenticatedDelete("comments/$id/like");
   }
 
   /// Returns all comments with the most likes and replies over the last 7 days.
@@ -202,7 +205,7 @@ extension CommentRequests on TraktManager {
       request += "/${mediaType.value}";
     }
 
-    return await _getList<TrendingComment>("comments/trending$request",
+    return await _manager._getList<TrendingComment>("comments/trending$request",
         extendedFull: extendedFull,
         pagination: pagination,
         queryParamameters: params);
@@ -237,7 +240,7 @@ extension CommentRequests on TraktManager {
       request += "/${mediaType.value}";
     }
 
-    return await _getList<TrendingComment>("comments/recent$request",
+    return await _manager._getList<TrendingComment>("comments/recent$request",
         extendedFull: extendedFull,
         pagination: pagination,
         queryParamameters: params);
@@ -272,7 +275,7 @@ extension CommentRequests on TraktManager {
       request += "/${mediaType.value}";
     }
 
-    return await _getList<TrendingComment>("comments/updates$request",
+    return await _manager._getList<TrendingComment>("comments/updates$request",
         extendedFull: extendedFull,
         pagination: pagination,
         queryParamameters: params);

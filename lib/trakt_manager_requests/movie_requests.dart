@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension MovieRequests on TraktManager {
+class Movies extends Category {
+  Movies(TraktManager manager) : super(manager);
+
   /// Returns all movies being watched right now.
   /// Movies with the most users are returned first.
   ///
@@ -9,7 +11,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/trending",
+    return await _manager._getList("movies/trending",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -21,7 +23,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/popular",
+    return await _manager._getList("movies/popular",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -33,7 +35,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/recommended/${period.value}",
+    return await _manager._getList("movies/recommended/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -46,7 +48,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/played/${period.value}",
+    return await _manager._getList("movies/played/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -61,7 +63,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/watched/${period.value}",
+    return await _manager._getList("movies/watched/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -76,7 +78,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/collected/${period.value}",
+    return await _manager._getList("movies/collected/${period.value}",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -87,7 +89,7 @@ extension MovieRequests on TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {
-    return await _getList("movies/anticipated",
+    return await _manager._getList("movies/anticipated",
         extendedFull: extendedFull, pagination: pagination, filters: filters);
   }
 
@@ -97,7 +99,8 @@ extension MovieRequests on TraktManager {
   /// ✨ Extended Info
   Future<List<BoxOfficeMovie>> getBoxOfficeMovies(
       {bool extendedFull = false}) async {
-    return await _getList("movies/boxoffice", extendedFull: extendedFull);
+    return await _manager._getList("movies/boxoffice",
+        extendedFull: extendedFull);
   }
 
   /// Returns all movies updated since the specified UTC date and time.
@@ -116,7 +119,7 @@ extension MovieRequests on TraktManager {
   /// 📄 Pagination ✨ Extended Info
   Future<List<UpdatedMovie>> getUpdatedMovies(String startDate,
       {bool extendedFull = false, RequestPagination? pagination}) async {
-    return await _getList("movies/updates/$startDate",
+    return await _manager._getList("movies/updates/$startDate",
         extendedFull: extendedFull, pagination: pagination);
   }
 
@@ -136,7 +139,7 @@ extension MovieRequests on TraktManager {
   /// 📄 Pagination
   Future<List<int>> getUpdatedMovieIds(String startDate,
       {RequestPagination? pagination}) async {
-    return await _getIds("movies/updates/id/$startDate",
+    return await _manager._getIds("movies/updates/id/$startDate",
         pagination: pagination);
   }
 
@@ -149,14 +152,14 @@ extension MovieRequests on TraktManager {
   ///
   /// ✨ Extended Info
   Future<Movie> getMovieSummary(String id, {bool extendedFull = false}) async {
-    return await _get<Movie>("movies/$id", extendedFull: extendedFull);
+    return await _manager._get<Movie>("movies/$id", extendedFull: extendedFull);
   }
 
   /// Returns all title aliases for a movie. Includes country where name is different.
   ///
   /// [id] - Trakt ID, Trakt slug, or IMDB ID
   Future<List<MovieShowAlias>> getMovieAliases(String id) async {
-    return await _getList<MovieShowAlias>("movies/$id/aliases");
+    return await _manager._getList<MovieShowAlias>("movies/$id/aliases");
   }
 
   /// Returns all releases for a movie including country, certification, release date, release type, and note.
@@ -168,7 +171,8 @@ extension MovieRequests on TraktManager {
   /// [id] - Trakt ID, Trakt slug, or IMDB ID
   /// [country] - 2 character country code
   Future<List<MovieRelease>> getMovieReleases(String id, String country) async {
-    return await _getList<MovieRelease>("movies/$id/releases/$country");
+    return await _manager
+        ._getList<MovieRelease>("movies/$id/releases/$country");
   }
 
   /// Returns all translations for a movie, including language and translated values for title, tagline and overview.
@@ -179,8 +183,8 @@ extension MovieRequests on TraktManager {
   /// ✨ Extended Info
   Future<List<MovieTranslation>> getMovieTranslations(String id,
       {String language = ""}) async {
-    return await _getList<MovieTranslation>(
-        "movies/$id/translations/$language");
+    return await _manager
+        ._getList<MovieTranslation>("movies/$id/translations/$language");
   }
 
   /// Returns all top level comments for a movie.
@@ -194,7 +198,8 @@ extension MovieRequests on TraktManager {
   Future<List<Comment>> getMovieComments(String id,
       {CommentsSortBy sortBy = CommentsSortBy.newest,
       RequestPagination? pagination}) async {
-    return await _getList<Comment>("movies/$id/comments/${sortBy.value}",
+    return await _manager._getList<Comment>(
+        "movies/$id/comments/${sortBy.value}",
         pagination: pagination);
   }
 
@@ -211,7 +216,7 @@ extension MovieRequests on TraktManager {
       {ListType type = ListType.personal,
       ListSort sortBy = ListSort.popular,
       RequestPagination? pagination}) async {
-    return await _getList<TraktList>(
+    return await _manager._getList<TraktList>(
         "movies/$id/lists/${type.value}/${sortBy.value}",
         pagination: pagination);
   }
@@ -228,7 +233,7 @@ extension MovieRequests on TraktManager {
   /// ✨ Extended Info
   Future<MoviePeople> getMoviePeople(String id,
       {bool extendedFull = false}) async {
-    return await _get<MoviePeople>("movies/$id/people",
+    return await _manager._get<MoviePeople>("movies/$id/people",
         extendedFull: extendedFull);
   }
 
@@ -236,7 +241,7 @@ extension MovieRequests on TraktManager {
   ///
   /// [id] - Trakt ID, Trakt slug, or IMDB ID
   Future<Rating> getMovieRatings(String id) async {
-    return await _get<Rating>("movies/$id/ratings");
+    return await _manager._get<Rating>("movies/$id/ratings");
   }
 
   /// Returns related and similar movies.
@@ -246,7 +251,7 @@ extension MovieRequests on TraktManager {
   /// 📄 Pagination ✨ Extended Info
   Future<List<Movie>> getRelatedMovie(String id,
       {bool extendedFull = false, RequestPagination? pagination}) async {
-    return await _getList<Movie>("movies/$id/related",
+    return await _manager._getList<Movie>("movies/$id/related",
         extendedFull: extendedFull, pagination: pagination);
   }
 
@@ -254,7 +259,7 @@ extension MovieRequests on TraktManager {
   ///
   /// [id] - Trakt ID, Trakt slug, or IMDB ID
   Future<MovieStats> getMovieStats(String id) async {
-    return await _get<MovieStats>("movies/$id/stats");
+    return await _manager._get<MovieStats>("movies/$id/stats");
   }
 
   /// Returns all users watching this movie right now.
@@ -264,7 +269,7 @@ extension MovieRequests on TraktManager {
   /// ✨ Extended Info
   Future<List<User>> getMovieWatchers(String id,
       {bool extendedFull = false}) async {
-    return await _getList<User>("movies/$id/watching",
+    return await _manager._getList<User>("movies/$id/watching",
         extendedFull: extendedFull);
   }
 }

@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension EpisodeRequests on TraktManager {
+class Episodes extends Category {
+  Episodes(TraktManager manager) : super(manager);
+
   /// Returns a single episode's details.
   ///
   /// All date and times are in UTC and were calculated using the episode's air_date and show's country and air_time.
@@ -15,7 +17,8 @@ extension EpisodeRequests on TraktManager {
   Future<Episode> getEpisodeSummary(
       String id, int seasonNumber, int episodeNumber,
       {bool extendedFull = false}) async {
-    return await _get("shows/$id/seasons/$seasonNumber/episodes/$episodeNumber",
+    return await _manager._get(
+        "shows/$id/seasons/$seasonNumber/episodes/$episodeNumber",
         extendedFull: extendedFull);
   }
 
@@ -28,7 +31,7 @@ extension EpisodeRequests on TraktManager {
   Future<List<ShowTranslation>> getEpisodeTranslations(
       String id, int seasonNumber, int episodeNumber,
       {String language = ""}) async {
-    return await _getList<ShowTranslation>(
+    return await _manager._getList<ShowTranslation>(
         "shows/$id/seasons/$seasonNumber/episodes/$episodeNumber/translations/$language");
   }
 
@@ -47,7 +50,7 @@ extension EpisodeRequests on TraktManager {
       String id, int seasonNumber, int episodeNumber,
       {CommentsSortBy sortBy = CommentsSortBy.newest,
       RequestPagination? pagination}) async {
-    return await _getList<Comment>(
+    return await _manager._getList<Comment>(
         "shows/$id/seasons/$seasonNumber/episodes/$episodeNumber/comments/${sortBy.value}",
         pagination: pagination);
   }
@@ -68,7 +71,7 @@ extension EpisodeRequests on TraktManager {
       {ListType type = ListType.personal,
       ListSort sortBy = ListSort.popular,
       RequestPagination? pagination}) async {
-    return await _getList<TraktList>(
+    return await _manager._getList<TraktList>(
         "shows/$id/seasons/$seasonNumber/episodes/$episodeNumber/lists/${type.value}/${sortBy.value}",
         pagination: pagination);
   }
@@ -89,7 +92,7 @@ extension EpisodeRequests on TraktManager {
   Future<EpisodePeople> getEpisodePeople(
       String id, int seasonNumber, int episodeNumber,
       {bool extendedFull = false, bool includeGuestStars = false}) async {
-    return await _get<EpisodePeople>(
+    return await _manager._get<EpisodePeople>(
         "shows/$id/seasons/$seasonNumber/episodes/$episodeNumber/people",
         extendedFull: extendedFull,
         includeGuestStars: includeGuestStars);
@@ -102,7 +105,7 @@ extension EpisodeRequests on TraktManager {
   /// [episodeNumber] - episode number
   Future<Rating> getEpisodeRatings(
       String id, int seasonNumber, int episodeNumber) async {
-    return await _get(
+    return await _manager._get(
         "shows/$id/seasons/$seasonNumber/episodes/$episodeNumber/ratings");
   }
 
@@ -113,7 +116,7 @@ extension EpisodeRequests on TraktManager {
   /// [episodeNumber] - episode number
   Future<EpisodeStats> getEpisodeStats(
       String id, int seasonNumber, int episodeNumber) async {
-    return await _get<EpisodeStats>(
+    return await _manager._get<EpisodeStats>(
         "shows/$id/seasons/$seasonNumber/episodes/$episodeNumber/stats");
   }
 
@@ -127,7 +130,7 @@ extension EpisodeRequests on TraktManager {
   Future<List<User>> getEpisodeWatchers(
       String id, int seasonNumber, int episodeNumber,
       {bool extendedFull = false}) async {
-    return await _getList<User>(
+    return await _manager._getList<User>(
         "shows/$id/seasons/$seasonNumber/episodes/$episodeNumber/watching",
         extendedFull: extendedFull);
   }

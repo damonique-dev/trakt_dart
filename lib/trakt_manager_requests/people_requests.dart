@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension PeopleRequests on TraktManager {
+class People extends Category {
+  People(TraktManager manager) : super(manager);
+
   /// Returns a single person's details.
   ///
   /// [id] - Trakt ID, Trakt slug, or IMDB ID
@@ -8,7 +10,7 @@ extension PeopleRequests on TraktManager {
   /// ✨ Extended Info
   Future<Person> getPersonSummary(String id,
       {bool extendedFull = false}) async {
-    return await _get("people/$id", extendedFull: extendedFull);
+    return await _manager._get("people/$id", extendedFull: extendedFull);
   }
 
   /// Returns all movies where this person is in the cast or crew.
@@ -23,7 +25,7 @@ extension PeopleRequests on TraktManager {
   /// ✨ Extended Info
   Future<PersonMovieCredits> getPersonMovieCredits(String id,
       {bool extendedFull = false}) async {
-    return await _get("people/$id/movies", extendedFull: extendedFull);
+    return await _manager._get("people/$id/movies", extendedFull: extendedFull);
   }
 
   /// Returns all shows where this person is in the cast or crew, including the episode_count for which they appear.
@@ -39,7 +41,7 @@ extension PeopleRequests on TraktManager {
   /// ✨ Extended Info
   Future<PersonShowCredits> getPersonShowCredits(String id,
       {bool extendedFull = false}) async {
-    return await _get("people/$id/shows", extendedFull: extendedFull);
+    return await _manager._get("people/$id/shows", extendedFull: extendedFull);
   }
 
   /// Returns all lists that contain this person.
@@ -55,7 +57,7 @@ extension PeopleRequests on TraktManager {
       {ListType type = ListType.personal,
       ListSort sortBy = ListSort.popular,
       RequestPagination? pagination}) async {
-    return await _getList<TraktList>(
+    return await _manager._getList<TraktList>(
         "people/$id/lists/${type.value}/${sortBy.value}",
         pagination: pagination);
   }

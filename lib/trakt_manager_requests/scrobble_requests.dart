@@ -1,6 +1,8 @@
 part of trakt_dart;
 
-extension ScrobbleRequests on TraktManager {
+class Scrobble extends Category {
+  Scrobble(TraktManager manager) : super(manager);
+
   /// Use this method when the video initially starts playing or is unpaused.
   /// This will remove any playback progress if it exists.
   ///
@@ -41,7 +43,7 @@ extension ScrobbleRequests on TraktManager {
       body["app_date"] = appDate;
     }
 
-    return await _authenticatedPost<ScrobbleResponse>("scrobble/start",
+    return await _manager._authenticatedPost<ScrobbleResponse>("scrobble/start",
         body: jsonEncode(body));
   }
 
@@ -84,7 +86,7 @@ extension ScrobbleRequests on TraktManager {
       body["app_date"] = appDate;
     }
 
-    return await _authenticatedPost<ScrobbleResponse>("scrobble/pause",
+    return await _manager._authenticatedPost<ScrobbleResponse>("scrobble/pause",
         body: jsonEncode(body));
   }
 
@@ -132,7 +134,7 @@ extension ScrobbleRequests on TraktManager {
       body["app_date"] = appDate;
     }
 
-    return await _authenticatedPost<ScrobbleResponse>("scrobble/stop",
+    return await _manager._authenticatedPost<ScrobbleResponse>("scrobble/stop",
         body: jsonEncode(body));
   }
 }

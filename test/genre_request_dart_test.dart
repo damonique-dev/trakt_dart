@@ -6,25 +6,27 @@ import 'package:trakt_dart/trakt_dart.dart';
 import 'setup_script.dart';
 
 void main() {
+  late TraktManager traktManager;
+
   setUp(() {
     load();
     if (Keys.clientId == null || Keys.clientSecret == null) {
       throw Exception(
           "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    TraktManager.instance.initializeTraktMananager(
+    traktManager = TraktManager(
         clientId: Keys.clientId!,
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
 
   test('Get Genres - Movies', () async {
-    final genres = await TraktManager.instance.getGenres(GenreType.movies);
+    final genres = await traktManager.genres.getGenres(GenreType.movies);
     expect(genres.length, equals(26));
   });
 
   test('Get Genres - Shows', () async {
-    final genres = await TraktManager.instance.getGenres(GenreType.shows);
+    final genres = await traktManager.genres.getGenres(GenreType.shows);
     expect(genres.length, equals(36));
   });
 }
