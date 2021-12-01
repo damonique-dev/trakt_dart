@@ -1,5 +1,8 @@
 part of trakt_dart;
 
+/// Trakt social recommendations use all the Recommendations lists from the users you follow.
+/// The more users you follow with similar tastes, the better your recommendations will be.
+/// We also use other factors for the algorithm to further personalize what gets recommended.
 class Recommendations extends Category {
   Recommendations(TraktManager manager) : super(manager);
 

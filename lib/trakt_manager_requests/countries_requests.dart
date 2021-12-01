@@ -1,5 +1,6 @@
 part of trakt_dart;
 
+/// Some API methods allow filtering by country code, so it's good to cache this list in your app.
 class Countries extends Category {
   Countries(TraktManager manager) : super(manager);
 

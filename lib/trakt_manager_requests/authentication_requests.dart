@@ -1,5 +1,13 @@
 part of trakt_dart;
 
+/// The API uses OAuth2. If you know what's up with OAuth2, grab your library and starting rolling.
+/// If you have access to a web browser (mobile app, desktop app, website), use standard OAuth.
+/// If you don't have web browser access (media center plugins, smart watches, smart TVs, command line scripts, system services),
+/// use Device authentication.To obtain a client_id and client_secret, create an application on the Trakt website.
+///
+/// Here are some helpful links to get your started:
+/// Create a new API app: https://trakt.tv/oauth/applications/new
+/// View your API apps: https://trakt.tv/oauth/applications
 class Authentication extends Category {
   Authentication(TraktManager manager) : super(manager);
 

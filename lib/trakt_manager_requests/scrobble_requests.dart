@@ -1,5 +1,8 @@
 part of trakt_dart;
 
+/// Scrobbling is an automatic way to track what a user is watching in a media center.
+/// The media center should send events that correspond to starting, pausing, and stopping (or finishing)
+/// watching a movie or episode.
 class Scrobble extends Category {
   Scrobble(TraktManager manager) : super(manager);
 

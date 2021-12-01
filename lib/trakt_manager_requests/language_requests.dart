@@ -1,5 +1,6 @@
 part of trakt_dart;
 
+/// Some API methods allow filtering by language code, so it's good to cache this list in your app.
 class Languages extends Category {
   Languages(TraktManager manager) : super(manager);
 

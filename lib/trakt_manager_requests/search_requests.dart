@@ -1,5 +1,8 @@
 part of trakt_dart;
 
+/// Searches can use queries or ID lookups. Queries will search text fields like the title and overview.
+/// ID lookups are helpful if you have an external ID and want to get the Trakt ID and info.
+/// These methods can search for movies, shows, episodes, people, and lists.
 class Search extends Category {
   Search(TraktManager manager) : super(manager);
 
