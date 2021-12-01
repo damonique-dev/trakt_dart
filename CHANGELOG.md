@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.6.0
+- Features
+    - Added User requests
+
 ## 0.5.0
 - Restructred TraktManager from Singleton to class to be instantiated.
 

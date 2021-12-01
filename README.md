@@ -8,6 +8,7 @@ To learn more about the Trakt API visit [*offical site*](https://trakt.docs.apia
 
 ## Features
 Current API calls implemented:
+- Added in v0.6.0: All User requests
 - Added in v0.4.0: All Calendar, Checkin, Comment, Recommendation, and Scrobble requests
 - Added in v0.3.0: All OAuth requests and remaining show requests that require OAuth
 - Added in v0.2.0: All Certification, Country, Genre, Language, Lists, Network, and Search
@@ -25,7 +26,7 @@ Current API calls implemented:
 
     ```yaml
     dependencies:
-      trakt_dart: ^0.5.0
+      trakt_dart: ^0.6.0
     ```
 
 2) **Import it**
