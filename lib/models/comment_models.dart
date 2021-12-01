@@ -89,7 +89,7 @@ class CommentLike {
 }
 
 @JsonSerializable(createToJson: false)
-class TrendingComment {
+class MediaComment {
   final String type;
   final Movie? movie;
   final Show? show;
@@ -98,14 +98,14 @@ class TrendingComment {
   final TraktList? list;
   final Comment comment;
 
-  TrendingComment(this.type, this.movie, this.show, this.season, this.episode,
+  MediaComment(this.type, this.movie, this.show, this.season, this.episode,
       this.list, this.comment);
 
-  factory TrendingComment.fromJson(Map<String, dynamic> json) =>
-      _$TrendingCommentFromJson(json);
+  factory MediaComment.fromJson(Map<String, dynamic> json) =>
+      _$MediaCommentFromJson(json);
 
-  static TrendingComment fromJsonModel(Map<String, dynamic> json) =>
-      TrendingComment.fromJson(json);
+  static MediaComment fromJsonModel(Map<String, dynamic> json) =>
+      MediaComment.fromJson(json);
 }
 
 enum CommentType { all, reviews, shouts }

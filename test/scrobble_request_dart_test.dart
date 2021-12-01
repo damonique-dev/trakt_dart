@@ -22,20 +22,21 @@ void main() {
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
+  group("Scrobble Requests - ", () {
+    test('Parse scrobble movie response', () async {
+      final file = File('test/test_data/scrobble_movie_response.json');
+      final json = jsonDecode(await file.readAsString());
+      final scrobble = ScrobbleResponse.fromJsonModel(json);
 
-  test('Parse scrobble movie response', () async {
-    final file = File('test/test_data/scrobble_movie_response.json');
-    final json = jsonDecode(await file.readAsString());
-    final scrobble = ScrobbleResponse.fromJsonModel(json);
+      expect(scrobble.id, equals(0));
+    });
 
-    expect(scrobble.id, equals(0));
-  });
+    test('Parse scrobble episode response', () async {
+      final file = File('test/test_data/scrobble_episode_response.json');
+      final json = jsonDecode(await file.readAsString());
+      final scrobble = ScrobbleResponse.fromJsonModel(json);
 
-  test('Parse scrobble episode response', () async {
-    final file = File('test/test_data/scrobble_episode_response.json');
-    final json = jsonDecode(await file.readAsString());
-    final scrobble = ScrobbleResponse.fromJsonModel(json);
-
-    expect(scrobble.id, equals(0));
+      expect(scrobble.id, equals(0));
+    });
   });
 }

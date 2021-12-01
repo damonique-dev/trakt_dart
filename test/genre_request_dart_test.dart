@@ -19,14 +19,16 @@ void main() {
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
+  group("Genre Requests - ", () {
+    test('Get Genres - Movies', () async {
+      final genres =
+          await traktManager.genres.getGenres(MoviesShowsType.movies);
+      expect(genres.length, equals(26));
+    });
 
-  test('Get Genres - Movies', () async {
-    final genres = await traktManager.genres.getGenres(GenreType.movies);
-    expect(genres.length, equals(26));
-  });
-
-  test('Get Genres - Shows', () async {
-    final genres = await traktManager.genres.getGenres(GenreType.shows);
-    expect(genres.length, equals(36));
+    test('Get Genres - Shows', () async {
+      final genres = await traktManager.genres.getGenres(MoviesShowsType.shows);
+      expect(genres.length, equals(36));
+    });
   });
 }

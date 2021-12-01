@@ -59,3 +59,31 @@ class SeasonStats {
   static SeasonStats fromJsonModel(Map<String, dynamic> json) =>
       SeasonStats.fromJson(json);
 }
+
+@JsonSerializable(createToJson: false)
+class CollectedSeason {
+  final int number;
+  final List<CollectedEpisode> episodes;
+
+  CollectedSeason(this.number, this.episodes);
+
+  factory CollectedSeason.fromJson(Map<String, dynamic> json) =>
+      _$CollectedSeasonFromJson(json);
+
+  static CollectedSeason fromJsonModel(Map<String, dynamic> json) =>
+      CollectedSeason.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class WatchedSeason {
+  final int number;
+  final List<WatchedEpisode> episodes;
+
+  WatchedSeason(this.number, this.episodes);
+
+  factory WatchedSeason.fromJson(Map<String, dynamic> json) =>
+      _$WatchedSeasonFromJson(json);
+
+  static WatchedSeason fromJsonModel(Map<String, dynamic> json) =>
+      WatchedSeason.fromJson(json);
+}

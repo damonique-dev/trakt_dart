@@ -186,7 +186,7 @@ class Comments extends Category {
   /// [includeReplies] - include comment replies
   ///
   /// 📄 Pagination ✨ Extended Info 😁 Emojis
-  Future<List<TrendingComment>> getTrendingComments(
+  Future<List<MediaComment>> getTrendingComments(
       {CommentType? commentType,
       MediaType? mediaType,
       bool? includeReplies,
@@ -205,7 +205,7 @@ class Comments extends Category {
       request += "/${mediaType.value}";
     }
 
-    return await _manager._getList<TrendingComment>("comments/trending$request",
+    return await _manager._getList<MediaComment>("comments/trending$request",
         extendedFull: extendedFull,
         pagination: pagination,
         queryParamameters: params);
@@ -221,7 +221,7 @@ class Comments extends Category {
   /// [includeReplies] - include comment replies
   ///
   /// 📄 Pagination ✨ Extended Info 😁 Emojis
-  Future<List<TrendingComment>> getRecentComments(
+  Future<List<MediaComment>> getRecentComments(
       {CommentType? commentType,
       MediaType? mediaType,
       bool? includeReplies,
@@ -240,7 +240,7 @@ class Comments extends Category {
       request += "/${mediaType.value}";
     }
 
-    return await _manager._getList<TrendingComment>("comments/recent$request",
+    return await _manager._getList<MediaComment>("comments/recent$request",
         extendedFull: extendedFull,
         pagination: pagination,
         queryParamameters: params);
@@ -256,7 +256,7 @@ class Comments extends Category {
   /// [includeReplies] - include comment replies
   ///
   /// 📄 Pagination ✨ Extended Info 😁 Emojis
-  Future<List<TrendingComment>> getUpdatedComments(
+  Future<List<MediaComment>> getUpdatedComments(
       {CommentType? commentType,
       MediaType? mediaType,
       bool? includeReplies,
@@ -275,7 +275,7 @@ class Comments extends Category {
       request += "/${mediaType.value}";
     }
 
-    return await _manager._getList<TrendingComment>("comments/updates$request",
+    return await _manager._getList<MediaComment>("comments/updates$request",
         extendedFull: extendedFull,
         pagination: pagination,
         queryParamameters: params);

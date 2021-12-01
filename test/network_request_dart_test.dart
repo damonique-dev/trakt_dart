@@ -19,9 +19,10 @@ void main() {
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
-
-  test('Get Networks', () async {
-    final networks = await traktManager.networks.getNetworks();
-    expect(networks.length, isNonZero);
+  group("Network Requests - ", () {
+    test('Get Networks', () async {
+      final networks = await traktManager.networks.getNetworks();
+      expect(networks.length, isNonZero);
+    });
   });
 }

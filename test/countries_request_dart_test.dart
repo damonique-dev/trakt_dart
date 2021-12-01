@@ -19,10 +19,11 @@ void main() {
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
-
-  test('Get Countries', () async {
-    final countries =
-        await traktManager.countries.getCountries(CountryType.movie);
-    expect(countries.length, equals(233));
+  group("Countries Requests - ", () {
+    test('Get Countries', () async {
+      final countries =
+          await traktManager.countries.getCountries(CountryType.movie);
+      expect(countries.length, equals(233));
+    });
   });
 }

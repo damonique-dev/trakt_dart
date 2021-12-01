@@ -19,16 +19,17 @@ void main() {
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
+  group("Language Requests - ", () {
+    test('Get Languages - Movies', () async {
+      final genres =
+          await traktManager.languages.getLanguages(LanguageType.movies);
+      expect(genres.length, equals(160));
+    });
 
-  test('Get Languages - Movies', () async {
-    final genres =
-        await traktManager.languages.getLanguages(LanguageType.movies);
-    expect(genres.length, equals(160));
-  });
-
-  test('Get Languages - Shows', () async {
-    final genres =
-        await traktManager.languages.getLanguages(LanguageType.shows);
-    expect(genres.length, equals(77));
+    test('Get Languages - Shows', () async {
+      final genres =
+          await traktManager.languages.getLanguages(LanguageType.shows);
+      expect(genres.length, equals(77));
+    });
   });
 }

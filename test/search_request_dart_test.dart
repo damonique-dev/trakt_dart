@@ -19,24 +19,25 @@ void main() {
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
+  group("Search Requests - ", () {
+    test('Search text query', () async {
+      final searchResults = await traktManager.search.searchTextQuery(
+          "tron",
+          [
+            SearchType.movie,
+            SearchType.show,
+            SearchType.episode,
+            SearchType.list,
+            SearchType.person
+          ],
+          extendedFull: true);
+      expect(searchResults.length, equals(11));
+    });
 
-  test('Search text query', () async {
-    final searchResults = await traktManager.search.searchTextQuery(
-        "tron",
-        [
-          SearchType.movie,
-          SearchType.show,
-          SearchType.episode,
-          SearchType.list,
-          SearchType.person
-        ],
-        extendedFull: true);
-    expect(searchResults.length, equals(11));
-  });
-
-  test('Search ids', () async {
-    final searchResults = await traktManager.search
-        .searchIds(SearchIdType.trakt, "12601", extendedFull: true);
-    expect(searchResults.length, equals(3));
+    test('Search ids', () async {
+      final searchResults = await traktManager.search
+          .searchIds(SearchIdType.trakt, "12601", extendedFull: true);
+      expect(searchResults.length, equals(3));
+    });
   });
 }

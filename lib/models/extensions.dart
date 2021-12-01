@@ -8,6 +8,7 @@ extension TraktModel on Type {
     Comment: Comment.fromJsonModel,
     Rating: Rating.fromJsonModel,
     MovieStats: MovieStats.fromJsonModel,
+    Metadata: Metadata.fromJsonModel,
 
     // Movie Models
     Movie: Movie.fromJsonModel,
@@ -49,7 +50,23 @@ extension TraktModel on Type {
     UserSharingText: UserSharingText.fromJsonModel,
     FollowRequest: FollowRequest.fromJsonModel,
     Follower: Follower.fromJsonModel,
+    Following: Following.fromJsonModel,
     HiddenItem: HiddenItem.fromJsonModel,
+    UserCollectionItem: UserCollectionItem.fromJsonModel,
+    UserLike: UserLike.fromJsonModel,
+    Friend: Friend.fromJsonModel,
+    HistoryItem: HistoryItem.fromJsonModel,
+    RatedItem: RatedItem.fromJsonModel,
+    WatchlistItem: WatchlistItem.fromJsonModel,
+    PersonalRecommendation: PersonalRecommendation.fromJsonModel,
+    Watching: Watching.fromJsonModel,
+    WatchedItem: WatchedItem.fromJsonModel,
+    Stats: Stats.fromJsonModel,
+    UserMovieSEpisodeStats: UserMovieSEpisodeStats.fromJsonModel,
+    UserShowStats: UserShowStats.fromJsonModel,
+    UserSeasonStats: UserSeasonStats.fromJsonModel,
+    UserNetworkStats: UserNetworkStats.fromJsonModel,
+    UserRatingStats: UserRatingStats.fromJsonModel,
 
     // People Models
     Person: Person.fromJsonModel,
@@ -70,10 +87,14 @@ extension TraktModel on Type {
     // Season Models
     Season: Season.fromJsonModel,
     SeasonStats: SeasonStats.fromJsonModel,
+    CollectedSeason: CollectedSeason.fromJsonModel,
+    WatchedSeason: WatchedSeason.fromJsonModel,
 
     // Episode Models
     Episode: Episode.fromJsonModel,
     EpisodeStats: EpisodeStats.fromJsonModel,
+    CollectedEpisode: CollectedEpisode.fromJsonModel,
+    WatchedEpisode: WatchedEpisode.fromJsonModel,
 
     // Search Models
     SearchResult: SearchResult.fromJsonModel,
@@ -96,6 +117,11 @@ extension TraktModel on Type {
     ListLikes: ListLikes.fromJsonModel,
     ListItem: ListItem.fromJsonModel,
     TrendingPopularList: TrendingPopularList.fromJsonModel,
+    ReorderListResponse: ReorderListResponse.fromJsonModel,
+    AddToCustomListResponse: AddToCustomListResponse.fromJsonModel,
+    RemoveFromCustomListResponse: RemoveFromCustomListResponse.fromJsonModel,
+    UpdatedCustomListMetadata: UpdatedCustomListMetadata.fromJsonModel,
+    UpdatedCustomListNotFound: UpdatedCustomListNotFound.fromJsonModel,
 
     // Network Models
     Network: Network.fromJsonModel,
@@ -116,7 +142,7 @@ extension TraktModel on Type {
     CommentResponse: CommentResponse.fromJsonModel,
     CommentMediaItem: CommentMediaItem.fromJsonModel,
     CommentLike: CommentLike.fromJsonModel,
-    TrendingComment: TrendingComment.fromJsonModel,
+    MediaComment: MediaComment.fromJsonModel,
 
     // Scrobble Models
     ScrobbleResponse: ScrobbleResponse.fromJsonModel,

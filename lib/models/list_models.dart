@@ -114,6 +114,82 @@ class ListItem {
       ListItem.fromJson(json);
 }
 
+@JsonSerializable(createToJson: false)
+class ReorderListResponse {
+  @JsonKey(name: 'skipped_ids')
+  final List<int> skippedIds;
+  final int updated;
+
+  ReorderListResponse(this.skippedIds, this.updated);
+
+  factory ReorderListResponse.fromJson(Map<String, dynamic> json) =>
+      _$ReorderListResponseFromJson(json);
+
+  static ReorderListResponse fromJsonModel(Map<String, dynamic> json) =>
+      ReorderListResponse.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class AddToCustomListResponse {
+  final UpdatedCustomListMetadata added, existing;
+
+  @JsonKey(name: 'not_found')
+  final UpdatedCustomListNotFound notFound;
+
+  AddToCustomListResponse(this.added, this.existing, this.notFound);
+
+  factory AddToCustomListResponse.fromJson(Map<String, dynamic> json) =>
+      _$AddToCustomListResponseFromJson(json);
+
+  static AddToCustomListResponse fromJsonModel(Map<String, dynamic> json) =>
+      AddToCustomListResponse.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class RemoveFromCustomListResponse {
+  final UpdatedCustomListMetadata deleted;
+
+  @JsonKey(name: 'not_found')
+  final UpdatedCustomListNotFound notFound;
+
+  RemoveFromCustomListResponse(this.deleted, this.notFound);
+
+  factory RemoveFromCustomListResponse.fromJson(Map<String, dynamic> json) =>
+      _$RemoveFromCustomListResponseFromJson(json);
+
+  static RemoveFromCustomListResponse fromJsonModel(
+          Map<String, dynamic> json) =>
+      RemoveFromCustomListResponse.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class UpdatedCustomListMetadata {
+  final int movies, shows, seasons, episodes, people;
+
+  UpdatedCustomListMetadata(
+      this.movies, this.shows, this.seasons, this.episodes, this.people);
+
+  factory UpdatedCustomListMetadata.fromJson(Map<String, dynamic> json) =>
+      _$UpdatedCustomListMetadataFromJson(json);
+
+  static UpdatedCustomListMetadata fromJsonModel(Map<String, dynamic> json) =>
+      UpdatedCustomListMetadata.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class UpdatedCustomListNotFound {
+  final List<Map<String, dynamic>> movies, shows, seasons, episodes, people;
+
+  UpdatedCustomListNotFound(
+      this.movies, this.shows, this.seasons, this.episodes, this.people);
+
+  factory UpdatedCustomListNotFound.fromJson(Map<String, dynamic> json) =>
+      _$UpdatedCustomListNotFoundFromJson(json);
+
+  static UpdatedCustomListNotFound fromJsonModel(Map<String, dynamic> json) =>
+      UpdatedCustomListNotFound.fromJson(json);
+}
+
 enum ListCommentsSortBy { newest, oldest, likes, replies }
 
 extension ListCommentsSortByValue on ListCommentsSortBy {
@@ -127,6 +203,80 @@ extension ListCommentsSortByValue on ListCommentsSortBy {
         return "likes";
       case ListCommentsSortBy.replies:
         return "replies";
+    }
+  }
+}
+
+enum CustomListPrivacy { private, friends, public }
+
+extension CustomListPrivacyValue on CustomListPrivacy {
+  String get value {
+    switch (this) {
+      case CustomListPrivacy.private:
+        return "private";
+      case CustomListPrivacy.friends:
+        return "friends";
+      case CustomListPrivacy.public:
+        return "public";
+    }
+  }
+}
+
+enum CustomListSort {
+  rank,
+  added,
+  title,
+  released,
+  runtime,
+  popularity,
+  percentage,
+  votes,
+  myRating,
+  random,
+  watched,
+  collected
+}
+
+extension CustomListSortValue on CustomListSort {
+  String get value {
+    switch (this) {
+      case CustomListSort.rank:
+        return "rank";
+      case CustomListSort.added:
+        return "added";
+      case CustomListSort.title:
+        return "title";
+      case CustomListSort.released:
+        return "released";
+      case CustomListSort.runtime:
+        return "runtime";
+      case CustomListSort.popularity:
+        return "popularity";
+      case CustomListSort.percentage:
+        return "percentage";
+      case CustomListSort.votes:
+        return "votes";
+      case CustomListSort.myRating:
+        return "my_rating";
+      case CustomListSort.random:
+        return "random";
+      case CustomListSort.watched:
+        return "watched";
+      case CustomListSort.collected:
+        return "collected";
+    }
+  }
+}
+
+enum CustomListSortHow { asc, desc }
+
+extension CustomListSortHowValue on CustomListSortHow {
+  String get value {
+    switch (this) {
+      case CustomListSortHow.asc:
+        return "asc";
+      case CustomListSortHow.desc:
+        return "desc";
     }
   }
 }

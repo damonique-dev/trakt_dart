@@ -22,37 +22,38 @@ void main() {
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
+  group("Checkin Requests - ", () {
+    test('Checkin assertions - both null', () async {
+      expect(() async {
+        await traktManager.checkIn
+            .checkIn(movie: null, episode: null, appDate: '', appVersion: '');
+      }, throwsAssertionError);
+    });
 
-  test('Checkin assertions - both null', () async {
-    expect(() async {
-      await traktManager.checkIn
-          .checkIn(movie: null, episode: null, appDate: '', appVersion: '');
-    }, throwsAssertionError);
-  });
+    test('Checkin assertions - both provided', () async {
+      final movie = await traktManager.movies.getMovieSummary("deadpool-2016");
+      final episode = await traktManager.episodes
+          .getEpisodeSummary("game-of-thrones", 1, 1);
+      expect(() async {
+        await traktManager.checkIn.checkIn(
+            movie: movie, episode: episode, appDate: '', appVersion: '');
+      }, throwsAssertionError);
+    });
 
-  test('Checkin assertions - both provided', () async {
-    final movie = await traktManager.movies.getMovieSummary("deadpool-2016");
-    final episode =
-        await traktManager.episodes.getEpisodeSummary("game-of-thrones", 1, 1);
-    expect(() async {
-      await traktManager.checkIn
-          .checkIn(movie: movie, episode: episode, appDate: '', appVersion: '');
-    }, throwsAssertionError);
-  });
+    test('Parse checkin movie response', () async {
+      final file = File('test/test_data/check_in_movie_response.json');
+      final json = jsonDecode(await file.readAsString());
+      final checkInMovie = CheckInResponse.fromJsonModel(json);
 
-  test('Parse checkin movie response', () async {
-    final file = File('test/test_data/check_in_movie_response.json');
-    final json = jsonDecode(await file.readAsString());
-    final checkInMovie = CheckInResponse.fromJsonModel(json);
+      expect(checkInMovie.id, equals(3373536619));
+    });
 
-    expect(checkInMovie.id, equals(3373536619));
-  });
+    test('Parse checkin episode response', () async {
+      final file = File('test/test_data/check_in_episode_response.json');
+      final json = jsonDecode(await file.readAsString());
+      final checkInEpisode = CheckInResponse.fromJsonModel(json);
 
-  test('Parse checkin episode response', () async {
-    final file = File('test/test_data/check_in_episode_response.json');
-    final json = jsonDecode(await file.readAsString());
-    final checkInEpisode = CheckInResponse.fromJsonModel(json);
-
-    expect(checkInEpisode.id, equals(3373536620));
+      expect(checkInEpisode.id, equals(3373536620));
+    });
   });
 }

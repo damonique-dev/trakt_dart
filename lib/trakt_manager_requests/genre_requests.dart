@@ -6,7 +6,7 @@ class Genres extends Category {
   /// Get a list of all genres, including names and slugs.
   ///
   /// [type] - Possible values:  movies , shows
-  Future<List<Genre>> getGenres(GenreType type) async {
+  Future<List<Genre>> getGenres(MoviesShowsType type) async {
     return await _manager._getList<Genre>("genres/${type.value}");
   }
 }

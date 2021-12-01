@@ -19,10 +19,11 @@ void main() {
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
-
-  test('Get Certifications', () async {
-    final searchResults = await traktManager.certifications
-        .getCertifications(CertificationType.movie);
-    expect(searchResults.certifications.length, equals(7));
+  group("Certification Requests - ", () {
+    test('Get Certifications', () async {
+      final searchResults = await traktManager.certifications
+          .getCertifications(CertificationType.movie);
+      expect(searchResults.certifications.length, equals(7));
+    });
   });
 }

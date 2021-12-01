@@ -22,42 +22,43 @@ void main() {
         clientSecret: Keys.clientSecret!,
         redirectURI: "");
   });
+  group("Calendar Requests - ", () {
+    test('Calendar Request - Null startdate - nonnull numberOfDays', () async {
+      expect(() async {
+        await traktManager.calendar
+            .getCalendarAllShows(startDate: null, numberOfDays: 7);
+      }, throwsAssertionError);
+    });
 
-  test('Calendar Request - Null startdate - nonnull numberOfDays', () async {
-    expect(() async {
-      await traktManager.calendar
-          .getCalendarAllShows(startDate: null, numberOfDays: 7);
-    }, throwsAssertionError);
-  });
+    test('Parse Calendar Show Data', () async {
+      final file = File('test/test_data/calendar_show_data.json');
+      final json = jsonDecode(await file.readAsString());
+      final myCalendarShow = MyCalendarShow.fromJsonModel(json);
 
-  test('Parse Calendar Show Data', () async {
-    final file = File('test/test_data/calendar_show_data.json');
-    final json = jsonDecode(await file.readAsString());
-    final myCalendarShow = MyCalendarShow.fromJsonModel(json);
+      expect(myCalendarShow.firstAired, equals("2014-07-14T01:00:00.000Z"));
+      expect(myCalendarShow.show.title, equals("True Blood"));
+      expect(myCalendarShow.episode.season, equals(7));
+    });
 
-    expect(myCalendarShow.firstAired, equals("2014-07-14T01:00:00.000Z"));
-    expect(myCalendarShow.show.title, equals("True Blood"));
-    expect(myCalendarShow.episode.season, equals(7));
-  });
+    test('Parse Calendar Movie Data', () async {
+      final file = File('test/test_data/calendar_movie_data.json');
+      final json = jsonDecode(await file.readAsString());
+      final myCalendarShow = MyCalendarMovie.fromJsonModel(json);
 
-  test('Parse Calendar Movie Data', () async {
-    final file = File('test/test_data/calendar_movie_data.json');
-    final json = jsonDecode(await file.readAsString());
-    final myCalendarShow = MyCalendarMovie.fromJsonModel(json);
+      expect(myCalendarShow.released, equals("2014-08-01"));
+      expect(myCalendarShow.movie.title, equals("Guardians of the Galaxy"));
+    });
 
-    expect(myCalendarShow.released, equals("2014-08-01"));
-    expect(myCalendarShow.movie.title, equals("Guardians of the Galaxy"));
-  });
+    test('Get all calendar shows', () async {
+      final shows =
+          await traktManager.calendar.getCalendarAllShows(extendedFull: true);
+      expect(shows.length, isNonZero);
+    });
 
-  test('Get all calendar shows', () async {
-    final shows =
-        await traktManager.calendar.getCalendarAllShows(extendedFull: true);
-    expect(shows.length, isNonZero);
-  });
-
-  test('Get all calendar movies', () async {
-    final movies =
-        await traktManager.calendar.getCalendarAllMovies(extendedFull: true);
-    expect(movies.length, isNonZero);
+    test('Get all calendar movies', () async {
+      final movies =
+          await traktManager.calendar.getCalendarAllMovies(extendedFull: true);
+      expect(movies.length, isNonZero);
+    });
   });
 }

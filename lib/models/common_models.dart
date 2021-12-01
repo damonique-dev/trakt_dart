@@ -103,6 +103,19 @@ extension MediaTypeValue on MediaType {
   }
 }
 
+enum MoviesShowsType { movies, shows }
+
+extension MoviesShowsTypeValue on MoviesShowsType {
+  String get value {
+    switch (this) {
+      case MoviesShowsType.movies:
+        return "movies";
+      case MoviesShowsType.shows:
+        return "shows";
+    }
+  }
+}
+
 @JsonSerializable(createToJson: false)
 class MovieShowMetadata {
   final String title;
@@ -201,4 +214,27 @@ class MovieShowAlias {
 
   static MovieShowAlias fromJsonModel(Map<String, dynamic> json) =>
       MovieShowAlias.fromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class Metadata {
+  final String? resolution, hdr, audio;
+
+  @JsonKey(name: '3d')
+  final bool? is3d;
+
+  @JsonKey(name: 'media_type')
+  final String? mediaType;
+
+  @JsonKey(name: 'audio_channels')
+  final String? audioChannels;
+
+  Metadata(this.resolution, this.hdr, this.audio, this.is3d, this.mediaType,
+      this.audioChannels);
+
+  factory Metadata.fromJson(Map<String, dynamic> json) =>
+      _$MetadataFromJson(json);
+
+  static Metadata fromJsonModel(Map<String, dynamic> json) =>
+      Metadata.fromJson(json);
 }

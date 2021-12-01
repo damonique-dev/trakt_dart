@@ -183,11 +183,15 @@ class TraktManager {
   }
 
   Future<T> _authenticatedGet<T>(String request,
-      {Map<String, dynamic>? queryParamameters}) async {
+      {bool extendedFull = false,
+      Map<String, dynamic>? queryParamameters}) async {
     assert(_accessToken != null,
         "Autheticate app and get access token before making authenticated request.");
 
     final queryParams = queryParamameters ?? {};
+    if (extendedFull) {
+      queryParams["extended"] = "full";
+    }
     final headers = _headers;
     headers["Authorization"] = "Bearer ${_accessToken!}";
 

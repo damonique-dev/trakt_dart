@@ -18,6 +18,8 @@ class Person {
 
   static Person fromJsonModel(Map<String, dynamic> json) =>
       Person.fromJson(json);
+
+  Map<String, dynamic> get metadata => {"name": name, "ids": ids};
 }
 
 @JsonSerializable(createToJson: false)
