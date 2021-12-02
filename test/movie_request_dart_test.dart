@@ -1,4 +1,4 @@
-import 'package:dotenv/dotenv.dart' show load, clean;
+import 'package:dotenv/dotenv.dart' show load;
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
