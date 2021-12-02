@@ -100,4 +100,53 @@ class Authentication extends Category {
 
     return accessTokenResponse;
   }
+
+  /// Generate new codes to start the device authentication process.
+  ///
+  /// The device_code and interval will be used later to poll for the access_token.
+  /// The user_code and verification_url should be presented to the user as mentioned in the flow steps above.
+  Future<DeviceCodeResponse> generateDeviceCodes({bool? signup}) async {
+    final url = Uri.https(_manager._baseURL, "oauth/device/code");
+    final response = await _manager.client.post(url,
+        headers: {"Content-Type": "application/json"},
+        body: {"client_id": _manager._clientId});
+
+    if (![200, 201, 204].contains(response.statusCode)) {
+      throw TraktManagerAPIError(
+          response.statusCode, response.reasonPhrase, response);
+    }
+
+    final jsonResult = jsonDecode(response.body);
+    return DeviceCodeResponse.fromJsonModel(jsonResult);
+  }
+
+  /// Use the authorization code GET parameter sent back to your redirect_uri to get an access_token.
+  ///
+  /// Save the access_token so your app can authenticate the user by sending the Authorization header.
+  ///
+  /// The access_token is valid for 3 months.
+  /// Save and use the refresh_token to get a new access_token without asking the user to re-authenticate.
+  Future<AccessTokenResponse> getDeviceAccessToken(String code) async {
+    final url = Uri.https(_manager._baseURL, "oauth/device/token");
+    Map<String, String> body = {
+      "code": code,
+      "client_id": _manager._clientId!,
+      "client_secret": _manager._clientSecret!,
+    };
+    final response = await _manager.client
+        .post(url, headers: {"Content-Type": "application/json"}, body: body);
+
+    if (![200, 201, 204].contains(response.statusCode)) {
+      throw TraktManagerAPIError(
+          response.statusCode, response.reasonPhrase, response);
+    }
+
+    final jsonResult = jsonDecode(response.body);
+    final accessTokenResponse = AccessTokenResponse.fromJsonModel(jsonResult);
+
+    _manager._accessToken = accessTokenResponse.accessToken;
+    _manager._refreshToken = accessTokenResponse.refreshToken;
+
+    return accessTokenResponse;
+  }
 }

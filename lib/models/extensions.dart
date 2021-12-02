@@ -128,6 +128,7 @@ extension TraktModel on Type {
 
     // Authentication Models
     AccessTokenResponse: AccessTokenResponse.fromJsonModel,
+    DeviceCodeResponse: DeviceCodeResponse.fromJsonModel,
 
     // Calendar Models
     MyCalendarShow: MyCalendarShow.fromJsonModel,

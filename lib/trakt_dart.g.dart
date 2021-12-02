@@ -16,6 +16,16 @@ AccessTokenResponse _$AccessTokenResponseFromJson(Map<String, dynamic> json) =>
       json['created_at'] as int,
     );
 
+DeviceCodeResponse _$DeviceCodeResponseFromJson(Map<String, dynamic> json) =>
+    DeviceCodeResponse(
+      json['device_code'] as String,
+      json['user_code'] as String,
+      json['verification_url'] as String,
+      json['refresh_token'] as String,
+      json['expiresIn'] as int,
+      json['interval'] as int,
+    );
+
 MyCalendarShow _$MyCalendarShowFromJson(Map<String, dynamic> json) =>
     MyCalendarShow(
       json['first_aired'] as String,
