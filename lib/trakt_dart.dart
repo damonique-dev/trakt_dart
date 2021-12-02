@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' show Client, Response;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tuple/tuple.dart';
 
 part 'category/category.dart';
 part 'models/authentication_models.dart';
@@ -25,6 +26,7 @@ part 'models/scrobble_models.dart';
 part 'models/search_models.dart';
 part 'models/season_models.dart';
 part 'models/show_models.dart';
+part 'models/sync_models.dart';
 part 'models/users_models.dart';
 part 'models/request_models.dart';
 part 'trakt_manager_requests/authentication_requests.dart';
@@ -45,6 +47,7 @@ part 'trakt_manager_requests/scrobble_requests.dart';
 part 'trakt_manager_requests/search_requests.dart';
 part 'trakt_manager_requests/season_requests.dart';
 part 'trakt_manager_requests/show_requests.dart';
+part 'trakt_manager_requests/sync_requests.dart';
 part 'trakt_manager_requests/user_requests.dart';
 
 part 'trakt_dart.g.dart';
@@ -80,6 +83,7 @@ class TraktManager {
   Seasons? _seasons;
   Shows? _shows;
   Users? _users;
+  Sync? _sync;
 
   Authentication get authentication => _authentication!;
   Calendar get calendar => _calendar!;
@@ -100,6 +104,7 @@ class TraktManager {
   Seasons get seasons => _seasons!;
   Shows get shows => _shows!;
   Users get users => _users!;
+  Sync get sync => _sync!;
 
   /// Initializes the TraktManager for making API calls. This must be called before making any API calls!
   ///
@@ -149,6 +154,7 @@ class TraktManager {
     _seasons = Seasons(this);
     _shows = Shows(this);
     _users = Users(this);
+    _sync = Sync(this);
   }
 
   Future<T> _get<T>(String request,

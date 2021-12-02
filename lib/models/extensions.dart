@@ -146,6 +146,16 @@ extension TraktModel on Type {
 
     // Scrobble Models
     ScrobbleResponse: ScrobbleResponse.fromJsonModel,
+
+    // Sync Models
+    SyncActivity: SyncActivity.fromJsonModel,
+    ActivityItem: ActivityItem.fromJsonModel,
+    PlaybackProgress: PlaybackProgress.fromJsonModel,
+    AddToSyncResponse: AddToSyncResponse.fromJsonModel,
+    AddToSyncResult: AddToSyncResult.fromJsonModel,
+    UpdatedSyncNotFound: UpdatedSyncNotFound.fromJsonModel,
+    RemoveFromSyncResponse: RemoveFromSyncResponse.fromJsonModel,
+    UpdatedSyncMetadata: UpdatedSyncMetadata.fromJsonModel,
   };
 
   Function(Map<String, dynamic>) get jsonDecoder {

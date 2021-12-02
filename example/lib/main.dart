@@ -3,6 +3,7 @@ import 'package:trakt_dart/trakt_dart.dart';
 
 void main() => runApp(TraktDartApp());
 
+// ignore: must_be_immutable
 class TraktDartApp extends StatelessWidget {
   late TraktManager traktManager;
 

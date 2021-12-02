@@ -537,6 +537,11 @@ class Users extends Category {
   ///
   /// [id] - User slug
   /// [listId] - Trakt ID or Trakt slug
+  /// [movies] - Movies to add
+  /// [shows] - Shows to add
+  /// [seasons] - Seasons to add
+  /// [episodes] - Episodes to add
+  /// [people] - Persons to add
   ///
   /// 🔒 OAuth Required 😁 Emojis
   Future<AddToCustomListResponse> addItemsToCustomList(int id, String listId,
@@ -725,9 +730,12 @@ class Users extends Category {
         extendedFull: extendedFull);
   }
 
-  /// Returns all friends for a user including when the relationship began.
+  /// Returns movies and episodes that a user has watched, sorted by most recent.
   ///
-  /// Friendship is a 2 way relationship where each user follows the other.
+  /// You can optionally limit the type to movies or episodes. The id (64-bit integer) in each history
+  /// item uniquely identifies the event and can be used to remove individual events by using the /sync/history/remove method.
+  /// The action will be set to scrobble, checkin, or watch.Specify a type and trakt item_id to limit the history for just that item.
+  /// If the item_id is valid, but there is no history, an empty array will be returned.
   ///
   /// [id] - User slug
   /// [type] - Possible values:  movies , shows , seasons , episodes
@@ -876,7 +884,7 @@ class Users extends Category {
       }
     }
     return await _manager._authenticatedGetList<PersonalRecommendation>(
-        "users/id/recommendations$request",
+        "users/$id/recommendations$request",
         extendedFull: extendedFull,
         pagination: pagination);
   }

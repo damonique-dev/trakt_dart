@@ -1035,6 +1035,105 @@ ShowProgressReset _$ShowProgressResetFromJson(Map<String, dynamic> json) =>
       json['reset_at'] as String,
     );
 
+SyncActivity _$SyncActivityFromJson(Map<String, dynamic> json) => SyncActivity(
+      json['all'] as String,
+      ActivityItem.fromJson(json['movies'] as Map<String, dynamic>),
+      ActivityItem.fromJson(json['episodes'] as Map<String, dynamic>),
+      ActivityItem.fromJson(json['shows'] as Map<String, dynamic>),
+      ActivityItem.fromJson(json['seasons'] as Map<String, dynamic>),
+      ActivityItem.fromJson(json['comments'] as Map<String, dynamic>),
+      ActivityItem.fromJson(json['lists'] as Map<String, dynamic>),
+      ActivityItem.fromJson(json['watchlist'] as Map<String, dynamic>),
+      ActivityItem.fromJson(json['recommendations'] as Map<String, dynamic>),
+      ActivityItem.fromJson(json['account'] as Map<String, dynamic>),
+    );
+
+ActivityItem _$ActivityItemFromJson(Map<String, dynamic> json) => ActivityItem(
+      json['watched_at'] as String?,
+      json['collected_at'] as String?,
+      json['rated_at'] as String?,
+      json['watchlisted_at'] as String?,
+      json['recommendations_at'] as String?,
+      json['commented_at'] as String?,
+      json['paused_at'] as String?,
+      json['hidden_at'] as String?,
+      json['liked_at'] as String?,
+      json['updated_at'] as String?,
+      json['settings_at'] as String?,
+      json['followed_at'] as String?,
+      json['following_at'] as String?,
+      json['pending_at'] as String?,
+    );
+
+PlaybackProgress _$PlaybackProgressFromJson(Map<String, dynamic> json) =>
+    PlaybackProgress(
+      json['id'] as int,
+      (json['progress'] as num).toDouble(),
+      json['type'] as String,
+      json['movie'] == null
+          ? null
+          : Movie.fromJson(json['movie'] as Map<String, dynamic>),
+      json['episode'] == null
+          ? null
+          : Episode.fromJson(json['episode'] as Map<String, dynamic>),
+      json['show'] == null
+          ? null
+          : Show.fromJson(json['show'] as Map<String, dynamic>),
+      json['paused_at'] as String,
+    );
+
+AddToSyncResponse _$AddToSyncResponseFromJson(Map<String, dynamic> json) =>
+    AddToSyncResponse(
+      json['added'] == null
+          ? null
+          : AddToSyncResult.fromJson(json['added'] as Map<String, dynamic>),
+      json['updated'] == null
+          ? null
+          : AddToSyncResult.fromJson(json['updated'] as Map<String, dynamic>),
+      json['existing'] == null
+          ? null
+          : AddToSyncResult.fromJson(json['existing'] as Map<String, dynamic>),
+      UpdatedSyncNotFound.fromJson(json['not_found'] as Map<String, dynamic>),
+    );
+
+AddToSyncResult _$AddToSyncResultFromJson(Map<String, dynamic> json) =>
+    AddToSyncResult(
+      json['movies'] as int?,
+      json['episodes'] as int?,
+      json['shows'] as int?,
+    );
+
+UpdatedSyncNotFound _$UpdatedSyncNotFoundFromJson(Map<String, dynamic> json) =>
+    UpdatedSyncNotFound(
+      (json['movies'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList(),
+      (json['shows'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList(),
+      (json['seasons'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList(),
+      (json['episodes'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList(),
+    );
+
+RemoveFromSyncResponse _$RemoveFromSyncResponseFromJson(
+        Map<String, dynamic> json) =>
+    RemoveFromSyncResponse(
+      UpdatedSyncMetadata.fromJson(json['deleted'] as Map<String, dynamic>),
+      UpdatedSyncNotFound.fromJson(json['not_found'] as Map<String, dynamic>),
+    );
+
+UpdatedSyncMetadata _$UpdatedSyncMetadataFromJson(Map<String, dynamic> json) =>
+    UpdatedSyncMetadata(
+      json['movies'] as int?,
+      json['shows'] as int?,
+      json['seasons'] as int?,
+      json['episodes'] as int?,
+    );
+
 User _$UserFromJson(Map<String, dynamic> json) => User(
       json['username'] as String,
       json['name'] as String?,
