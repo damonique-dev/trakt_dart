@@ -7,14 +7,9 @@ To learn more about Trakt visit [*offical site*](https://www.trakt.tv)
 To learn more about the Trakt API visit [*offical site*](https://trakt.docs.apiary.io)
 
 ## Features
-Current API calls implemented:
-- Added in v0.6.0: All User requests
-- Added in v0.4.0: All Calendar, Checkin, Comment, Recommendation, and Scrobble requests
-- Added in v0.3.0: All OAuth requests and remaining show requests that require OAuth
-- Added in v0.2.0: All Certification, Country, Genre, Language, Lists, Network, and Search
-- Added in v0.1.0: All Movie, Show, Season, Episode, People Requests the do not require OAuth
+All version 2 requests for all Categories!
 
-**Note:** This packaage is still in beta. [File any issues you see or feature requests](https://github.com/nikkithomas2012/trakt_dart/issues/new)
+[File any issues you see or feature requests](https://github.com/nikkithomas2012/trakt_dart/issues/new)
 
 ## Getting started
 
@@ -26,7 +21,7 @@ Current API calls implemented:
 
     ```yaml
     dependencies:
-      trakt_dart: ^0.6.0
+      trakt_dart: ^1.0.0
     ```
 
 2) **Import it**

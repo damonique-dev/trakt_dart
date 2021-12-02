@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.0
+- Features
+    - Added Sync, Device Auth requests
+
 ## 0.6.0
 - Features
     - Added User requests
