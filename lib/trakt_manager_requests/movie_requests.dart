@@ -19,7 +19,7 @@ class Movies extends Category {
   /// Popularity is calculated using the rating percentage and the number of ratings.
   ///
   /// 📄 Pagination ✨ Extended Info 🎚 Filters
-  Future<List<Movie>> getPopularMovies(TimePeriod period,
+  Future<List<Movie>> getPopularMovies(
       {bool extendedFull = false,
       RequestPagination? pagination,
       MovieFilters? filters}) async {

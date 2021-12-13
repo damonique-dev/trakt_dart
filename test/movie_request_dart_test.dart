@@ -21,13 +21,14 @@ void main() {
   });
   group("Movie Requests - ", () {
     test('Get Trending Movie', () async {
-      final movies = await traktManager.movies.getTrendingMovies();
+      final movies =
+          await traktManager.movies.getTrendingMovies(extendedFull: true);
       expect(movies.length, equals(10));
     });
 
     test('Get Popular Movie', () async {
       final movies =
-          await traktManager.movies.getPopularMovies(TimePeriod.weekly);
+          await traktManager.movies.getPopularMovies(extendedFull: true);
       expect(movies.length, equals(10));
     });
 
