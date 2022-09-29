@@ -21,7 +21,10 @@ void main() {
   });
   group("Device Auth - ", () {
     test('Try device auth', () async {
-      await traktManager.authentication.generateDeviceCodes(signup: true);
+      var response =
+          await traktManager.authentication.generateDeviceCodes(signup: true);
+      expect(response.deviceCode, isNotNull);
+      print({response.verificationUrl, response.deviceCode});
     });
   });
 }
