@@ -40,16 +40,16 @@ class DeviceCodeResponse {
   @JsonKey(name: 'verification_url')
   final String verificationUrl;
 
-  @JsonKey(name: 'refresh_token')
-  final String refreshToken;
+  // @JsonKey(name: 'refresh_token')
+  // final String refreshToken;
 
-  @JsonKey(name: 'expiresIn')
+  @JsonKey(name: 'expires_in')
   final int expiresIn;
 
   final int interval;
 
   DeviceCodeResponse(this.deviceCode, this.userCode, this.verificationUrl,
-      this.refreshToken, this.expiresIn, this.interval);
+      /* this.refreshToken,  */ this.expiresIn, this.interval);
 
   factory DeviceCodeResponse.fromJson(Map<String, dynamic> json) =>
       _$DeviceCodeResponseFromJson(json);
