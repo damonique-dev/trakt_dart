@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dotenv/dotenv.dart' show load;
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
@@ -12,15 +12,11 @@ void main() {
   late TraktManager traktManager;
 
   setUp(() {
-    load();
-    if (Keys.clientId == null || Keys.clientSecret == null) {
-      throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
+    final env = DotEnv()..load();
+    if (Keys.clientId(env) == null || Keys.clientSecret(env) == null) {
+      throw Exception("Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    traktManager = TraktManager(
-        clientId: Keys.clientId!,
-        clientSecret: Keys.clientSecret!,
-        redirectURI: "");
+    traktManager = TraktManager(clientId: Keys.clientId(env)!, clientSecret: Keys.clientSecret(env)!, redirectURI: "");
   });
   group("User Requests - ", () {
     test('Parse user settings response', () async {
@@ -40,22 +36,19 @@ void main() {
     });
 
     test('Get Collected Items - movies', () async {
-      final movies = await traktManager.users.getCollection(
-          "sean", UserCollectionType.movies,
-          extendedFull: true, extendedMetadata: true);
+      final movies = await traktManager.users
+          .getCollection("sean", UserCollectionType.movies, extendedFull: true, extendedMetadata: true);
       expect(movies.length, isNonZero);
     });
 
     test('Get Collected Items - shows', () async {
-      final movies = await traktManager.users.getCollection(
-          "sean", UserCollectionType.shows,
-          extendedFull: true, extendedMetadata: true);
+      final movies = await traktManager.users
+          .getCollection("sean", UserCollectionType.shows, extendedFull: true, extendedMetadata: true);
       expect(movies.length, isNonZero);
     });
 
     test('Get User comments', () async {
-      final comments = await traktManager.users
-          .getComments("sean", extendedFull: true, includeReplies: "true");
+      final comments = await traktManager.users.getComments("sean", extendedFull: true, includeReplies: "true");
       expect(comments.length, isNonZero);
     });
 
@@ -80,34 +73,29 @@ void main() {
     });
 
     test('Get User watched history', () async {
-      final history =
-          await traktManager.users.getHistory("sean", extendedFull: true);
+      final history = await traktManager.users.getHistory("sean", extendedFull: true);
       expect(history.length, isNonZero);
     });
 
     test('Get User ratings', () async {
-      final ratings = await traktManager.users.getRatings("sean",
-          type: MediaType.movies, ratings: [3], extendedFull: true);
+      final ratings =
+          await traktManager.users.getRatings("sean", type: MediaType.movies, ratings: [3], extendedFull: true);
       expect(ratings.length, isNonZero);
     });
 
     test('Get User watchlist', () async {
-      final watchlist = await traktManager.users.getWatchlist("sean",
-          type: WatchedItemType.movies,
-          sortBy: SortBy.rank,
-          extendedFull: true);
+      final watchlist = await traktManager.users
+          .getWatchlist("sean", type: WatchedItemType.movies, sortBy: SortBy.rank, extendedFull: true);
       expect(watchlist.length, isNonZero);
     });
 
     test('Get User watched - movies', () async {
-      final watched = await traktManager.users
-          .getWatched("sean", MoviesShowsType.movies, extendedFull: true);
+      final watched = await traktManager.users.getWatched("sean", MoviesShowsType.movies, extendedFull: true);
       expect(watched.length, isNonZero);
     });
 
     test('Get User watched - shows', () async {
-      final watched = await traktManager.users
-          .getWatched("sean", MoviesShowsType.shows, extendedFull: true);
+      final watched = await traktManager.users.getWatched("sean", MoviesShowsType.shows, extendedFull: true);
       expect(watched.length, isNonZero);
     });
 

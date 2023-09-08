@@ -2,7 +2,8 @@ part of trakt_dart;
 
 @JsonSerializable(createToJson: false)
 class TraktList {
-  final String name, description, privacy;
+  final String name, privacy;
+  final String? description;
   final int likes;
   final User? user;
   final Ids ids;
@@ -31,27 +32,12 @@ class TraktList {
   @JsonKey(name: 'comment_count')
   final int commentCount;
 
-  TraktList(
-      this.name,
-      this.description,
-      this.privacy,
-      this.likes,
-      this.user,
-      this.ids,
-      this.displayNumbers,
-      this.allowComments,
-      this.sortBy,
-      this.sortHow,
-      this.createdAt,
-      this.updatedAt,
-      this.itemCount,
-      this.commentCount);
+  TraktList(this.name, this.description, this.privacy, this.likes, this.user, this.ids, this.displayNumbers,
+      this.allowComments, this.sortBy, this.sortHow, this.createdAt, this.updatedAt, this.itemCount, this.commentCount);
 
-  factory TraktList.fromJson(Map<String, dynamic> json) =>
-      _$TraktListFromJson(json);
+  factory TraktList.fromJson(Map<String, dynamic> json) => _$TraktListFromJson(json);
 
-  static TraktList fromJsonModel(Map<String, dynamic> json) =>
-      TraktList.fromJson(json);
+  static TraktList fromJsonModel(Map<String, dynamic> json) => TraktList.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -66,11 +52,9 @@ class TrendingPopularList {
 
   TrendingPopularList(this.list, this.likeCount, this.commentCount);
 
-  factory TrendingPopularList.fromJson(Map<String, dynamic> json) =>
-      _$TrendingPopularListFromJson(json);
+  factory TrendingPopularList.fromJson(Map<String, dynamic> json) => _$TrendingPopularListFromJson(json);
 
-  static TrendingPopularList fromJsonModel(Map<String, dynamic> json) =>
-      TrendingPopularList.fromJson(json);
+  static TrendingPopularList fromJsonModel(Map<String, dynamic> json) => TrendingPopularList.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -81,11 +65,9 @@ class ListLikes {
 
   ListLikes(this.likedAt, this.user);
 
-  factory ListLikes.fromJson(Map<String, dynamic> json) =>
-      _$ListLikesFromJson(json);
+  factory ListLikes.fromJson(Map<String, dynamic> json) => _$ListLikesFromJson(json);
 
-  static ListLikes fromJsonModel(Map<String, dynamic> json) =>
-      ListLikes.fromJson(json);
+  static ListLikes fromJsonModel(Map<String, dynamic> json) => ListLikes.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -104,14 +86,12 @@ class ListItem {
   final Episode? episode;
   final Person? person;
 
-  ListItem(this.rank, this.id, this.listedAt, this.notes, this.type, this.movie,
-      this.show, this.season, this.episode, this.person);
+  ListItem(this.rank, this.id, this.listedAt, this.notes, this.type, this.movie, this.show, this.season, this.episode,
+      this.person);
 
-  factory ListItem.fromJson(Map<String, dynamic> json) =>
-      _$ListItemFromJson(json);
+  factory ListItem.fromJson(Map<String, dynamic> json) => _$ListItemFromJson(json);
 
-  static ListItem fromJsonModel(Map<String, dynamic> json) =>
-      ListItem.fromJson(json);
+  static ListItem fromJsonModel(Map<String, dynamic> json) => ListItem.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -122,11 +102,9 @@ class ReorderListResponse {
 
   ReorderListResponse(this.skippedIds, this.updated);
 
-  factory ReorderListResponse.fromJson(Map<String, dynamic> json) =>
-      _$ReorderListResponseFromJson(json);
+  factory ReorderListResponse.fromJson(Map<String, dynamic> json) => _$ReorderListResponseFromJson(json);
 
-  static ReorderListResponse fromJsonModel(Map<String, dynamic> json) =>
-      ReorderListResponse.fromJson(json);
+  static ReorderListResponse fromJsonModel(Map<String, dynamic> json) => ReorderListResponse.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -138,11 +116,9 @@ class AddToCustomListResponse {
 
   AddToCustomListResponse(this.added, this.existing, this.notFound);
 
-  factory AddToCustomListResponse.fromJson(Map<String, dynamic> json) =>
-      _$AddToCustomListResponseFromJson(json);
+  factory AddToCustomListResponse.fromJson(Map<String, dynamic> json) => _$AddToCustomListResponseFromJson(json);
 
-  static AddToCustomListResponse fromJsonModel(Map<String, dynamic> json) =>
-      AddToCustomListResponse.fromJson(json);
+  static AddToCustomListResponse fromJsonModel(Map<String, dynamic> json) => AddToCustomListResponse.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -157,8 +133,7 @@ class RemoveFromCustomListResponse {
   factory RemoveFromCustomListResponse.fromJson(Map<String, dynamic> json) =>
       _$RemoveFromCustomListResponseFromJson(json);
 
-  static RemoveFromCustomListResponse fromJsonModel(
-          Map<String, dynamic> json) =>
+  static RemoveFromCustomListResponse fromJsonModel(Map<String, dynamic> json) =>
       RemoveFromCustomListResponse.fromJson(json);
 }
 
@@ -166,28 +141,22 @@ class RemoveFromCustomListResponse {
 class UpdatedCustomListMetadata {
   final int movies, shows, seasons, episodes, people;
 
-  UpdatedCustomListMetadata(
-      this.movies, this.shows, this.seasons, this.episodes, this.people);
+  UpdatedCustomListMetadata(this.movies, this.shows, this.seasons, this.episodes, this.people);
 
-  factory UpdatedCustomListMetadata.fromJson(Map<String, dynamic> json) =>
-      _$UpdatedCustomListMetadataFromJson(json);
+  factory UpdatedCustomListMetadata.fromJson(Map<String, dynamic> json) => _$UpdatedCustomListMetadataFromJson(json);
 
-  static UpdatedCustomListMetadata fromJsonModel(Map<String, dynamic> json) =>
-      UpdatedCustomListMetadata.fromJson(json);
+  static UpdatedCustomListMetadata fromJsonModel(Map<String, dynamic> json) => UpdatedCustomListMetadata.fromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
 class UpdatedCustomListNotFound {
   final List<Map<String, dynamic>> movies, shows, seasons, episodes, people;
 
-  UpdatedCustomListNotFound(
-      this.movies, this.shows, this.seasons, this.episodes, this.people);
+  UpdatedCustomListNotFound(this.movies, this.shows, this.seasons, this.episodes, this.people);
 
-  factory UpdatedCustomListNotFound.fromJson(Map<String, dynamic> json) =>
-      _$UpdatedCustomListNotFoundFromJson(json);
+  factory UpdatedCustomListNotFound.fromJson(Map<String, dynamic> json) => _$UpdatedCustomListNotFoundFromJson(json);
 
-  static UpdatedCustomListNotFound fromJsonModel(Map<String, dynamic> json) =>
-      UpdatedCustomListNotFound.fromJson(json);
+  static UpdatedCustomListNotFound fromJsonModel(Map<String, dynamic> json) => UpdatedCustomListNotFound.fromJson(json);
 }
 
 enum ListCommentsSortBy { newest, oldest, likes, replies }

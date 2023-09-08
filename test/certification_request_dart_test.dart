@@ -1,4 +1,4 @@
-import 'package:dotenv/dotenv.dart' show load;
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
@@ -9,20 +9,15 @@ void main() {
   late TraktManager traktManager;
 
   setUp(() {
-    load();
-    if (Keys.clientId == null || Keys.clientSecret == null) {
-      throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
+    final env = DotEnv()..load();
+    if (Keys.clientId(env) == null || Keys.clientSecret(env) == null) {
+      throw Exception("Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    traktManager = TraktManager(
-        clientId: Keys.clientId!,
-        clientSecret: Keys.clientSecret!,
-        redirectURI: "");
+    traktManager = TraktManager(clientId: Keys.clientId(env)!, clientSecret: Keys.clientSecret(env)!, redirectURI: "");
   });
   group("Certification Requests - ", () {
     test('Get Certifications', () async {
-      final searchResults = await traktManager.certifications
-          .getCertifications(CertificationType.movie);
+      final searchResults = await traktManager.certifications.getCertifications(CertificationType.movie);
       expect(searchResults.certifications.length, equals(7));
     });
   });

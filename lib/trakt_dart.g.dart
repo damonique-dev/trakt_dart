@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of trakt_dart;
+part of 'trakt_dart.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -289,7 +289,7 @@ Language _$LanguageFromJson(Map<String, dynamic> json) => Language(
 
 TraktList _$TraktListFromJson(Map<String, dynamic> json) => TraktList(
       json['name'] as String,
-      json['description'] as String,
+      json['description'] as String?,
       json['privacy'] as String,
       json['likes'] as int,
       json['user'] == null
@@ -490,7 +490,7 @@ MovieRelease _$MovieReleaseFromJson(Map<String, dynamic> json) => MovieRelease(
 
 MovieTranslation _$MovieTranslationFromJson(Map<String, dynamic> json) =>
     MovieTranslation(
-      json['title'] as String,
+      json['title'] as String?,
       json['overview'] as String,
       json['tagline'] as String,
       json['language'] as String,

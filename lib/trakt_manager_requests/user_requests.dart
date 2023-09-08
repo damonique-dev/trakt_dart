@@ -35,21 +35,15 @@ class Users extends Category {
   /// List a user's pending following requests that they're waiting for the other user's to approve.
   ///
   /// 🔒 OAuth Required ✨ Extended Info
-  Future<List<FollowRequest>> getFollowingRequests(
-      {bool extendedFull = false}) async {
-    return await _manager._authenticatedGetList<FollowRequest>(
-        "users/requests/following",
-        extendedFull: extendedFull);
+  Future<List<FollowRequest>> getFollowingRequests({bool extendedFull = false}) async {
+    return await _manager._authenticatedGetList<FollowRequest>("users/requests/following", extendedFull: extendedFull);
   }
 
   /// List a user's pending follow requests so they can either approve or deny them.
   ///
   /// 🔒 OAuth Required ✨ Extended Info
-  Future<List<FollowRequest>> getFollowerRequests(
-      {bool extendedFull = false}) async {
-    return await _manager._authenticatedGetList<FollowRequest>(
-        "users/requests/following",
-        extendedFull: extendedFull);
+  Future<List<FollowRequest>> getFollowerRequests({bool extendedFull = false}) async {
+    return await _manager._authenticatedGetList<FollowRequest>("users/requests/following", extendedFull: extendedFull);
   }
 
   /// Approve a follower using the id of the request.
@@ -87,8 +81,7 @@ class Users extends Category {
       HiddenItemType? type,
       bool extendedFull = false,
       RequestPagination? pagination}) async {
-    return await _manager._authenticatedGetList<HiddenItem>(
-        "users/hidden/${section.value}",
+    return await _manager._authenticatedGetList<HiddenItem>("users/hidden/${section.value}",
         extendedFull: extendedFull,
         pagination: pagination,
         queryParamameters: (type != null) ? {"type": type.value} : null);
@@ -122,9 +115,7 @@ class Users extends Category {
       body["seasons"] = metaSeasons;
     }
 
-    return await _manager._authenticatedPost<HiddenItem>(
-        "users/hidden/${section.value}",
-        body: jsonEncode(body));
+    return await _manager._authenticatedPost<HiddenItem>("users/hidden/${section.value}", body: jsonEncode(body));
   }
 
   /// Unhide items for a specific section. Here's what type of items can unhidden for each section.
@@ -155,8 +146,7 @@ class Users extends Category {
       body["seasons"] = metaSeasons;
     }
 
-    return await _manager._authenticatedPost<HiddenItem>(
-        "users/hidden/${section.value}/remove",
+    return await _manager._authenticatedPost<HiddenItem>("users/hidden/${section.value}/remove",
         body: jsonEncode(body));
   }
 
@@ -167,10 +157,8 @@ class Users extends Category {
   /// [type] - Possible values:  comments , lists .
   ///
   /// 🔒 OAuth Required 📄 Pagination
-  Future<List<UserLike>> getLikes(
-      {UserLikesType? type, RequestPagination? pagination}) async {
-    return await _manager._authenticatedGetList<UserLike>("users/likes/$type",
-        pagination: pagination);
+  Future<List<UserLike>> getLikes({UserLikesType? type, RequestPagination? pagination}) async {
+    return await _manager._authenticatedGetList<UserLike>("users/likes/$type", pagination: pagination);
   }
 
   /// Get a user's profile information.
@@ -182,10 +170,7 @@ class Users extends Category {
   /// [useOAuth] - whether to make the request using OAuth header
   ///
   /// 🔓 OAuth Optional ✨ Extended Info
-  Future<User> getProfile(String id,
-      {bool extendedFull = false,
-      bool? extendedVIP,
-      bool useOAuth = false}) async {
+  Future<User> getProfile(String id, {bool extendedFull = false, bool? extendedVIP, bool useOAuth = false}) async {
     Map<String, dynamic>? params;
     List<String> extended = [];
     if (extendedFull) {
@@ -199,8 +184,7 @@ class Users extends Category {
       params["extended"] = extended.join(",");
     }
     if (useOAuth) {
-      return await _manager._authenticatedGet<User>("users/$id",
-          queryParamameters: params);
+      return await _manager._authenticatedGet<User>("users/$id", queryParamameters: params);
     }
 
     return await _manager._get<User>("users/$id", queryParamameters: params);
@@ -226,11 +210,8 @@ class Users extends Category {
   /// [useOAuth] - whether to make the request using OAuth header
   ///
   /// 🔓 OAuth Optional ✨ Extended Info
-  Future<List<UserCollectionItem>> getCollection(
-      String id, UserCollectionType type,
-      {bool extendedFull = false,
-      bool? extendedMetadata,
-      bool useOAuth = false}) async {
+  Future<List<UserCollectionItem>> getCollection(String id, UserCollectionType type,
+      {bool extendedFull = false, bool? extendedMetadata, bool useOAuth = false}) async {
     Map<String, dynamic>? params;
     List<String> extended = [];
     if (extendedFull) {
@@ -245,14 +226,11 @@ class Users extends Category {
     }
 
     if (useOAuth) {
-      return await _manager._authenticatedGetList<UserCollectionItem>(
-          "users/$id/collection/${type.value}",
+      return await _manager._authenticatedGetList<UserCollectionItem>("users/$id/collection/${type.value}",
           queryParamameters: params);
     }
 
-    return await _manager._getList<UserCollectionItem>(
-        "users/$id/collection/${type.value}",
-        queryParamameters: params);
+    return await _manager._getList<UserCollectionItem>("users/$id/collection/${type.value}", queryParamameters: params);
   }
 
   /// Returns the most recently written comments for the user.
@@ -277,11 +255,7 @@ class Users extends Category {
       RequestPagination? pagination,
       bool useOAuth = false}) async {
     Map<String, dynamic>? params;
-    assert(
-        includeReplies == null ||
-            includeReplies == "true" ||
-            includeReplies == "false" ||
-            includeReplies == "only",
+    assert(includeReplies == null || includeReplies == "true" || includeReplies == "false" || includeReplies == "only",
         "Invalid includeReplies. Valid values are \"true\", \"false\", or \"only\"");
 
     if (includeReplies != null) {
@@ -297,17 +271,12 @@ class Users extends Category {
     }
 
     if (useOAuth) {
-      return await _manager._authenticatedGetList<MediaComment>(
-          "users/$id/comments$request",
-          queryParamameters: params,
-          pagination: pagination,
-          extendedFull: extendedFull);
+      return await _manager._authenticatedGetList<MediaComment>("users/$id/comments$request",
+          queryParamameters: params, pagination: pagination, extendedFull: extendedFull);
     }
 
     return await _manager._getList<MediaComment>("users/$id/comments$request",
-        queryParamameters: params,
-        pagination: pagination,
-        extendedFull: extendedFull);
+        queryParamameters: params, pagination: pagination, extendedFull: extendedFull);
   }
 
   /// Returns all custom lists for a user.
@@ -360,8 +329,7 @@ class Users extends Category {
     if (description != null) {
       body["description"] = description;
     }
-    return await _manager._authenticatedPost<TraktList>("users/$id/lists",
-        body: jsonEncode(body));
+    return await _manager._authenticatedPost<TraktList>("users/$id/lists", body: jsonEncode(body));
   }
 
   /// Reorder all lists by sending the updated rank of list ids.
@@ -373,8 +341,7 @@ class Users extends Category {
   ///
   /// 🔒 OAuth Required
   Future<ReorderListResponse> reorderLists(String id, List<int> listIds) async {
-    return await _manager._authenticatedPost<ReorderListResponse>(
-        "users/$id/lists/reorder",
+    return await _manager._authenticatedPost<ReorderListResponse>("users/$id/lists/reorder",
         body: jsonEncode({"rank": listIds}));
   }
 
@@ -387,11 +354,9 @@ class Users extends Category {
   /// [useOAuth] - whether to make the request using OAuth header
   ///
   /// 🔓 OAuth Optional 😁 Emojis
-  Future<TraktList> getList(String id, String listId,
-      {bool useOAuth = false}) async {
+  Future<TraktList> getList(String id, String listId, {bool useOAuth = false}) async {
     if (useOAuth) {
-      return await _manager
-          ._authenticatedGet<TraktList>("users/$id/lists/$listId");
+      return await _manager._authenticatedGet<TraktList>("users/$id/lists/$listId");
     }
 
     return await _manager._get<TraktList>("users/$id/lists/$listId");
@@ -443,9 +408,7 @@ class Users extends Category {
     if (sortHow != null) {
       body["sort_how"] = sortHow.value;
     }
-    return await _manager._authenticatedPut<TraktList>(
-        "users/$id/lists/$listId",
-        body: jsonEncode(body));
+    return await _manager._authenticatedPut<TraktList>("users/$id/lists/$listId", body: jsonEncode(body));
   }
 
   /// Remove a custom list and all items it contains.
@@ -468,12 +431,9 @@ class Users extends Category {
   Future<List<ListLikes>> getListLikes(int id, String listId,
       {bool useOAuth = false, RequestPagination? pagination}) async {
     if (useOAuth) {
-      return await _manager._authenticatedGetList<ListLikes>(
-          "users/$id/lists/$listId/likes",
-          pagination: pagination);
+      return await _manager._authenticatedGetList<ListLikes>("users/$id/lists/$listId/likes", pagination: pagination);
     }
-    return await _manager._getList<ListLikes>("users/$id/lists/$listId/likes",
-        pagination: pagination);
+    return await _manager._getList<ListLikes>("users/$id/lists/$listId/likes", pagination: pagination);
   }
 
   /// Votes help determine popular lists. Only one like is allowed per list per user.
@@ -522,12 +482,11 @@ class Users extends Category {
   }) async {
     var request = "users/$id/lists/$listId";
     if (listType != null) {
-      request = request + "/${listType.value}";
+      request = "$request/${listType.value}";
     }
 
     if (useOAuth) {
-      return await _manager._authenticatedGetList<ListItem>(request,
-          pagination: pagination);
+      return await _manager._authenticatedGetList<ListItem>(request, pagination: pagination);
     }
 
     return await _manager._getList<ListItem>(request, pagination: pagination);
@@ -571,8 +530,7 @@ class Users extends Category {
       body["people"] = people.map((person) => person.metadata).toList();
     }
 
-    return await _manager._authenticatedPost<AddToCustomListResponse>(
-        "users/$id/lists/$listId/items",
+    return await _manager._authenticatedPost<AddToCustomListResponse>("users/$id/lists/$listId/items",
         body: jsonEncode(body));
   }
 
@@ -582,8 +540,7 @@ class Users extends Category {
   /// [listId] - Trakt ID or Trakt slug
   ///
   /// 🔒 OAuth Required 😁 Emojis
-  Future<RemoveFromCustomListResponse> removeItemsFromCustomList(
-      int id, String listId,
+  Future<RemoveFromCustomListResponse> removeItemsFromCustomList(int id, String listId,
       {List<Movie> movies = const [],
       List<Show> shows = const [],
       List<Season> seasons = const [],
@@ -610,8 +567,7 @@ class Users extends Category {
       body["people"] = people.map((person) => person.metadata).toList();
     }
 
-    return await _manager._authenticatedPost<RemoveFromCustomListResponse>(
-        "users/$id/lists/$listId/items/remove",
+    return await _manager._authenticatedPost<RemoveFromCustomListResponse>("users/$id/lists/$listId/items/remove",
         body: jsonEncode(body));
   }
 
@@ -624,10 +580,8 @@ class Users extends Category {
   /// [itemIds] - the updated rank of list ids.
   ///
   /// 🔒 OAuth Required
-  Future<ReorderListResponse> reorderListItems(
-      String id, String listId, List<int> itemIds) async {
-    return await _manager._authenticatedPost<ReorderListResponse>(
-        "users/$id/lists/$listId/items/reorder",
+  Future<ReorderListResponse> reorderListItems(String id, String listId, List<int> itemIds) async {
+    return await _manager._authenticatedPost<ReorderListResponse>("users/$id/lists/$listId/items/reorder",
         body: jsonEncode({"rank": itemIds}));
   }
 
@@ -645,13 +599,10 @@ class Users extends Category {
       ListCommentsSortBy sort = ListCommentsSortBy.newest,
       RequestPagination? pagination}) async {
     if (useOAuth) {
-      return await _manager._authenticatedGetList<Comment>(
-          "users/$id/lists/$listId/comments/${sort.value}",
+      return await _manager._authenticatedGetList<Comment>("users/$id/lists/$listId/comments/${sort.value}",
           pagination: pagination);
     }
-    return await _manager._getList<Comment>(
-        "users/$id/lists/$listId/comments/${sort.value}",
-        pagination: pagination);
+    return await _manager._getList<Comment>("users/$id/lists/$listId/comments/${sort.value}", pagination: pagination);
   }
 
   /// If the user has a private profile, the follow request will require approval (approved_at will be null).
@@ -682,15 +633,11 @@ class Users extends Category {
   /// [useOAuth] - whether to make the request using OAuth header
   ///
   /// 🔓 OAuth Optional ✨ Extended Info
-  Future<List<Follower>> getFollowers(String id,
-      {bool useOAuth = false, bool extendedFull = false}) async {
+  Future<List<Follower>> getFollowers(String id, {bool useOAuth = false, bool extendedFull = false}) async {
     if (useOAuth) {
-      return await _manager._authenticatedGetList<Follower>(
-          "users/$id/followers",
-          extendedFull: extendedFull);
+      return await _manager._authenticatedGetList<Follower>("users/$id/followers", extendedFull: extendedFull);
     }
-    return await _manager._getList<Follower>("users/$id/followers",
-        extendedFull: extendedFull);
+    return await _manager._getList<Follower>("users/$id/followers", extendedFull: extendedFull);
   }
 
   /// Returns all friends for a user including when the relationship began.
@@ -701,15 +648,11 @@ class Users extends Category {
   /// [useOAuth] - whether to make the request using OAuth header
   ///
   /// 🔓 OAuth Optional ✨ Extended Info
-  Future<List<Follower>> getFollowing(String id,
-      {bool useOAuth = false, bool extendedFull = false}) async {
+  Future<List<Follower>> getFollowing(String id, {bool useOAuth = false, bool extendedFull = false}) async {
     if (useOAuth) {
-      return await _manager._authenticatedGetList<Follower>(
-          "users/$id/following",
-          extendedFull: extendedFull);
+      return await _manager._authenticatedGetList<Follower>("users/$id/following", extendedFull: extendedFull);
     }
-    return await _manager._getList<Follower>("users/$id/following",
-        extendedFull: extendedFull);
+    return await _manager._getList<Follower>("users/$id/following", extendedFull: extendedFull);
   }
 
   /// Returns all friends for a user including when the relationship began.
@@ -720,14 +663,11 @@ class Users extends Category {
   /// [useOAuth] - whether to make the request using OAuth header
   ///
   /// 🔓 OAuth Optional ✨ Extended Info
-  Future<List<Friend>> getFriends(String id,
-      {bool useOAuth = false, bool extendedFull = false}) async {
+  Future<List<Friend>> getFriends(String id, {bool useOAuth = false, bool extendedFull = false}) async {
     if (useOAuth) {
-      return await _manager._authenticatedGetList<Friend>("users/$id/friends",
-          extendedFull: extendedFull);
+      return await _manager._authenticatedGetList<Friend>("users/$id/friends", extendedFull: extendedFull);
     }
-    return await _manager._getList<Friend>("users/$id/friends",
-        extendedFull: extendedFull);
+    return await _manager._getList<Friend>("users/$id/friends", extendedFull: extendedFull);
   }
 
   /// Returns movies and episodes that a user has watched, sorted by most recent.
@@ -771,14 +711,10 @@ class Users extends Category {
 
     if (useOAuth) {
       return await _manager._authenticatedGetList<HistoryItem>(request,
-          extendedFull: extendedFull,
-          pagination: pagination,
-          queryParamameters: params);
+          extendedFull: extendedFull, pagination: pagination, queryParamameters: params);
     }
     return await _manager._getList<HistoryItem>(request,
-        extendedFull: extendedFull,
-        pagination: pagination,
-        queryParamameters: params);
+        extendedFull: extendedFull, pagination: pagination, queryParamameters: params);
   }
 
   /// Get a user's ratings filtered by type.
@@ -810,8 +746,7 @@ class Users extends Category {
       return await _manager._authenticatedGetList<RatedItem>(request,
           extendedFull: extendedFull, pagination: pagination);
     }
-    return await _manager._getList<RatedItem>(request,
-        extendedFull: extendedFull, pagination: pagination);
+    return await _manager._getList<RatedItem>(request, extendedFull: extendedFull, pagination: pagination);
   }
 
   /// Returns all items in a user's watchlist filtered by type.
@@ -857,8 +792,7 @@ class Users extends Category {
       return await _manager._authenticatedGetList<WatchlistItem>(request,
           extendedFull: extendedFull, pagination: pagination);
     }
-    return await _manager._getList<WatchlistItem>(request,
-        extendedFull: extendedFull, pagination: pagination);
+    return await _manager._getList<WatchlistItem>(request, extendedFull: extendedFull, pagination: pagination);
   }
 
   /// Returns all items a user personally recommendeds to others including optional notes explaining why they recommended an item.
@@ -872,10 +806,7 @@ class Users extends Category {
   ///
   /// 🔒 OAuth Required 📄 Pagination Optional ✨ Extended Info 😁 Emojis
   Future<List<PersonalRecommendation>> getPersonalRecommendations(String id,
-      {MoviesShowsType? type,
-      SortBy? sortBy,
-      bool extendedFull = false,
-      RequestPagination? pagination}) async {
+      {MoviesShowsType? type, SortBy? sortBy, bool extendedFull = false, RequestPagination? pagination}) async {
     var request = "";
     if (type != null) {
       request += "/${type.value}";
@@ -883,10 +814,8 @@ class Users extends Category {
         request += "/${sortBy.value}";
       }
     }
-    return await _manager._authenticatedGetList<PersonalRecommendation>(
-        "users/$id/recommendations$request",
-        extendedFull: extendedFull,
-        pagination: pagination);
+    return await _manager._authenticatedGetList<PersonalRecommendation>("users/$id/recommendations$request",
+        extendedFull: extendedFull, pagination: pagination);
   }
 
   /// Returns a movie or episode if the user is currently watching something.
@@ -897,14 +826,11 @@ class Users extends Category {
   /// [useOAuth] - whether to make the request using OAuth header
   ///
   /// 🔓 OAuth Optional ✨ Extended Info
-  Future<Watching> getWatching(String id,
-      {bool useOAuth = false, bool extendedFull = false}) async {
+  Future<Watching> getWatching(String id, {bool useOAuth = false, bool extendedFull = false}) async {
     if (useOAuth) {
-      return await _manager._authenticatedGet<Watching>("users/$id/watching",
-          extendedFull: extendedFull);
+      return await _manager._authenticatedGet<Watching>("users/$id/watching", extendedFull: extendedFull);
     }
-    return await _manager._get<Watching>("users/$id/watching",
-        extendedFull: extendedFull);
+    return await _manager._get<Watching>("users/$id/watching", extendedFull: extendedFull);
   }
 
   /// Returns all movies or shows a user has watched sorted by most plays.
@@ -924,9 +850,7 @@ class Users extends Category {
   ///
   /// 🔓 OAuth Optional ✨ Extended Info
   Future<List<WatchedItem>> getWatched(String id, MoviesShowsType type,
-      {bool useOAuth = false,
-      bool extendedFull = false,
-      bool? extendedNoSeasons}) async {
+      {bool useOAuth = false, bool extendedFull = false, bool? extendedNoSeasons}) async {
     Map<String, dynamic>? params;
     List<String> extended = [];
     if (extendedFull) {
@@ -941,13 +865,10 @@ class Users extends Category {
     }
 
     if (useOAuth) {
-      return await _manager._authenticatedGetList<WatchedItem>(
-          "users/$id/watched/${type.value}",
+      return await _manager._authenticatedGetList<WatchedItem>("users/$id/watched/${type.value}",
           queryParamameters: params);
     }
-    return await _manager._getList<WatchedItem>(
-        "users/$id/watched/${type.value}",
-        queryParamameters: params);
+    return await _manager._getList<WatchedItem>("users/$id/watched/${type.value}", queryParamameters: params);
   }
 
   /// Returns stats about the movies, shows, and episodes a user has watched, collected, and rated.

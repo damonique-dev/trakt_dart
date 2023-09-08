@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dotenv/dotenv.dart' show load;
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
@@ -9,18 +9,11 @@ import 'package:trakt_dart/trakt_dart.dart';
 import 'setup_script.dart';
 
 void main() {
-  late TraktManager traktManager;
-
   setUp(() {
-    load();
-    if (Keys.clientId == null || Keys.clientSecret == null) {
-      throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
+    final env = DotEnv()..load();
+    if (Keys.clientId(env) == null) {
+      throw Exception("Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    traktManager = TraktManager(
-        clientId: Keys.clientId!,
-        clientSecret: Keys.clientSecret!,
-        redirectURI: "");
   });
   group("Scrobble Requests - ", () {
     test('Parse scrobble movie response', () async {

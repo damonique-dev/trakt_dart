@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dotenv/dotenv.dart' show load;
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
@@ -12,21 +12,16 @@ void main() {
   late TraktManager traktManager;
 
   setUp(() {
-    load();
-    if (Keys.clientId == null || Keys.clientSecret == null) {
-      throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
+    final env = DotEnv()..load();
+    if (Keys.clientId(env) == null || Keys.clientSecret(env) == null) {
+      throw Exception("Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    traktManager = TraktManager(
-        clientId: Keys.clientId!,
-        clientSecret: Keys.clientSecret!,
-        redirectURI: "");
+    traktManager = TraktManager(clientId: Keys.clientId(env)!, clientSecret: Keys.clientSecret(env)!, redirectURI: "");
   });
   group("Calendar Requests - ", () {
     test('Calendar Request - Null startdate - nonnull numberOfDays', () async {
       expect(() async {
-        await traktManager.calendar
-            .getCalendarAllShows(startDate: null, numberOfDays: 7);
+        await traktManager.calendar.getCalendarAllShows(startDate: null, numberOfDays: 7);
       }, throwsAssertionError);
     });
 
@@ -50,14 +45,12 @@ void main() {
     });
 
     test('Get all calendar shows', () async {
-      final shows =
-          await traktManager.calendar.getCalendarAllShows(extendedFull: true);
+      final shows = await traktManager.calendar.getCalendarAllShows(extendedFull: true);
       expect(shows.length, isNonZero);
     });
 
     test('Get all calendar movies', () async {
-      final movies =
-          await traktManager.calendar.getCalendarAllMovies(extendedFull: true);
+      final movies = await traktManager.calendar.getCalendarAllMovies(extendedFull: true);
       expect(movies.length, isNonZero);
     });
   });

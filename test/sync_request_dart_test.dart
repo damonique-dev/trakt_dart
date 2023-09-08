@@ -1,27 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dotenv/dotenv.dart' show load;
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
-import 'package:tuple/tuple.dart';
 
 import 'setup_script.dart';
 
 void main() {
-  late TraktManager traktManager;
-
   setUp(() {
-    load();
-    if (Keys.clientId == null || Keys.clientSecret == null) {
-      throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
+    final env = DotEnv()..load();
+    if (Keys.clientId(env) == null || Keys.clientSecret(env) == null) {
+      throw Exception("Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    traktManager = TraktManager(
-        clientId: Keys.clientId!,
-        clientSecret: Keys.clientSecret!,
-        redirectURI: "");
   });
   group("Sync Requests - ", () {
     test('Parse sync activities', () async {
@@ -33,8 +25,7 @@ void main() {
     });
 
     test('Parse playback progress - movies', () async {
-      final file =
-          File('test/test_data/playback_progress_movies_response.json');
+      final file = File('test/test_data/playback_progress_movies_response.json');
       final json = jsonDecode(await file.readAsString());
       final progress = PlaybackProgress.fromJsonModel(json);
 

@@ -6,19 +6,15 @@ class Lists extends Category {
   /// Returns all lists with the most likes and comments over the last 7 days.
   ///
   /// 📄 Pagination 😁 Emojis
-  Future<List<TrendingPopularList>> getTrendingLists(
-      {RequestPagination? pagination}) async {
-    return await _manager._getList<TrendingPopularList>("lists/trending",
-        pagination: pagination);
+  Future<List<TrendingPopularList>> getTrendingLists({RequestPagination? pagination}) async {
+    return await _manager._getList<TrendingPopularList>("lists/trending", pagination: pagination);
   }
 
   /// Returns the most popular lists. Popularity is calculated using total number of likes and comments.
   ///
   /// 📄 Pagination 😁 Emojis
-  Future<List<TrendingPopularList>> getPopularLists(
-      {RequestPagination? pagination}) async {
-    return await _manager._getList<TrendingPopularList>("lists/popular",
-        pagination: pagination);
+  Future<List<TrendingPopularList>> getPopularLists({RequestPagination? pagination}) async {
+    return await _manager._getList<TrendingPopularList>("lists/popular", pagination: pagination);
   }
 
   /// Returns a single list.
@@ -38,10 +34,8 @@ class Lists extends Category {
   /// [id] - Trakt ID
   ///
   /// 📄 Pagination
-  Future<List<ListLikes>> getListLikes(int id,
-      {RequestPagination? pagination}) async {
-    return await _manager._getList<ListLikes>("lists/$id/likes",
-        pagination: pagination);
+  Future<List<ListLikes>> getListLikes(int id, {RequestPagination? pagination}) async {
+    return await _manager._getList<ListLikes>("lists/$id/likes", pagination: pagination);
   }
 
   /// Get all items on a custom list.
@@ -62,7 +56,7 @@ class Lists extends Category {
   }) async {
     var request = "lists/$id/items";
     if (listType != null) {
-      request = request + "/${listType.value}";
+      request = "$request/${listType.value}";
     }
     return await _manager._getList<ListItem>(request, pagination: pagination);
   }
@@ -76,9 +70,7 @@ class Lists extends Category {
   ///
   /// 📄 Pagination 😁 Emojis
   Future<List<Comment>> getListComments(int id,
-      {ListCommentsSortBy sort = ListCommentsSortBy.newest,
-      RequestPagination? pagination}) async {
-    return await _manager._getList<Comment>("lists/$id/comments/${sort.value}",
-        pagination: pagination);
+      {ListCommentsSortBy sort = ListCommentsSortBy.newest, RequestPagination? pagination}) async {
+    return await _manager._getList<Comment>("lists/$id/comments/${sort.value}", pagination: pagination);
   }
 }

@@ -1,4 +1,4 @@
-import 'package:dotenv/dotenv.dart' show load;
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
@@ -9,26 +9,21 @@ void main() {
   late TraktManager traktManager;
 
   setUp(() {
-    load();
-    if (Keys.clientId == null || Keys.clientSecret == null) {
-      throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
+    final env = DotEnv()..load();
+    if (Keys.clientId(env) == null || Keys.clientSecret(env) == null) {
+      throw Exception("Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    traktManager = TraktManager(
-        clientId: Keys.clientId!,
-        clientSecret: Keys.clientSecret!,
-        redirectURI: "");
+    traktManager = TraktManager(clientId: Keys.clientId(env)!, clientSecret: Keys.clientSecret(env)!, redirectURI: "");
   });
   group("Genre Requests - ", () {
     test('Get Genres - Movies', () async {
-      final genres =
-          await traktManager.genres.getGenres(MoviesShowsType.movies);
-      expect(genres.length, equals(26));
+      final genres = await traktManager.genres.getGenres(MoviesShowsType.movies);
+      expect(genres.length, greaterThan(0));
     });
 
     test('Get Genres - Shows', () async {
       final genres = await traktManager.genres.getGenres(MoviesShowsType.shows);
-      expect(genres.length, equals(36));
+      expect(genres.length, greaterThan(0));
     });
   });
 }

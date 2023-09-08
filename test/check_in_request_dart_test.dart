@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dotenv/dotenv.dart' show load;
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
@@ -12,31 +12,24 @@ void main() {
   late TraktManager traktManager;
 
   setUp(() {
-    load();
-    if (Keys.clientId == null || Keys.clientSecret == null) {
-      throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
+    final env = DotEnv()..load();
+    if (Keys.clientId(env) == null || Keys.clientSecret(env) == null) {
+      throw Exception("Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    traktManager = TraktManager(
-        clientId: Keys.clientId!,
-        clientSecret: Keys.clientSecret!,
-        redirectURI: "");
+    traktManager = TraktManager(clientId: Keys.clientId(env)!, clientSecret: Keys.clientSecret(env)!, redirectURI: "");
   });
   group("Checkin Requests - ", () {
     test('Checkin assertions - both null', () async {
       expect(() async {
-        await traktManager.checkIn
-            .checkIn(movie: null, episode: null, appDate: '', appVersion: '');
+        await traktManager.checkIn.checkIn(movie: null, episode: null, appDate: '', appVersion: '');
       }, throwsAssertionError);
     });
 
     test('Checkin assertions - both provided', () async {
       final movie = await traktManager.movies.getMovieSummary("deadpool-2016");
-      final episode = await traktManager.episodes
-          .getEpisodeSummary("game-of-thrones", 1, 1);
+      final episode = await traktManager.episodes.getEpisodeSummary("game-of-thrones", 1, 1);
       expect(() async {
-        await traktManager.checkIn.checkIn(
-            movie: movie, episode: episode, appDate: '', appVersion: '');
+        await traktManager.checkIn.checkIn(movie: movie, episode: episode, appDate: '', appVersion: '');
       }, throwsAssertionError);
     });
 

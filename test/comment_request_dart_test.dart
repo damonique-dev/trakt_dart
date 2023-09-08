@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dotenv/dotenv.dart' show load;
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
@@ -12,15 +12,11 @@ void main() {
   late TraktManager traktManager;
 
   setUp(() {
-    load();
-    if (Keys.clientId == null || Keys.clientSecret == null) {
-      throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
+    final env = DotEnv()..load();
+    if (Keys.clientId(env) == null || Keys.clientSecret(env) == null) {
+      throw Exception("Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    traktManager = TraktManager(
-        clientId: Keys.clientId!,
-        clientSecret: Keys.clientSecret!,
-        redirectURI: "");
+    traktManager = TraktManager(clientId: Keys.clientId(env)!, clientSecret: Keys.clientSecret(env)!, redirectURI: "");
   });
   group("Comment Requests - ", () {
     test('Parse comment response', () async {
@@ -32,11 +28,8 @@ void main() {
     });
 
     test('Get Comment', () async {
-      final commment = await traktManager.comments.getComment("190");
-      expect(
-          commment.comment,
-          equals(
-              "Not as good as the 1979 original, but just as shocking, and just as satisfying to see her revenge"));
+      final commment = await traktManager.comments.getComment("400");
+      expect(commment.comment, equals("Still my reference show... next to OffCenter."));
     });
 
     test('Get Comment Replies', () async {
@@ -60,8 +53,8 @@ void main() {
     });
 
     test('Get Trending Comments -  Show Reviews', () async {
-      final comments = await traktManager.comments.getTrendingComments(
-          mediaType: MediaType.shows, commentType: CommentType.reviews);
+      final comments =
+          await traktManager.comments.getTrendingComments(mediaType: MediaType.shows, commentType: CommentType.reviews);
       expect(comments.length, equals(10));
     });
 
@@ -71,8 +64,8 @@ void main() {
     });
 
     test('Get Recent Comments -  Show Reviews', () async {
-      final comments = await traktManager.comments.getRecentComments(
-          mediaType: MediaType.shows, commentType: CommentType.reviews);
+      final comments =
+          await traktManager.comments.getRecentComments(mediaType: MediaType.shows, commentType: CommentType.reviews);
       expect(comments.length, equals(10));
     });
 
@@ -82,8 +75,8 @@ void main() {
     });
 
     test('Get Updated Comments -  Show Reviews', () async {
-      final comments = await traktManager.comments.getUpdatedComments(
-          mediaType: MediaType.shows, commentType: CommentType.reviews);
+      final comments =
+          await traktManager.comments.getUpdatedComments(mediaType: MediaType.shows, commentType: CommentType.reviews);
       expect(comments.length, equals(10));
     });
   });

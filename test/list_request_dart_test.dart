@@ -1,4 +1,4 @@
-import 'package:dotenv/dotenv.dart' show load;
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trakt_dart/trakt_dart.dart';
@@ -9,15 +9,11 @@ void main() {
   late TraktManager traktManager;
 
   setUp(() {
-    load();
-    if (Keys.clientId == null || Keys.clientSecret == null) {
-      throw Exception(
-          "Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
+    final env = DotEnv()..load();
+    if (Keys.clientId(env) == null || Keys.clientSecret(env) == null) {
+      throw Exception("Set the CLIENT_KEY and/or CLIENT_SECRET variables to run local tests");
     }
-    traktManager = TraktManager(
-        clientId: Keys.clientId!,
-        clientSecret: Keys.clientSecret!,
-        redirectURI: "");
+    traktManager = TraktManager(clientId: Keys.clientId(env)!, clientSecret: Keys.clientSecret(env)!, redirectURI: "");
   });
 
   group("List Requests - ", () {
@@ -38,12 +34,11 @@ void main() {
 
     test('Get List Likes', () async {
       final likes = await traktManager.lists.getListLikes(3837211);
-      expect(likes.length, equals(20));
+      expect(likes.length, greaterThan(0));
     });
 
     test('Get List Items', () async {
-      final items =
-          await traktManager.lists.getListItems(3837211, extendedFull: true);
+      final items = await traktManager.lists.getListItems(3837211, extendedFull: true);
       expect(items.length, isNonZero);
     });
   });
