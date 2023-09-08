@@ -109,7 +109,7 @@ class Authentication extends Category {
     final url = Uri.https(_manager._baseURL, "oauth/device/code");
     final response = await _manager.client.post(url,
         headers: {"Content-Type": "application/json"},
-        body: {"client_id": _manager._clientId});
+        body: jsonEncode({"client_id": _manager._clientId}));
 
     if (![200, 201, 204].contains(response.statusCode)) {
       throw TraktManagerAPIError(
@@ -133,8 +133,11 @@ class Authentication extends Category {
       "client_id": _manager._clientId!,
       "client_secret": _manager._clientSecret!,
     };
-    final response = await _manager.client
-        .post(url, headers: {"Content-Type": "application/json"}, body: body);
+    final response = await _manager.client.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(body),
+    );
 
     if (![200, 201, 204].contains(response.statusCode)) {
       throw TraktManagerAPIError(
