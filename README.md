@@ -21,7 +21,7 @@ All version 2 requests for all Categories!
 
     ```yaml
     dependencies:
-      trakt_dart: ^1.0.0
+      trakt_dart: ^1.0.1
     ```
 
 2) **Import it**

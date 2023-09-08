@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.0.1
+- Upgraded dependencies and Flutter to 3.13.0
+- Fix
+    - OAuth now opens url in browers
+    - Failing tests
+
 ## 1.0.0
 - Features
     - Added Sync, Device Auth requests
