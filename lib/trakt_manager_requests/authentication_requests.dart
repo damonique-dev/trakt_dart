@@ -18,13 +18,7 @@ class Authentication extends Category {
   /// Send signup=true if you prefer the account sign up page to be the default.
   Future<void> authorizeApplication({bool? signup}) async {
     final url = Uri.parse(_manager._oauthURL);
-    final response = await _manager.client
-        .get(url, headers: {"Content-Type": "application/json"});
-
-    if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
-    }
+    await ChromeSafariBrowser().open(url: url);
   }
 
   /// Use the authorization code GET parameter sent back to your redirect_uri to get an access_token.
@@ -62,12 +56,10 @@ class Authentication extends Category {
       "client_id": _manager._clientId!,
       "client_secret": _manager._clientSecret!,
     };
-    final response = await _manager.client
-        .post(url, headers: {"Content-Type": "application/json"}, body: body);
+    final response = await _manager.client.post(url, headers: {"Content-Type": "application/json"}, body: body);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     _manager._accessToken = null;
@@ -84,12 +76,10 @@ class Authentication extends Category {
       "redirect_uri": _manager._redirectURI!,
       "grant_type": "authorization_code"
     });
-    final response = await _manager.client
-        .post(url, headers: {"Content-Type": "application/json"}, body: body);
+    final response = await _manager.client.post(url, headers: {"Content-Type": "application/json"}, body: body);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -107,13 +97,11 @@ class Authentication extends Category {
   /// The user_code and verification_url should be presented to the user as mentioned in the flow steps above.
   Future<DeviceCodeResponse> generateDeviceCodes({bool? signup}) async {
     final url = Uri.https(_manager._baseURL, "oauth/device/code");
-    final response = await _manager.client.post(url,
-        headers: {"Content-Type": "application/json"},
-        body: {"client_id": _manager._clientId});
+    final response = await _manager.client
+        .post(url, headers: {"Content-Type": "application/json"}, body: {"client_id": _manager._clientId});
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -133,12 +121,10 @@ class Authentication extends Category {
       "client_id": _manager._clientId!,
       "client_secret": _manager._clientSecret!,
     };
-    final response = await _manager.client
-        .post(url, headers: {"Content-Type": "application/json"}, body: body);
+    final response = await _manager.client.post(url, headers: {"Content-Type": "application/json"}, body: body);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);

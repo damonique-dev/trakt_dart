@@ -2,6 +2,7 @@ library trakt_dart;
 
 import 'dart:convert';
 
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:http/http.dart' show Client, Response;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tuple/tuple.dart';
@@ -113,27 +114,19 @@ class TraktManager {
   /// [redirectURI] - the redirect uri set under your Trakt applications for OAuth.
   /// [useStaging] - whether to use the Trakt Staging environment. Default to false.
   TraktManager(
-      {required String clientId,
-      required String clientSecret,
-      required String redirectURI,
-      bool useStaging = false})
+      {required String clientId, required String clientSecret, required String redirectURI, bool useStaging = false})
       : client = Client() {
     _clientId = clientId;
     _clientSecret = clientSecret;
     _redirectURI = redirectURI;
 
-    _headers = {
-      "trakt-api-version": "2",
-      "trakt-api-key": clientId,
-      "Content-type": "application/json"
-    };
+    _headers = {"trakt-api-version": "2", "trakt-api-key": clientId, "Content-type": "application/json"};
 
     if (useStaging) {
       _baseURL = "api-staging.trakt.tv";
     }
 
-    _oauthURL =
-        "https://trakt.tv/oauth/authorize?response_type=code&client_id=$_clientId&redirect_uri=$_redirectURI";
+    _oauthURL = "https://trakt.tv/oauth/authorize?response_type=code&client_id=$_clientId&redirect_uri=$_redirectURI";
 
     _authentication = Authentication(this);
     _calendar = Calendar(this);
@@ -180,8 +173,7 @@ class TraktManager {
     final response = await client.get(url, headers: _headers);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -189,10 +181,8 @@ class TraktManager {
   }
 
   Future<T> _authenticatedGet<T>(String request,
-      {bool extendedFull = false,
-      Map<String, dynamic>? queryParamameters}) async {
-    assert(_accessToken != null,
-        "Autheticate app and get access token before making authenticated request.");
+      {bool extendedFull = false, Map<String, dynamic>? queryParamameters}) async {
+    assert(_accessToken != null, "Autheticate app and get access token before making authenticated request.");
 
     final queryParams = queryParamameters ?? {};
     if (extendedFull) {
@@ -205,8 +195,7 @@ class TraktManager {
     final response = await client.get(url, headers: _headers);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -231,8 +220,7 @@ class TraktManager {
     final response = await client.get(url, headers: _headers);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -264,8 +252,7 @@ class TraktManager {
     final response = await client.get(url, headers: _headers);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -276,8 +263,7 @@ class TraktManager {
     return [];
   }
 
-  Future<List<int>> _getIds<T>(String request,
-      {RequestPagination? pagination}) async {
+  Future<List<int>> _getIds<T>(String request, {RequestPagination? pagination}) async {
     final queryParams = <String, dynamic>{};
 
     queryParams.addAll(pagination?.toMap() ?? {});
@@ -286,8 +272,7 @@ class TraktManager {
     final response = await client.get(url, headers: _headers);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -298,8 +283,7 @@ class TraktManager {
   }
 
   Future<T> _authenticatedPost<T>(String request, {String? body}) async {
-    assert(_accessToken != null,
-        "Autheticate app and get access token before making authenticated request.");
+    assert(_accessToken != null, "Autheticate app and get access token before making authenticated request.");
 
     final headers = _headers;
     headers["Authorization"] = "Bearer ${_accessToken!}";
@@ -308,8 +292,7 @@ class TraktManager {
     final response = await client.post(url, headers: _headers, body: body);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -317,8 +300,7 @@ class TraktManager {
   }
 
   Future<T> _authenticatedPut<T>(String request, {String? body}) async {
-    assert(_accessToken != null,
-        "Autheticate app and get access token before making authenticated request.");
+    assert(_accessToken != null, "Autheticate app and get access token before making authenticated request.");
 
     final headers = _headers;
     headers["Authorization"] = "Bearer ${_accessToken!}";
@@ -327,8 +309,7 @@ class TraktManager {
     final response = await client.put(url, headers: _headers, body: body);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -336,8 +317,7 @@ class TraktManager {
   }
 
   Future<void> _authenticatedDelete(String request) async {
-    assert(_accessToken != null,
-        "Autheticate app and get access token before making authenticated request.");
+    assert(_accessToken != null, "Autheticate app and get access token before making authenticated request.");
 
     final headers = _headers;
     headers["Authorization"] = "Bearer ${_accessToken!}";
@@ -346,8 +326,7 @@ class TraktManager {
     final response = await client.delete(url, headers: _headers);
 
     if (![200, 201, 204].contains(response.statusCode)) {
-      throw TraktManagerAPIError(
-          response.statusCode, response.reasonPhrase, response);
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
     return;
   }
