@@ -98,7 +98,7 @@ class Authentication extends Category {
   Future<DeviceCodeResponse> generateDeviceCodes({bool? signup}) async {
     final url = Uri.https(_manager._baseURL, "oauth/device/code");
     final response = await _manager.client
-        .post(url, headers: {"Content-Type": "application/json"}, body: {"client_id": _manager._clientId});
+        .post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode({"client_id": _manager._clientId}));
 
     if (![200, 201, 204].contains(response.statusCode)) {
       throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
@@ -121,7 +121,11 @@ class Authentication extends Category {
       "client_id": _manager._clientId!,
       "client_secret": _manager._clientSecret!,
     };
-    final response = await _manager.client.post(url, headers: {"Content-Type": "application/json"}, body: body);
+    final response = await _manager.client.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(body),
+    );
 
     if (![200, 201, 204].contains(response.statusCode)) {
       throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
