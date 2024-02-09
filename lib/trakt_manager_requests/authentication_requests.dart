@@ -76,7 +76,7 @@ class Authentication extends Category {
       "redirect_uri": _manager._redirectURI!,
       "grant_type": "authorization_code"
     });
-    final response = await _manager.client.post(url, headers: {"Content-Type": "application/json"}, body: body);
+    final response = await _manager.client.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(body));
 
     if (![200, 201, 204].contains(response.statusCode)) {
       throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
