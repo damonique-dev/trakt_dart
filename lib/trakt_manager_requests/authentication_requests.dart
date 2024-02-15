@@ -50,7 +50,7 @@ class Authentication extends Category {
   ///
   /// This is not required, but might improve the user experience so the user doesn't have an unused app connection hanging around.
   Future<void> revokeAccessToken() async {
-    final url = Uri.https(_manager._baseURL, "oauth/token");
+    final url = Uri.https(_manager._baseURL, "oauth/revoke");
     final body = {
       "token": _manager._accessToken,
       "client_id": _manager._clientId!,
